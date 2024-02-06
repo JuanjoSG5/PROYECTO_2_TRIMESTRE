@@ -10,13 +10,13 @@ export function validatePassword(password) {
     return regex.test(password);
 }
 
-export function validateName(name) {
+export function validateUsername(name) {
     // regular expression for name validation: John Doe
     const regex = new RegExp('^[a-zA-Z]+ [a-zA-Z]+$');
     return regex.test(name);
 }
 
-// In order to confirm the password when loging in
+// In order to confirm the password when logging in
 export function doesPasswordMatch(password, confirmPassword) {
     return password === confirmPassword;
 }

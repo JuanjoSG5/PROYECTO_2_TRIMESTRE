@@ -1,35 +1,35 @@
 <template>
-        <label class="label">{{ label }}
-            <select 
-                v-if="type === 'select'" 
-                class="input" 
-                :value="value" 
-                @change="$emit('input', $event.target.value)"
-            >
+    <label class="label">{{ label }}
+        <select 
+            v-if="type === 'select'" 
+            class="input" 
+            :value="value" 
+            @change="$emit('input', $event.target.value)"
+        >
 
-                <option 
-                    class="input"
-                    v-for="option in options" 
-                    :value="option.value">
-                    {{ option.label }}
-                </option>
-            </select>
-            <textarea 
-                v-else-if="type === 'textarea'" 
-                class="text-area" 
-                :value="value" 
-                :placeholder="placeholder"
-                @input="$emit('input', $event.target.value)">
-            </textarea>
-            <input 
-                v-else 
+            <option 
                 class="input"
-                :type="type" 
-                :value="value" 
-                :placeholder="placeholder"
-                @input="$emit('input', $event.target.value)" 
-            />
-        </label>
+                v-for="option in options" 
+                :value="option.value">
+                {{ option.label }}
+            </option>
+        </select>
+        <textarea 
+            v-else-if="type === 'textarea'" 
+            class="text-area" 
+            :value="value" 
+            :placeholder="placeholder"
+            @input="$emit('input', $event.target.value)">
+        </textarea>
+        <input 
+            v-else 
+            class="input"
+            :type="type" 
+            :value="value" 
+            :placeholder="placeholder"
+        />
+        <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
+    </label>
 </template>
 
 <script>
@@ -54,6 +54,10 @@ export default {
         options: {
             type: Array,  
             default: () => []  
+        },
+        errorMessage: {
+            type: String,
+            default: ''
         }
     }
 }
@@ -89,5 +93,11 @@ export default {
 .input:focus,
 .input:focus-visible {
     outline: 2px inset var(--vt-c-black-mute);
+}
+
+.error-message {
+    color: var(--vt-c-red);
+    font-size: 12px;
+    margin-top: 5px;
 }
 </style>
