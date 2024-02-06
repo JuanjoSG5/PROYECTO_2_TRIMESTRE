@@ -1,10 +1,19 @@
-<script setup>
-import test2 from './context/test2.vue';
+<script >
+import Navbar from './components/shared/Navbar.vue';
+import Footer from './components/shared/Footer.vue';
+
+export default {
+  components: {
+    Navbar,
+    Footer
+  }
+}
 </script>
 
 <template>
- 
-  <test2>test</test2>
+  <Navbar />
+  <router-view />
+  <Footer />
 </template>
 
 <style scoped>
@@ -14,9 +23,11 @@ import test2 from './context/test2.vue';
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }

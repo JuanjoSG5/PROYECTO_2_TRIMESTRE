@@ -1,10 +1,10 @@
-// main.js or main.ts
+import './assets/main.css'
 import { createApp } from 'vue';
+import router from './router/router';
 import App from './App.vue';
-import UserContext from './context/UserContext.js';
 
 const app = createApp(App);
 
-app.use(UserContext);
+app.use(router);
 
 app.mount('#app');

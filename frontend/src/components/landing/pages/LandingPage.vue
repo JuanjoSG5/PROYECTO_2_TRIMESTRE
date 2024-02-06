@@ -1,6 +1,6 @@
 <template lang="">
     <div>
-        public 
+        Landing page, comunicating the user about what the app does and some simple uses
     </div>
 </template>
 <script>
