@@ -63,7 +63,6 @@ export default {
     }
   },
   methods: {
-    // Method to determine the value of the input based on formSent
     getValue() {
       return this.formSent ? '' : this.value;
     }

@@ -61,10 +61,9 @@
   
         if (!this.selectedInquiryErrorMessage && !this.userTextErrorMessage) {
           this.formSent = true;
-          // Reset formSent after successful submission
           setTimeout(() => {
             this.formSent = false;
-          }, 3000); // Reset after 3 seconds (adjust as needed)
+          }, 3000); 
         }
       },
       clearSelectedInquiryErrorMessage() {

@@ -12,13 +12,13 @@
 </template>
   
 <script>
+import {store} from '../../context/UserContext.js';
 export default {
-    props:{
-        isLoggedIn: {
-            type: Boolean,
-            default: false
-        }
-    }
+    computed: {
+        isLoggedIn() {
+            return store.isLoggedIn;
+        },
+    },
 };
 </script>
   
