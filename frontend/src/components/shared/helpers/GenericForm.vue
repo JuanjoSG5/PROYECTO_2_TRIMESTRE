@@ -1,5 +1,5 @@
 <template>
-    <form class="form-control" @submit.prevent="handleSubmit">
+    <form class="form-control" >
       <slot :validateForm="validateForm"></slot>
       <SubmitButton label="Submit" />
     </form>
@@ -24,10 +24,6 @@
       };
     },
     methods: {
-      handleInputChange(fieldName, value) {
-        this.formData[fieldName] = value;
-        this.validationRules[fieldName].errorMessage = '';
-      },
       getErrorMessage(fieldName) {
         return this.validationRules[fieldName].errorMessage;
       },

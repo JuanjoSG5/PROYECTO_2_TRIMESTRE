@@ -36,12 +36,6 @@ export default {
         CustomForm
 
     },
-    props: {
-        validateForm: {
-        type: Function,
-        required: true
-        }
-    },
     data() {
         return {
             formData: {
@@ -67,20 +61,15 @@ export default {
     },
     methods: {
         
-        handleInputChange(fieldName, value) {
-            this.formData[fieldName] = value;
-            this.validationRules[fieldName].errorMessage = '';
+        handleInputChange(formData, value) {
+            formData = value;
+            this.validationRules.errorMessage = '';
         },
         getErrorMessage(fieldName) {
             return this.validationRules[fieldName].errorMessage;
         },
-        handleSubmit() {
-            console.log("test");
-            if (this.validateForm()) {
-                console.log("test11111");
-                this.$emit('formValidated', this.formData);
-            }
-
+        handleSubmit(formData) {
+            console.log(formData);
         }
     }
 };
