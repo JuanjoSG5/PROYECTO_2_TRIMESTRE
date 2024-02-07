@@ -1,17 +1,12 @@
 <template>
-    <button type="button" class="submit-button" @click.prevent="$emit('submit')">
-        {{ label }}
+    <button type="submit" class="submit-button" @click.prevent="$emit('submit')">
+        Submit
     </button>
 </template>
 
 <script>
 export default {
-    props: {
-        label: {
-            type: String,
-            required: true
-        }
-    }
+    
 }
 </script>
 

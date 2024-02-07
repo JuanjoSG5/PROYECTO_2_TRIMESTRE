@@ -3,7 +3,7 @@
         <legend>This is the contact Form</legend>
         <CustomInput label="Inquiry Type" type="select" v-model="selectedInquiry" :options="possibleInquiries" />
         <CustomInput label="Description of the inquiry" type="textarea" v-model="userText" placeholder="Write here what you want to communicate to us" />
-        <SubmitButton label="Submit" />
+        <SubmitButton  />
     </form>
 </template>
   

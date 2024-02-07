@@ -1,7 +1,7 @@
 <template>
     <form class="form-control" >
       <slot :validateForm="validateForm"></slot>
-      <SubmitButton label="Submit" />
+      <SubmitButton />
     </form>
   </template>
   
