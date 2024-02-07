@@ -5,15 +5,20 @@
             <router-link class="route" to="/">Home</router-link>
             <router-link class="route" to="/contact">Contact</router-link>
             <router-link class="route" to="/home">Events</router-link>
-            <router-link class="route" to="/login">Login</router-link>
-            <router-link class="route" to="/register">Register</router-link>
-            <router-link class="route" to="/user">User</router-link>
+            <router-link v-if="!isLoggedIn" class="route" to="/login">Login</router-link>
+            <router-link v-if="!isLoggedIn" class="route" to="/register">Register</router-link>
+            <router-link v-else class="route" to="/user">User</router-link>
     </nav>
 </template>
   
 <script>
 export default {
-
+    props:{
+        isLoggedIn: {
+            type: Boolean,
+            default: false
+        }
+    }
 };
 </script>
   

@@ -1,19 +1,26 @@
 <script >
-import Navbar from './components/shared/Navbar.vue';
-import Footer from './components/shared/Footer.vue';
+import PrivateLayout from './components/shared/layouts/Private.vue';
+import PublicLayout from './components/shared/layouts/Public.vue';
 
 export default {
   components: {
-    Navbar,
-    Footer
+    PrivateLayout,
+    PublicLayout
+},
+  data(){
+    return {
+      isLogged: false
+    }
   }
 }
 </script>
 
 <template>
-  <Navbar />
-    <router-view />
-  <Footer />
+  <section>
+    <PrivateLayout v-if="isLogged" />
+    <PublicLayout v-else />
+
+  </section>
 </template>
 
 <style scoped>
