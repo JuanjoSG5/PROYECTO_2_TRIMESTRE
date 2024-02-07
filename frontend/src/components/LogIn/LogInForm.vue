@@ -70,8 +70,8 @@ export default {
     methods: {
         
         handleInputChange(fieldName, value) {
-    this.formData[fieldName] = value; // Assign value to the corresponding field in formData
-    this.errorMessage[fieldName] = ''; // Clear error message for the specific field
+    this.formData[fieldName] = value; 
+    this.errorMessage[fieldName] = '';
 },
 
         getErrorMessage(fieldName) {

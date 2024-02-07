@@ -1,9 +1,11 @@
 <template>
     <form class="form-control">
+        <!-- Slot for custom form content -->
         <slot :validateForm="validateForm" :handleSubmit="handleSubmit"></slot>
+        <!-- SubmitButton component triggers handleSubmit method -->
         <SubmitButton @click="handleSubmit" />
-        
     </form>
+    <!-- Display message if form is successfully submitted -->
     <h3 v-if="formSent">The inquiry has been submitted</h3>
 </template>
   
@@ -16,11 +18,13 @@ export default {
         SubmitButton
     },
     computed: {
+        // Computed property to check login status
         logIn() {
             return store.isLoggedIn = true;
         },
     },
     props: {
+        // Validation rules object required for form validation
         validationRules: {
             type: Object,
             required: true
@@ -33,39 +37,32 @@ export default {
         };
     },
     methods: {
-    validateForm() {
-        let correctForm = true;
-        for (const fieldName in this.validationRules) {
-            if (!this.validateField(fieldName)) {
-                correctForm = false;
+        // Validate the entire form
+        validateForm() {
+            let correctForm = true;
+            for (const fieldName in this.validationRules) {
+                if (!this.validateField(fieldName)) {
+                    correctForm = false;
+                }
+            }
+            return correctForm;
+        },
+        // Validate a single form field
+        validateField(fieldName) {
+            const rule = this.validationRules[fieldName];
+            if (!rule.validator(this.formData[fieldName])) {
+                rule.errorMessage = `Please enter a valid ${rule.label}.`;
+                return false;
+            }
+            return true;
+        },
+        handleSubmit() {
+            if (this.validateForm()) {
+                this.logIn();
+                this.formSent = true;
             }
         }
-        console.log('Form validation result:', correctForm); // Log form validation result
-        return correctForm;
-    },
-    validateField(fieldName) {
-        const rule = this.validationRules[fieldName];
-        if (!rule.validator(this.formData[fieldName])) {
-            rule.errorMessage = `Please enter a valid ${rule.label}.`;
-            console.log(`Validation failed for ${fieldName}: ${rule.errorMessage}`); // Log validation failure
-            return false;
-        }
-        console.log(`Validation passed for ${fieldName}`); // Log validation success
-        return true;
-    },
-    handleSubmit() {
-        console.log('Submit button clicked'); // Check if handleSubmit is being triggered
-        if (this.validateForm()) {
-            this.logIn();
-            this.formSent = true;
-            console.log('Form submitted successfully'); // Check if form submission is successful
-        }
-        else {
-            console.log('Form validation failed'); // Check if form validation fails
-        }
     }
-}
-
 };
 </script>
   
@@ -77,4 +74,3 @@ export default {
     align-items: center;
 }
 </style>
-  
