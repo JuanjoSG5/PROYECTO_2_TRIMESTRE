@@ -16,7 +16,7 @@
         <textarea 
             v-else-if="type === 'textarea'" 
             class="text-area" 
-            :value="value" 
+            :value="getValue()"
             :placeholder="placeholder"
             @input="$emit('input', $event.target.value)">
         </textarea>
@@ -32,32 +32,42 @@
 
 <script>
 export default {
-    props: {
-        label: {
-            type: String,
-            required: true
-        },
-        type: {
-            type: String,
-            default: 'text'
-        },
-        value: {
-            type: [String, Number],
-            default: ''
-        },
-        placeholder: {
-            type: String,
-            default: ''
-        },
-        options: {
-            type: Array,  
-            default: () => []  
-        },
-        errorMessage: {
-            type: String,
-            default: ''
-        }
+  props: {
+    label: {
+      type: String,
+      required: true
+    },
+    type: {
+      type: String,
+      default: 'text'
+    },
+    value: {
+      type: [String, Number],
+      default: ''
+    },
+    placeholder: {
+      type: String,
+      default: ''
+    },
+    options: {
+      type: Array,  
+      default: () => []  
+    },
+    errorMessage: {
+      type: String,
+      default: ''
+    },
+    formSent: {
+      type: Boolean,
+      default: false
     }
+  },
+  methods: {
+    // Method to determine the value of the input based on formSent
+    getValue() {
+      return this.formSent ? '' : this.value;
+    }
+  }
 }
 </script>
 
