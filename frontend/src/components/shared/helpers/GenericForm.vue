@@ -72,5 +72,11 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
+  }
+
+  @media (max-width: 1024px) {
+    .form-control {
+      margin-top: 50px; 
+    }
+  }
 </style>

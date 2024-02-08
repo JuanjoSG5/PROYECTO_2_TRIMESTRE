@@ -87,7 +87,14 @@ export default {
 .label {
   font-weight: bold;
   margin-bottom: 5px;
-  width: 33vw;
+  width: 40vw;
+}
+
+@media (max-width: 1024px) {
+  .label {
+    margin-top: 16px;
+      width: 50vw;
+  }
 }
 
 

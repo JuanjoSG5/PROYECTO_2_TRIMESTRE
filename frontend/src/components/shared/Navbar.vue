@@ -28,7 +28,7 @@ export default {
     display: flex;
     top: 0;
     left: 0;
-    margin: 8px;
+    margin: 16px;
     width: 100%;
     position: absolute;
     justify-content: space-around;
