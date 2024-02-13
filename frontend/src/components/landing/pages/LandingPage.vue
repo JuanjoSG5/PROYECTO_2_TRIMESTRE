@@ -18,15 +18,18 @@
       <section class="section-separator">
         Create and manage your Events
       </section>
+      <SampleContainer />
     </section>
   </template>
   
   <script>
   import LandingButtons from '../components/LandingButtons.vue';
+  import SampleContainer from '../components/sampleContainer.vue';
   
   export default {
     components: {
       LandingButtons,
+      SampleContainer
     }
   }
   </script>
@@ -38,7 +41,7 @@
   
   .top-section {
     display: grid;
-    margin: 24px 153px;
+    margin: 2rem 5rem;
     grid-template-columns: 1.3fr 1fr;
     grid-gap: 0.4fr;
   }
@@ -61,7 +64,7 @@
       font-size: 36px;
       margin-top: 8px;
       margin-bottom: 8px;
-      font-weight: normal;
+      font-weight: bold;
     }
   }
   
@@ -82,8 +85,7 @@
     color: var(--vt-c-black);
     margin-top: 8px;
     margin-bottom: 34px;
-    padding-left: 8px;
-    padding-right: 16px;
+    
     width: 100%;
     height: 10vh;
     text-align: center;

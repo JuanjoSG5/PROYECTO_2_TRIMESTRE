@@ -17,10 +17,9 @@ export default {
 </script>
 
 <template>
-    <section>
         <PrivateLayout v-if="isLoggedIn" />
         <PublicLayout v-else />
-    </section>
+    
 </template>
 
 <style scoped>

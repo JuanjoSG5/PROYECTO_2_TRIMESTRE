@@ -15,10 +15,9 @@ export default {
     width: 100%;
     background-color: var(--vt-c-black-contrast);
     color: var(--vt-c-black);
-    position: fixed; 
     text-align: center;
     padding: 8px;
-    left: 0;
+    right: 10px;
     bottom: 0;
 }
 
