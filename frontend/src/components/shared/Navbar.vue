@@ -5,15 +5,20 @@
             <router-link class="route" to="/">Home</router-link>
             <router-link class="route" to="/contact">Contact</router-link>
             <router-link class="route" to="/home">Events</router-link>
-            <router-link class="route" to="/login">Login</router-link>
-            <router-link class="route" to="/register">Register</router-link>
-            <router-link class="route" to="/user">User</router-link>
+            <router-link v-if="!isLoggedIn" class="route" to="/login">Login</router-link>
+            <router-link v-if="!isLoggedIn" class="route" to="/register">Register</router-link>
+            <router-link v-else class="route" to="/user">User</router-link>
     </nav>
 </template>
   
 <script>
+import {store} from '../../context/UserContext.js';
 export default {
-
+    computed: {
+        isLoggedIn() {
+            return store.isLoggedIn;
+        },
+    },
 };
 </script>
   
@@ -23,7 +28,7 @@ export default {
     display: flex;
     top: 0;
     left: 0;
-    margin: 8px;
+    margin: 16px;
     width: 100%;
     position: absolute;
     justify-content: space-around;

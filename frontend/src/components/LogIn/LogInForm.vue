@@ -1,37 +1,87 @@
 <template>
-    <form class="form-control" action="">
-        <legend>This is the log in form</legend>
-        <CustomInput label="Username" v-model="username" placeholder="Username" />
-        <CustomInput label="Password" type="password" v-model="password"  />
-        <CustomInput label="Email" type="email" v-model="email" placeholder="example@gmail.com" />
-        <SubmitButton label="Submit" />
-    </form>
+    <CustomForm :validationRules="validationRules" >
+        <CustomInput 
+            label="Username" 
+            v-model="formData.username" 
+            placeholder="Username"
+            :errorMessage="errorMessage.username" 
+            @input="handleInputChange('username', $event.target.value)"
+        />
+        <CustomInput 
+            label="Password" 
+            type="password" 
+            v-model="formData.password"
+            :errorMessage="errorMessage.password" 
+            @input="handleInputChange('password', $event.target.value)" 
+        />
+        <CustomInput 
+            label="Email" 
+            type="email" 
+            v-model="formData.email" 
+            placeholder="example@gmail.com"
+            :errorMessage="errorMessage.email" 
+            @input="handleInputChange('email', $event.target.value)" 
+        />
+        
+        
+    </CustomForm>
 </template>
 
 <script>
+// Import necessary components and methods
 import CustomInput from '../shared/helpers/GenericInput.vue';
-import SubmitButton from '../shared/helpers/SubmitButton.vue';
+import CustomForm from '../shared/helpers/GenericForm.vue';
+import { validateEmail, validatePassword, validateUsername } from '../shared/helpers/InputValidation.js';
 
 export default {
     components: {
         CustomInput,
-        SubmitButton
+        CustomForm
     },
     data() {
         return {
-            username: '',
-            password: '',
-            email: ''
+            
+            formData: {
+                username: '',
+                password: '',
+                email: ''
+            },
+            errorMessage: {
+                username: '',
+                password: '',
+                email: ''
+            },
+            validationRules: {
+                username: {
+                    label: 'Username',
+                    validator: (value) => validateUsername(value) 
+                },
+                password: {
+                    label: 'Password',
+                    validator: (value) => validatePassword(value)
+                },
+                email: {
+                    label: 'Email',
+                    validator: (value) => validateEmail(value) 
+                }
+            }
         };
-    }
-}
-</script>
+    },
+    methods: {
+        
+        handleInputChange(fieldName, value) {
+    this.formData[fieldName] = value; 
+    this.errorMessage[fieldName] = '';
+},
 
+        getErrorMessage(fieldName) {
+            return this.validationRules[fieldName].errorMessage;
+        }
+    }
+};
+</script>
+  
 <style scoped>
-.form-control {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; 
-}
+    
 </style>
+  

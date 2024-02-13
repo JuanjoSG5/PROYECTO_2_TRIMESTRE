@@ -1,34 +1,41 @@
-<script >
-import Navbar from './components/shared/Navbar.vue';
-import Footer from './components/shared/Footer.vue';
+<script>
+import PrivateLayout from './components/shared/layouts/Private.vue';
+import PublicLayout from './components/shared/layouts/Public.vue';
+import { store } from './context/UserContext.js';
 
 export default {
-  components: {
-    Navbar,
-    Footer
-  }
+    components: {
+        PrivateLayout,
+        PublicLayout
+    }, 
+    computed: {
+        isLoggedIn() {
+            return store.isLoggedIn;
+        },
+    },
 }
 </script>
 
 <template>
-  <Navbar />
-  <router-view />
-  <Footer />
+    <section>
+        <PrivateLayout v-if="isLoggedIn" />
+        <PublicLayout v-else />
+    </section>
 </template>
 
 <style scoped>
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
 }
 
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+    filter: drop-shadow(0 0 2em #646cffaa);
 }
 
 .logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+    filter: drop-shadow(0 0 2em #42b883aa);
 }
 </style>

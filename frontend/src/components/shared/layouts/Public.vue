@@ -1,11 +1,17 @@
 <template lang="">
-    
+    <Navbar />
+        <router-view />
+    <Footer />
 </template>
 <script>
-import Header from './Header.vue'
-import Footer from './Footer.vue'   
+
+import Navbar from '../Navbar.vue';
+import Footer from '../Footer.vue';
 export default {
-    
+    components: {
+        Navbar,
+        Footer,
+    }
 }
 </script>
 <style lang="">
