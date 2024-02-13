@@ -12,15 +12,16 @@ export default {
 
 <style scoped>
 .footer {
+    position: absolute; /* Position the footer relative to its closest positioned ancestor */
     width: 100%;
     background-color: var(--vt-c-black-contrast);
-    color: var(--vt-c-black);
-    position: fixed; 
+    color: var(--vt-c-black); 
     text-align: center;
     padding: 8px;
-    left: 0;
-    bottom: 0;
+    bottom: 0; /* Align the bottom edge of the footer with the bottom edge of its containing block */
+    margin-top: 20px; /* Add margin-top to push the footer up from the bottom */
 }
+
 
 .text {
     font-weight: bold;

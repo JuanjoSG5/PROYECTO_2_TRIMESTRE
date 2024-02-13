@@ -18,15 +18,18 @@
       <section class="section-separator">
         Create and manage your Events
       </section>
+      <TopContainer />
     </section>
   </template>
   
   <script>
   import LandingButtons from '../components/LandingButtons.vue';
+  import TopContainer from '../components/sampleContainer.vue';
   
   export default {
     components: {
       LandingButtons,
+      TopContainer
     }
   }
   </script>
@@ -82,7 +85,7 @@
     color: var(--vt-c-black);
     margin-top: 8px;
     margin-bottom: 34px;
-    padding-left: 8px;
+    padding-left: 16px;
     padding-right: 16px;
     width: 100%;
     height: 10vh;
