@@ -1,7 +1,7 @@
 <template>
   <section class="contact-page">
     <ContactForm />
-    <img src="https://dummyimage.com/715x752/000/fff" alt="">
+    <img class="contact-image" src="https://dummyimage.com/715x752/000/fff" alt="">
   </section>
 </template>
 
@@ -21,7 +21,20 @@ export default {
       align-items: center;
       justify-items: center;
       grid-template-columns: 1fr 1fr;
-      padding: 2rem 3rem 4rem 5rem;
+      padding: 3rem 3rem ;
 
     }
+    .contact-image{
+      height: 70vh;
+      width: auto;
+      opacity: 1;
+      transition: opacity 0.3s ease-in-out;
+      border-radius: 12px;
+    }
+    @media (max-width: 1024) {
+    .contact-image {
+        opacity: 0;
+    }
+}
+
 </style>

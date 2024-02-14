@@ -57,6 +57,7 @@ export default {
             return true;
         },
         handleSubmit() {
+            console.log('result' + this.validateForm());
             if (this.validateForm()) {
                 this.logIn();
                 this.formSent = true;
@@ -67,16 +68,5 @@ export default {
 </script>
   
 <style scoped>
-.form-control {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
 
-  @media (max-width: 1024px) {
-    .form-control {
-      margin-top: 50px; 
-    }
-  }
 </style>

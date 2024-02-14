@@ -85,6 +85,7 @@ export default {
 <style scoped>
 
 .label {
+    font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 5px;
   width: 40vw;
@@ -103,6 +104,8 @@ export default {
 
 .input {
   width: 100%;
+  height: 7vh;
+  font-size: 1rem;
   padding: 10px;
   margin: 10px 0;
   border: 2px solid var(--vt-c-black-contrast);
@@ -112,6 +115,11 @@ export default {
 .input:focus,
 .input:focus-visible {
   outline: 2px inset var(--vt-c-black-mute);
+}
+@media (max-width: 1024px) {
+  .input {
+    height: 10vw;
+  }
 }
 
 

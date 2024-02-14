@@ -1,5 +1,7 @@
 <template>
     <CustomForm :validationRules="validationRules" >
+        <legend class="form-title"> Log In</legend>
+        <p class="signup-suggestion">Don’t have an count yet </p>
         <CustomInput 
             label="Username" 
             v-model="formData.username" 
@@ -7,6 +9,7 @@
             :errorMessage="errorMessage.username" 
             @input="handleInputChange('username', $event.target.value)"
         />
+        
         <CustomInput 
             label="Password" 
             type="password" 
@@ -14,6 +17,7 @@
             :errorMessage="errorMessage.password" 
             @input="handleInputChange('password', $event.target.value)" 
         />
+
         <CustomInput 
             label="Email" 
             type="email" 
@@ -82,6 +86,12 @@ export default {
 </script>
   
 <style scoped>
-    
+    .form-title{
+        font-size: 3rem;
+        font-weight: bold;
+    }
+    .signup-suggestion{
+        font-size: 1.5rem;
+    }
 </style>
   

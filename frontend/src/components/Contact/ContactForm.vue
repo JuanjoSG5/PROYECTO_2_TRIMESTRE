@@ -110,8 +110,12 @@ export default {
 </script>
   
 <style scoped>
+    .form-control{
+        margin-right: 2rem;
+    }
     .form-title{
         font-size: 2rem;
         margin-bottom: 1rem;
     }
+
 </style>
