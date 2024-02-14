@@ -1,25 +1,31 @@
 <template lang="">
-    <main class="main">
-        <Navbar />
-            
-                <router-view />
-        <Footer />
-    </main>
+  <main class="main">
+    <Navbar />
+        <router-view />
+    <Footer v-if="showFooter" />
+  </main>
 </template>
-<script>
 
+<script>
 import Navbar from '../Navbar.vue';
 import Footer from '../Footer.vue';
+
 export default {
-    components: {
-        Navbar,
-        Footer,
-    }
+  components: {
+    Navbar,
+    Footer,
+  },
+  computed: {
+    showFooter() {
+      return this.$route.meta.showFooter;
+    },
+  },
 }
 </script>
+
 <style scoped>
-    .main{
-        width: 100%;
-        height: 100%;
-    }
+.main {
+  width: 100%;
+  height: 100%;
+}
 </style>

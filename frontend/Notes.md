@@ -64,3 +64,9 @@ export default {
 ```
 
 Here is an example on how to use this
+
+# Routing
+
+## Meta property when routing
+
+You can pass properties you want specifically for an specific field that are associated with the route, they are used to control some aspects of the routes
