@@ -18,7 +18,7 @@
       <!-- Textarea input -->
       <textarea 
           v-else-if="type === 'textarea'" 
-          class="text-area" 
+          class="input" 
           :value="getValue()"
           :placeholder="placeholder"
           @input="$emit('input', $event.target.value)">
@@ -98,24 +98,15 @@ export default {
 }
 
 
-.text-area {
-  width: 95.8%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-.text-area:focus,
-.text-area:focus-visible {
-  outline: 2px solid var(--vt-c-black-mute);
-}
+
 
 
 .input {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
-  border: 1px solid #ccc;
+  border: 2px solid var(--vt-c-black-contrast);
+  box-sizing: border-box;
   border-radius: 4px;
 }
 .input:focus,

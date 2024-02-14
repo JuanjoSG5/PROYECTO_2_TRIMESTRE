@@ -1,6 +1,6 @@
 <template>
   <form class="form-control" @submit.prevent="submitForm">
-      <legend>This is the contact Form</legend>
+      <legend class="form-title">This is the contact Form</legend>
       
       <!-- CustomInput component for selecting inquiry type -->
       <CustomInput 
@@ -12,10 +12,9 @@
           :errorMessage="selectedInquiryErrorMessage"
           @input="clearSelectedInquiryErrorMessage"
       />
-      
-      <!-- CustomInput component for describing the inquiry -->
+
       <CustomInput 
-          label="Description of the inquiry" 
+          label="Subject of the inquiry" 
           type="textarea" 
           v-model="userText"
           placeholder="Write here what you want to communicate to us"
@@ -23,6 +22,18 @@
           :errorMessage="userTextErrorMessage"
           @input="clearUserTextErrorMessage"
       />
+      
+      <!-- CustomInput component for describing the inquiry -->
+      <CustomInput 
+          label="Description of the inquiry" 
+          type="textarea" 
+          v-model="subject"
+          placeholder="Write here what you want to communicate to us"
+          :formSent="formSent"
+          :errorMessage="subjectErrorMessage"
+          @input="clearSubjectErrorMessage"
+      />
+      
       
       <SubmitButton @click="submitForm"/>
       
@@ -44,6 +55,7 @@ export default {
       // Data properties to store form state and input values
       return {
           formSent: false,
+          subject: '',
           selectedInquiry: '',
           userText: '',
           possibleInquiries: [
@@ -53,7 +65,8 @@ export default {
               { label: 'Other', value: 'Other Inquiry' }
           ],
           selectedInquiryErrorMessage: '',
-          userTextErrorMessage: ''
+          userTextErrorMessage: '',
+          subjectErrorMessage: '',
       };
   },
   methods: {
@@ -71,6 +84,10 @@ export default {
               this.userTextErrorMessage = 'Please enter a valid description';
           }
 
+          if(this.subject.trim() === ''){
+              this.subjectErrorMessage = 'Please enter a valid subject';
+          }
+
           // If no errors, mark form as submitted and reset after 3 seconds
           if (!this.selectedInquiryErrorMessage && !this.userTextErrorMessage) {
               this.formSent = true;
@@ -84,17 +101,17 @@ export default {
       },
       clearUserTextErrorMessage() {
           this.userTextErrorMessage = '';
+      },
+      clearSubjectErrorMessage(){
+          this.subjectErrorMessage = '';
       }
   }
 };
 </script>
   
 <style scoped>
-.form-control {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  align-items: center;
-}
+    .form-title{
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
 </style>

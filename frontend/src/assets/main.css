@@ -2,6 +2,8 @@
 
 #app {
   margin: 0 auto;
+  box-sizing: border-box;
+  width: 100%;
   font-weight: normal;
 }
 
@@ -22,7 +24,6 @@ a,
 
 @media (min-width: 1024px) {
   body {
-    display: flex;
     place-items: center;
   }
 

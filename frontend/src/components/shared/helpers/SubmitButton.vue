@@ -13,7 +13,7 @@ export default {
 <style scoped>
 .submit-button {
     border: 2px solid var(--vt-c-black);
-    border-radius: 25px;
+    border-radius: 12px;
     margin: 0 auto;
     display: block;
     padding: 16px 32px;
@@ -21,8 +21,8 @@ export default {
     background-color: var(--vt-c-black-contrast);
     font-size: 16px;
     box-shadow: 4px 4px 8px rgba(82, 109, 130, 0.4);
+    width: 100%;
     cursor: pointer;
-    /* Ensure cursor changes on hover */
 }
 
 .submit-button:hover {
