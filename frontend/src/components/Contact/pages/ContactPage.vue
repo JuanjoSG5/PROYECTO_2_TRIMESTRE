@@ -21,8 +21,8 @@ export default {
       align-items: center;
       justify-items: center;
       grid-template-columns: 1fr 1fr;
-      padding: 3rem 3rem ;
-
+      padding: 4rem 3rem ;
+      box-sizing: border-box;
     }
     .contact-image{
       height: 70vh;

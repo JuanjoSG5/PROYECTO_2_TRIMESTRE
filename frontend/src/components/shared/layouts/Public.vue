@@ -1,9 +1,10 @@
 <template lang="">
-    <Navbar />
-        <main>
-            <router-view />
-        </main>
-    <Footer />
+    <main class="main">
+        <Navbar />
+            
+                <router-view />
+        <Footer />
+    </main>
 </template>
 <script>
 
@@ -16,6 +17,9 @@ export default {
     }
 }
 </script>
-<style lang="">
-    
+<style scoped>
+    .main{
+        width: 100%;
+        height: 100%;
+    }
 </style>

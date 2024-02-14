@@ -87,7 +87,7 @@ export default {
 .label {
     font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom:4vh;
   width: 40vw;
 }
 
@@ -119,6 +119,7 @@ export default {
 @media (max-width: 1024px) {
   .input {
     height: 10vw;
+    width: 90vw;
   }
 }
 
