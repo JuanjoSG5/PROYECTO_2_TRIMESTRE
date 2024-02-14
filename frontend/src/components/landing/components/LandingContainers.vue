@@ -17,10 +17,10 @@
             <img class="bottom-image" src="https://dummyimage.com/361x284/000000/fff" alt="landing-image">   
         </section>
         <section class="bottom-container-content">
-            <h2 class="bottom-header">Optimize your time management </h2>
+            <h2 class="bottom-header">Customize your events on the go!</h2>
             <p class="bottom-description">
-                Simplify your day and sync your events with the apps you use most—all from one place.
-                Discover how TimeSync can enhance your productivity and make your workflow more efficient.
+                Customize your working style with TimeSync. 
+                TimeSync offers you the flexibility to manage your events the way you prefer.
             </p>
         </section>
         

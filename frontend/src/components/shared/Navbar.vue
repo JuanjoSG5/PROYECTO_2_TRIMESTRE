@@ -26,8 +26,7 @@ export default {
 
 .navbar {
     display: flex;
-    top: 0;
-    left: 0;
+    padding-top: 1rem;
     width: 100%;
     justify-content: space-around;
     

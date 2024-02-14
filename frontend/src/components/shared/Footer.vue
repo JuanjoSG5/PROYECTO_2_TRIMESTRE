@@ -12,17 +12,17 @@ export default {
 
 <style scoped>
 .footer {
+    
     width: 100%;
     background-color: var(--vt-c-black-contrast);
     color: var(--vt-c-black);
     text-align: center;
     padding: 8px;
     right: 10px;
-    bottom: 0;
 }
 
 .text {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 1.4vw;
 }
 </style>
