@@ -21,10 +21,10 @@
     width: 100%;
     border: 2px solid var(--vt-c-black);
     border-radius: 12px;
-    margin: 0 auto;
+    margin-top: 2rem;
+    padding: 16px 32px;
     font-size: 2rem;
     color: var(--vt-c-black);
-    padding: 16px 32px;
     background-color: var(--vt-c-black-contrast);
     box-shadow: 4px 4px 8px rgba(82, 109, 130, 0.4);
     cursor: pointer;

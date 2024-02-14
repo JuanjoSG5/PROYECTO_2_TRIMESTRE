@@ -1,5 +1,5 @@
 <template>
-    <CustomForm :validationRules="validationRules" >
+    <CustomForm :formData="formData" :validationRules="validationRules" >
         <legend class="form-title"> Log In</legend>
         <p class="signup-suggestion">Don’t have an count yet </p>
         <CustomInput 
@@ -9,7 +9,7 @@
             :errorMessage="errorMessage.username" 
             @input="handleInputChange('username', $event.target.value)"
         />
-        
+
         <CustomInput 
             label="Password" 
             type="password" 
@@ -74,9 +74,10 @@ export default {
     methods: {
         
         handleInputChange(fieldName, value) {
-    this.formData[fieldName] = value; 
-    this.errorMessage[fieldName] = '';
-},
+            console.log(fieldName, value);
+            this.formData[fieldName] = value; 
+            this.errorMessage[fieldName] = '';
+        },
 
         getErrorMessage(fieldName) {
             return this.validationRules[fieldName].errorMessage;
@@ -86,10 +87,12 @@ export default {
 </script>
   
 <style scoped>
+    
     .form-title{
         font-size: 3rem;
         font-weight: bold;
     }
+    
     .signup-suggestion{
         font-size: 1.5rem;
     }
