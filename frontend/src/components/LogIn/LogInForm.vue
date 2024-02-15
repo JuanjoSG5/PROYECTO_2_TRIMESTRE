@@ -4,11 +4,11 @@
         <p class="signup-suggestion">Don’t have an count yet 
             <router-link class="route" to="/register">Sign Up</router-link>
         </p><CustomInput 
-            label="Username" 
-            v-model="formData.username" 
-            placeholder="Username"
-            :errorMessage="errorMessage.username" 
-            @input="handleInputChange('username', $event.target.value)"
+            label="Name" 
+            v-model="formData.name" 
+            placeholder="Name"
+            :errorMessage="errorMessage.name" 
+            @input="handleInputChange('Name', $event.target.value)"
         />
 
         <CustomInput 
@@ -40,16 +40,16 @@ export default {
         return {
             
             formData: {
-                username: '',
+                name: '',
                 password: '',
             },
             errorMessage: {
-                username: '',
+                name: '',
                 password: '',
             },
             validationRules: {
-                username: {
-                    label: 'Username',
+                name: {
+                    label: 'Name',
                     validator: (value) => validateUsername(value) 
                 },
                 password: {

@@ -5,8 +5,7 @@
         <!-- SubmitButton component triggers handleSubmit method -->
         <SubmitButton @click.prevent="handleSubmit" />
     </form>
-    <!-- Display message if form is successfully submitted -->
-    <h3 v-if="formSent">The inquiry has been submitted</h3>
+    
 </template>
   
 <script>
@@ -61,44 +60,81 @@ export default {
             const value = this.formData[fieldName];
             if (!rule.validator(value)) {
                 rule.errorMessage = `Please enter a valid ${rule.label}.`;
+                console.log("This field is not a valid" + rule.label);
                 return false;
             }
             return true;
         },
         handleSubmit() {
             if (this.validateForm()) {
-                this.logIn = true; 
-                this.formSent = true;
-                if (this.checkIfUserExists() === false) {
-                    console.log("The user doesn't exist. Procced to Sign Up");
-                    this.signUpUser();
-                }
-
-
+                console.log("form is valid");
                 
-
+                this.checkIfUserExists() === false 
+                    ? console.log('User does not exist')
+                    :  this.createUser();
+                    
             } 
-            console.log('Form is not valid');
+            
         },
         async checkIfUserExists() {
+            console.log('Checking if user exists');
             const currentData = await fetch('http://localhost:9000/api/v1/users')
                 .then(response => response.json())
-            const userExists = currentData.some(user => user.name === this.formData.username);
-            if (userExists) {
-                this.errorMessage.username = 'Username already exists';
-                return true;
+                .catch(error => {
+                    console.error('Error fetching user data:', error);
+                    return []; 
+                });
+
+            console.log('currentData:', currentData);
+
+            if (Array.isArray(currentData.data)) {
+                const userExists = currentData.data.some(user => user.name === this.formData.name);
+                if (userExists) {
+                    this.errorMessage.name = 'Username already exists';
+                    return true;
+                }
+                return false;
+            } else {
+                console.error('Unexpected response format: currentData is not an array');
+                return false;
             }
-            return false;
+        },async checkIfUserExists() {
+            console.log('Checking if user exists');
+            const currentData = await fetch('http://localhost:9000/api/v1/users')
+                .then(response => response.json())
+                .catch(error => {
+                    console.error('Error fetching user data:', error);
+                    return []; 
+                });
+
+            console.log('currentData:', currentData);
+
+            if (Array.isArray(currentData.data)) {
+                const userExists = currentData.data.some(user => user.name === this.formData.name);
+                if (userExists) {
+                    this.errorMessage.name = 'Name already exists';
+                    return true;
+                }
+                return false;
+            } else {
+                console.error('Unexpected response format: currentData is not an array');
+                return false;
+            }
         },
-        signUpUser() {
+
+        async createUser() {
+            console.log(JSON.stringify(this.formData));
+
             const postRequest = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify(this.formData)
             };
-            fetch('http://localhost:9000/api/v1/users', postRequest)
+            console.log('Sending post request:', postRequest);
+            await fetch('http://localhost:9000/api/v1/users', postRequest)
                 .then(response => response.json())
                 .then(data => {
                     console.log('Success:', data);
@@ -106,8 +142,24 @@ export default {
                 .catch((error) => {
                     console.error('Error:', error);
                 });
+                this.logIn = true; 
+                this.formSent = true;
+        },
+
+        handleSubmit() {
+            if (this.validateForm()) {
+                console.log("form is valid");
+                
+                this.checkIfUserExists() === false 
+                    ? console.log('User does not exist')
+                    :  this.createUser();
+                    
+            } 
+            
         }
+        
     }
+    
 
 };
 </script>

@@ -5,11 +5,11 @@
             <router-link class="route" to="/login">Log In</router-link>
         </p>
         <CustomInput 
-            label="Username" 
-            v-model="formData.username" 
-            placeholder="Username"
-            :errorMessage="errorMessage.username" 
-            @input="handleInputChange('username', $event.target.value)"
+            label="Name" 
+            v-model="formData.name" 
+            placeholder="Name"
+            :errorMessage="errorMessage.name" 
+            @input="handleInputChange('name', $event.target.value)"
         />
 
         <CustomInput 
@@ -48,18 +48,18 @@ export default {
         return {
             
             formData: {
-                username: '',
+                name: '',
                 password: '',
                 email: ''
             },
             errorMessage: {
-                username: '',
+                name: '',
                 password: '',
                 email: ''
             },
             validationRules: {
-                username: {
-                    label: 'Username',
+                name: {
+                    label: 'Name',
                     validator: (value) => validateUsername(value) 
                 },
                 password: {
