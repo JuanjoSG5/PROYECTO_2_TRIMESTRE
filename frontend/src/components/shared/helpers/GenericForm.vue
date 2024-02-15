@@ -45,46 +45,68 @@ export default {
         };
     },
     methods: {
-    // Validate the entire form
-    validateForm() {
-        console.log("Validating the entire form...");
-        let correctForm = true;
-        for (const fieldName in this.formData) {
-            if (!this.validateField(fieldName)) {
-                correctForm = false;
+        // Validate the entire form
+        validateForm() {
+            let correctForm = true;
+            for (const fieldName in this.formData) {
+                if (!this.validateField(fieldName)) {
+                    correctForm = false;
+                }
             }
-        }
-        console.log("Form validation result:", correctForm);
-        return correctForm;
-    },
-    // Validate a single form field
-    validateField(fieldName) {
-        console.log("Validating field:", fieldName);
-        const rule = this.validationRules[fieldName];
-        const value = this.formData[fieldName];
-        console.log("Value of", fieldName, ":", value);
-        if (!rule.validator(value)) {
-            rule.errorMessage = `Please enter a valid ${rule.label}.`;
-            console.log("Validation failed for field:", fieldName);
-            console.log("Error message:", rule.errorMessage);
+            return correctForm;
+        },
+        // Validate a single form field
+        validateField(fieldName) {
+            const rule = this.validationRules[fieldName];
+            const value = this.formData[fieldName];
+            if (!rule.validator(value)) {
+                rule.errorMessage = `Please enter a valid ${rule.label}.`;
+                return false;
+            }
+            return true;
+        },
+        handleSubmit() {
+            if (this.validateForm()) {
+                this.logIn = true; 
+                this.formSent = true;
+                if (this.checkIfUserExists() === false) {
+                    console.log("The user doesn't exist. Procced to Sign Up");
+                    this.signUpUser();
+                }
+
+
+                
+
+            } 
+            console.log('Form is not valid');
+        },
+        async checkIfUserExists() {
+            const currentData = await fetch('http://localhost:9000/api/v1/users')
+                .then(response => response.json())
+            const userExists = currentData.some(user => user.name === this.formData.username);
+            if (userExists) {
+                this.errorMessage.username = 'Username already exists';
+                return true;
+            }
             return false;
+        },
+        signUpUser() {
+            const postRequest = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(this.formData)
+            };
+            fetch('http://localhost:9000/api/v1/users', postRequest)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
         }
-        console.log("Validation passed for field:", fieldName);
-        return true;
-    },
-    handleSubmit() {
-        console.log("Handling form submission...");
-        console.log('Form validation result:', this.validateForm());
-        if (this.validateForm()) {
-            console.log("Form is valid. Logging in...");
-            this.logIn = true; // Calling the setter to update the login status
-            this.formSent = true;
-        } else {
-            console.log("Form submission halted due to validation errors.");
-        }
-    }
-
-
     }
 
 };

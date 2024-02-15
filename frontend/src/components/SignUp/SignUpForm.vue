@@ -2,7 +2,7 @@
     <CustomForm :formData="formData" :validationRules="validationRules" >
         <legend class="form-title">Sign Up</legend>
         <p class="signup-suggestion">Already have an account?
-            <router-link v-if="!isLoggedIn" class="route" to="/login">Log In</router-link>
+            <router-link class="route" to="/login">Log In</router-link>
         </p>
         <CustomInput 
             label="Username" 
