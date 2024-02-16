@@ -10,7 +10,7 @@
                 <button @click="toggleEditMode" v-if="!isEditMode">Edit</button>
                 <button @click="saveChanges" v-if="isEditMode">Save</button>
             </header>
-            <section class="events-content">
+            <section v-if="!isLoading" class="events-content">
                 <h1>{{ currentEvent.name }}</h1>
                 <p>{{ currentEvent.description }}</p>
                 <p v-if="!isEditMode">Time: {{ getFormattedTime(currentEvent.start_date) }}</p>
@@ -18,18 +18,21 @@
                 <textarea v-model="editedEvent.description" v-if="isEditMode"></textarea>
                 <input type="datetime-local" v-model="editedEvent.start_date" v-if="isEditMode">
             </section>
+            <Loader v-else />
         </section>
     </section>
 </template>
 
 <script>
-import { Icon } from '@iconify/vue'; // Ensure this import statement is present
+import { Icon } from '@iconify/vue'; 
+import Loader from '../../shared/Loader.vue'; 
 import LateralMenu from '../components/LateralMenu.vue';
 
 export default {
-    components: { LateralMenu, Icon }, // Make sure Icon component is registered
+    components: { LateralMenu, Icon, Loader },
     data() {
         return {
+            isLoading: true,
             isMenuRetracted: false,
             isImportant: false,
             isEditMode: false,
@@ -42,6 +45,9 @@ export default {
         await this.getEventFrontApi();
     },
     methods: {
+        toggleLoading() {
+            this.isLoading = !this.isLoading;
+        },
         toggleMenu() {
             this.isMenuRetracted = !this.isMenuRetracted;
         },
@@ -54,6 +60,7 @@ export default {
                 console.log("fecth Done");
             this.events = eventsData;
             this.currentEvent = this.events.data[0];
+            this.toggleLoading();
         },
         getFormattedTime(dateTimeString) {
             const date = new Date(dateTimeString);
