@@ -10,7 +10,7 @@
   
 <script>
 import SubmitButton from './SubmitButton.vue';
-import { store } from '../../../context/UserContext.js'
+import { store } from '../../../store/UserStore.js'
 
 export default {
     components: {

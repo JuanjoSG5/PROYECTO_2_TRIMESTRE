@@ -12,7 +12,7 @@
 </template>
   
 <script>
-import {store} from '../../context/UserContext.js';
+import {store} from '../../store/UserStore.js';
 export default {
     computed: {
         isLoggedIn() {
