@@ -35,8 +35,10 @@
                         class=" event-description event-description-local" 
                         v-model="editedEvent.description" 
                     ></textarea>
-                    <input class="event-time-local" type="datetime" v-model="editedEvent.start_date" >
-                    <button class="edit-button" @click="saveChanges" >Save</button>
+                    <div class="event-time-edit event-time-edit-local">
+                        <input class="event-time event-time-local" type="datetime" v-model="editedEvent.start_date" >
+                        <button class="edit-button" @click="saveChanges" >Save</button>
+                    </div>
                 </section>
             </section>
             <Loader class="loader" v-else />
@@ -141,13 +143,19 @@ export default {
 
         & .event-title{
             margin: auto;
-            padding-top: 2rem;
+            padding-top: 5rem;
             font-size: 3rem;
         }
 
         & .event-description {
             font-size: 2rem;
-            padding-left: 3rem;
+            padding-left: 7rem;
+            margin-top: 1.3rem;
+            margin-bottom: 1.3rem;
+            min-height: 20vh;
+            max-height: 50vh;
+            resize: none;
+            overflow: hidden;
         }
         & .event-time-edit{
             position:relative
@@ -156,7 +164,8 @@ export default {
         & .event-time{
             display: inline-block;
             font-size: 2rem;
-            padding-left: 3rem;
+            margin-top: .5rem;
+            padding-left: 7rem;
             & .actual-time{
                 font-weight: 500;
                 color: var(--vt-c-black-mute);
@@ -177,15 +186,56 @@ export default {
         & .event-title-local{
             border: none;
             border-radius: 0.5rem;
-            padding: auto;
-            margin-top:3rem ;
+            padding: 0;
+            margin-top:6rem ;
+            text-align: center;
             color: var(--vt-c-black-contrast);
-            background-color: var(--vt-c-black);
+            background-color: var(--vt-c-black-soft);
             box-shadow: 4px 4px 8px rgba(82, 109, 130, 0.4);
+            &:hover {
+                outline: 2px solid var(--vt-c-black-contrast);
+            }
+            &:focus {
+                outline: 2px solid /* Your desired outline color */;
+            }       
         }
 
         & .event-description-local{
-            margin-top:2rem
+            margin: auto;
+            margin-top:2rem;
+            padding: 0;
+            border: none;
+            border-radius: .5rem;
+            background-color: var(--vt-c-black-soft);
+            color: var(--vt-c-black-contrast);
+            width: 80%;
+            
+            &:hover {
+                outline: 2px solid var(--vt-c-black-contrast);
+            }
+            &:focus {
+                outline: 2px solid /* Your desired outline color */;
+            }       
+        }
+        & .event-time-edit-local{
+            
+            & .event-time-local{
+                margin-top:2rem;
+                margin-left: 4rem;
+                padding: 0;
+                border: none;
+                border-radius: .5rem;
+                background-color: var(--vt-c-black-soft);
+                color: var(--vt-c-black-contrast);
+                text-align: center;
+                width: 33%;
+                &:hover {
+                    outline: 2px solid var(--vt-c-black-contrast);
+                }
+                &:focus {
+                    outline: 2px solid /* Your desired outline color */;
+                }       
+            }
         }
     }
     & .loader{
