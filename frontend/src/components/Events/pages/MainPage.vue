@@ -6,6 +6,7 @@
             :isMenuRetracted="isMenuRetracted" 
             @toggle-menu="toggleMenu" 
             @event="currentEvent = $event"
+            @update="getEventFrontApi"
         />
         <section class="events">
             <EventHeader/>
@@ -57,7 +58,7 @@ export default {
     components: { LateralMenu, Icon, Loader,EventHeader },
     data() {
         return {
-            isLoading: true,
+            isLoading: false,
             isMenuRetracted: false,
             isEditMode: false,
             currentEvent: {},
@@ -66,6 +67,7 @@ export default {
         };
     },
     async mounted() {
+        this.toggleLoading()
         await this.getEventFrontApi();
     },
     methods: {
@@ -208,6 +210,7 @@ export default {
             border-radius: .5rem;
             background-color: var(--vt-c-black-soft);
             color: var(--vt-c-black-contrast);
+            box-shadow: 4px 4px 8px rgba(82, 109, 130, 0.4);
             width: 80%;
             
             &:hover {
@@ -219,6 +222,7 @@ export default {
         }
         & .event-time-edit-local{
             
+            
             & .event-time-local{
                 margin-top:2rem;
                 margin-left: 4rem;
@@ -228,6 +232,7 @@ export default {
                 background-color: var(--vt-c-black-soft);
                 color: var(--vt-c-black-contrast);
                 text-align: center;
+                box-shadow: 4px 4px 8px rgba(82, 109, 130, 0.4);
                 width: 33%;
                 &:hover {
                     outline: 2px solid var(--vt-c-black-contrast);
@@ -235,6 +240,11 @@ export default {
                 &:focus {
                     outline: 2px solid /* Your desired outline color */;
                 }       
+            }
+
+            & .edit-button{
+                padding:0;
+                margin-right: 3rem;
             }
         }
     }

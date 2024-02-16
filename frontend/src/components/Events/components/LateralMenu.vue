@@ -52,6 +52,7 @@
   
 <script>
 import { Icon } from '@iconify/vue';
+import {getTime} from '../helpers/Time.js'
 
 export default {
     components: { Icon },
@@ -71,14 +72,21 @@ export default {
             this.$emit('toggle-menu');
         },
         async createEvent() {
-            console.log(JSON.stringify(this.editedEvent));
+            const newEvent = {
+                name: "Title",
+                description: "Here goes your description",
+                start_date: getTime(),
+                end_date:null,
+                priority: "high", 
+                user_id: 1
+            };
             const postRequest = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify(this.editedEvent)
+                body: JSON.stringify(newEvent)
             };
             console.log('Sending post request:', postRequest);
             await fetch('http://localhost:9000/api/v1/events', postRequest)
@@ -89,6 +97,7 @@ export default {
                 .catch((error) => {
                     console.error('Error:', error);
                 });
+            this.$emit('update', newEvent);
         },
 
     }
@@ -241,6 +250,7 @@ export default {
             box-sizing: border-box;
             list-style: none;
             transition: all 1s ease;
+            overflow-y: auto;
 
             & .prioritary-event,
             .event {
