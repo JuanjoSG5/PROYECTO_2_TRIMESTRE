@@ -42,12 +42,37 @@
   export default {
     components: { Icon },
     props: {
-      isMenuRetracted: Boolean
+      isMenuRetracted: Boolean,
+      editedEvent: {
+            type: Object,
+            required: true
+        }
     },
     methods: {
       toggleMenu() {
         this.$emit('toggle-menu');
       },
+      async createEvent() {
+            console.log(JSON.stringify(this.editedEvent));
+            
+            const postRequest = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(this.editedEvent)
+            };
+            console.log('Sending post request:', postRequest);
+            await fetch('http://localhost:9000/api/v1/events', postRequest)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        },
 
     }
   };

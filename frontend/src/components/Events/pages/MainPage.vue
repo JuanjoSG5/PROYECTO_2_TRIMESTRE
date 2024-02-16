@@ -1,6 +1,6 @@
 <template>
     <section :class="[isMenuRetracted ? 'main-event-content' : 'main-content']">
-        <LateralMenu :isMenuRetracted="isMenuRetracted" @toggle-menu="toggleMenu" />
+        <LateralMenu :editedEvent="editedEvent" :isMenuRetracted="isMenuRetracted" @toggle-menu="toggleMenu" />
         <section class="events">
             <EventHeader/>
             <section v-if="!isLoading" >
@@ -29,7 +29,7 @@
                         class=" event-description event-description-local" 
                         v-model="editedEvent.description" 
                     ></textarea>
-                    <input type="datetime-local" v-model="editedEvent.start_date" >
+                    <input class="event-time-local" type="datetime" v-model="editedEvent.start_date" >
                     <button class="edit-button" @click="saveChanges" >Save</button>
                 </section>
             </section>
@@ -43,6 +43,7 @@ import { Icon } from '@iconify/vue';
 import Loader from '../../shared/Loader.vue'; 
 import LateralMenu from '../components/LateralMenu.vue';
 import EventHeader from '../components/EventHeader.vue';
+import {getTime} from '../helpers/Time'
 
 export default {
     components: { LateralMenu, Icon, Loader,EventHeader },
@@ -68,8 +69,13 @@ export default {
         },
         
         toggleEditMode() {
+            // TODO: In future chnages make it able to actually change the priority and assign it to the current user
             this.isEditMode = !this.isEditMode;
-            this.editedEvent = this.currentEvent
+            this.editedEvent.name = this.currentEvent.name
+            this.editedEvent.description = this.currentEvent.description
+            this.editedEvent.start_date = getTime()
+            this.editedEvent.priority = 'medium'
+            this.editedEvent.user_id = 1
         },
         async getEventFrontApi() {
             const eventsData = await fetch('http://localhost:9000/api/v1/events')
