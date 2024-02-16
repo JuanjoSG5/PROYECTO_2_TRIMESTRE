@@ -11,8 +11,8 @@ export function validatePassword(password) {
 }
 
 export function validateUsername(name) {
-    // regular expression for name validation: John Doe
-    const regex = new RegExp('^[a-zA-Z]+ [a-zA-Z]+$');
+    // regular expression for name validation: JohnDoe
+    const regex = new RegExp('^[a-zA-Z]+$');
     return regex.test(name);
 }
 

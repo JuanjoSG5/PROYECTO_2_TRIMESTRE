@@ -26,15 +26,23 @@ export default {
 
 .navbar {
     display: flex;
-    top: 0;
-    left: 0;
-    margin: 16px;
+    padding-top: 1rem;
     width: 100%;
-    position: absolute;
     justify-content: space-around;
-    
     align-items: center;
     color: white;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        width: 100%;    
+        padding: 0;
+        margin: 0;
+        justify-content:safe;
+    }
+    .route {
+        margin-top: 1rem;
+    }
 }
 
 .route {

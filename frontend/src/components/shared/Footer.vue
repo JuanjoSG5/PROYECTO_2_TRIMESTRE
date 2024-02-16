@@ -12,19 +12,32 @@ export default {
 
 <style scoped>
 .footer {
-    position: absolute; /* Position the footer relative to its closest positioned ancestor */
+    bottom: 0;
     width: 100%;
     background-color: var(--vt-c-black-contrast);
-    color: var(--vt-c-black); 
+    color: var(--vt-c-black);
     text-align: center;
     padding: 8px;
-    bottom: 0; /* Align the bottom edge of the footer with the bottom edge of its containing block */
-    margin-top: 20px; /* Add margin-top to push the footer up from the bottom */
+    box-sizing: border-box;
 }
 
 
 .text {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 1.4vw;
+}
+
+@media (max-width: 1024px) {
+    .text {
+        font-size: 2.5vw;
+        padding-right: 2rem;
+        
+    }
+}
+
+@media (max-width: 768px) {
+    .text {
+        font-size: 3.5vw;
+    }
 }
 </style>

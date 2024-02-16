@@ -18,81 +18,79 @@
       <section class="section-separator">
         Create and manage your Events
       </section>
-      <TopContainer />
+      <LandingContainer />
     </section>
   </template>
   
-  <script>
-  import LandingButtons from '../components/LandingButtons.vue';
-  import TopContainer from '../components/sampleContainer.vue';
-  
-  export default {
+<script>
+import LandingButtons from '../components/LandingButtons.vue';
+import LandingContainer from '../components/LandingContainers.vue';
+
+export default {
     components: {
-      LandingButtons,
-      TopContainer
+        LandingButtons,
+        LandingContainer
     }
-  }
-  </script>
+}
+</script>
   
-  <style scoped>
-  .landing {
+<style scoped>
+.landing {
     padding: 0;
-  }
-  
-  .top-section {
+}
+
+.top-section {
     display: grid;
-    margin: 24px 153px;
+    margin: 2rem 5rem;
     grid-template-columns: 1.3fr 1fr;
     grid-gap: 0.4fr;
-  }
-  
-  .top-section-content {
+}
+
+.top-section-content {
     margin-right: 10vw;
-  }
-  
-  .top-section-image {
+}
+
+.top-section-image {
     width: 391px;
     height: 366px;
     border-radius: 8px;
     justify-self: center;
     align-self: center;
-  }
-  
-  .section-title {
-    &,
-    .app-color {
-      font-size: 36px;
-      margin-top: 8px;
-      margin-bottom: 8px;
-      font-weight: normal;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: normal;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    & .app-color {
+        font-size: 3rem;
+        font-weight: bold;
     }
-  }
-  
-  .section-subtitle,
-  .section-description {
-    font-size: 24px;
+}
+
+.section-subtitle,
+.section-description {
+    font-size: 1.5rem;
     margin-top: 8px;
     margin-bottom: 8px;
     font-weight: normal;
-  
+
     &.section-description {
-      font-size: 20px;
+        font-size: 20px;
     }
-  }
-  
-  .section-separator {
+}
+
+.section-separator {
     background-color: var(--vt-c-black-contrast);
     color: var(--vt-c-black);
     margin-top: 8px;
     margin-bottom: 34px;
-    padding-left: 16px;
-    padding-right: 16px;
     width: 100%;
     height: 10vh;
     text-align: center;
     line-height: 10vh;
     font-size: 2rem;
     font-weight: bold;
-  }
-  </style>
-  
+}
+</style>

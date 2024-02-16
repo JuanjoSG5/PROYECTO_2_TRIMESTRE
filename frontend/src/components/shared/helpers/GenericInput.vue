@@ -18,7 +18,9 @@
       <!-- Textarea input -->
       <textarea 
           v-else-if="type === 'textarea'" 
-          class="text-area" 
+
+          class="input" 
+
           :value="getValue()"
           :placeholder="placeholder"
           @input="$emit('input', $event.target.value)">
@@ -85,9 +87,41 @@ export default {
 <style scoped>
 
 .label {
+  font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom:4vh;
   width: 40vw;
+}
+
+.input {
+  width: 100%;
+  height: 7vh;
+  font-size: 1rem;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid var(--vt-c-black-contrast);
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+.input:focus,
+.input:focus-visible {
+  outline: 2px inset var(--vt-c-black-mute);
+}
+
+.error-message {
+  color: var(--vt-c-red);
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+@media (max-width: 1024px) {
+  .label{
+    display: block;
+  }
+  .input {
+    height: 10vw;
+    width: 70vw;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -98,35 +132,4 @@ export default {
 }
 
 
-.text-area {
-  width: 95.8%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-.text-area:focus,
-.text-area:focus-visible {
-  outline: 2px solid var(--vt-c-black-mute);
-}
-
-
-.input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-.input:focus,
-.input:focus-visible {
-  outline: 2px inset var(--vt-c-black-mute);
-}
-
-
-.error-message {
-  color: var(--vt-c-red);
-  font-size: 12px;
-  margin-top: 5px;
-}
 </style>
