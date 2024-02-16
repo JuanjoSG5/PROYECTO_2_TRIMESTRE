@@ -20,6 +20,7 @@ export default {
       return this.$route.meta.showFooter;
     },
   },
+
 }
 </script>
 

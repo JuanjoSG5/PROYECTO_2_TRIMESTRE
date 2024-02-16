@@ -18,7 +18,9 @@
       <!-- Textarea input -->
       <textarea 
           v-else-if="type === 'textarea'" 
+
           class="input" 
+
           :value="getValue()"
           :placeholder="placeholder"
           @input="$emit('input', $event.target.value)">
@@ -85,13 +87,11 @@ export default {
 <style scoped>
 
 .label {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
   font-weight: bold;
   margin-bottom:4vh;
   width: 40vw;
 }
-
-
 
 .input {
   width: 100%;

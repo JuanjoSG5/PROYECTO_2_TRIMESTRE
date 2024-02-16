@@ -21,6 +21,7 @@ export default {
     box-sizing: border-box;
 }
 
+
 .text {
     font-weight: bold;
     font-size: 1.4vw;

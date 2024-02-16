@@ -5,7 +5,6 @@
         <!-- SubmitButton component triggers handleSubmit method -->
         <SubmitButton @click.prevent="handleSubmit" />
     </form>
-    
 </template>
   
 <script>
@@ -47,7 +46,9 @@ export default {
         // Validate the entire form
         validateForm() {
             let correctForm = true;
+
             for (const fieldName in this.formData) {
+
                 if (!this.validateField(fieldName)) {
                     correctForm = false;
                 }
@@ -57,10 +58,11 @@ export default {
         // Validate a single form field
         validateField(fieldName) {
             const rule = this.validationRules[fieldName];
+
             const value = this.formData[fieldName];
             if (!rule.validator(value)) {
                 rule.errorMessage = `Please enter a valid ${rule.label}.`;
-                console.log("This field is not a valid" + rule.label);
+               
                 return false;
             }
             return true;
