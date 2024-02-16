@@ -37,6 +37,7 @@
                     v-for="event in events" 
                     :key="event.id" 
                     class="event"
+                    @click="$emit('event', event)"
                 >
                     {{ event.name }}
                 </li>

@@ -5,6 +5,7 @@
             :editedEvent="editedEvent" 
             :isMenuRetracted="isMenuRetracted" 
             @toggle-menu="toggleMenu" 
+            @event="currentEvent = $event"
         />
         <section class="events">
             <EventHeader/>
