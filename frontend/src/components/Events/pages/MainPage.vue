@@ -1,7 +1,7 @@
 <template>
     <section :class="[isMenuRetracted ? 'main-event-content' : 'main-content']">
         <LateralMenu 
-            :events="events" 
+            :events="events.data" 
             :editedEvent="editedEvent" 
             :isMenuRetracted="isMenuRetracted" 
             @toggle-menu="toggleMenu" 

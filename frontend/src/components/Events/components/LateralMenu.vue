@@ -32,8 +32,14 @@
             <h2>
                 <Icon class="down-arrow" icon="lets-icons:arrow-drop-down-big" /> Events
             </h2>
-            <ul class="events-list">
-                <li class="event">Example event</li>
+            <ul  class="events-list">
+                <li 
+                    v-for="event in events" 
+                    :key="event.id" 
+                    class="event"
+                >
+                    {{ event.name }}
+                </li>
             </ul>
         </section>
         <section class="user-display">
