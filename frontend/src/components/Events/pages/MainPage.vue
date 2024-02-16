@@ -1,6 +1,11 @@
 <template>
     <section :class="[isMenuRetracted ? 'main-event-content' : 'main-content']">
-        <LateralMenu :editedEvent="editedEvent" :isMenuRetracted="isMenuRetracted" @toggle-menu="toggleMenu" />
+        <LateralMenu 
+            :events="events" 
+            :editedEvent="editedEvent" 
+            :isMenuRetracted="isMenuRetracted" 
+            @toggle-menu="toggleMenu" 
+        />
         <section class="events">
             <EventHeader/>
             <section v-if="!isLoading" >
