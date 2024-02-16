@@ -34,12 +34,28 @@ export default {
     }
 
     @media (max-width: 1024px) {
-        .login-image {
+        .signup-image {
             opacity: 0;
-            transform: scale(0.8); /* Scale down gradually before hiding */
+            transform: scale(0.8); 
         }
-        .login-page {
-            grid-template-columns: 1fr;
+        .signup-page {
+            display: block;
+        }
+    }
+
+    
+    @media (max-width: 1012px) {
+        /*No se me ocurre otra manera de hacer que la imagen no se muestre */
+        .signup-image{
+            display: none;
+        }
+        
+    }
+
+    @media (max-width: 768px) {
+        
+        .signup-page {
+            padding: 2rem 2rem;
         }
     }
 </style>

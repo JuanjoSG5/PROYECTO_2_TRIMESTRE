@@ -44,7 +44,7 @@ export default {
             display: block;
         }
     }
-    @media (max-width: 1000px) {
+    @media (max-width: 1012px) {
         /*No se me ocurre otra manera de hacer que la imagen no se muestre */
         .login-image{
             display: none;
