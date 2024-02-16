@@ -24,10 +24,10 @@ class StoreRoutineRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'start_date' => 'required|date|after_or_equal:today', // Assuming routines cannot start in the past
-            'end_date' => 'nullable|date|after_or_equal:start_date', // End date must be after or equal to start date
-            'event_id' => 'required|exists:events,id', // Assuming event_id must exist in the events table
-            'user_id' => 'required|exists:users,id', // Assuming user_id must exist in the users table
+            'start_date' => 'required|date|after_or_equal:today', 
+            'end_date' => 'nullable|date|after_or_equal:start_date', 
+            'event_id' => 'required|exists:events,id', 
+            'user_id' => 'required|exists:users,id', 
         ];
     }
 }

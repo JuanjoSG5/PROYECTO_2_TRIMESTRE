@@ -26,7 +26,6 @@
 </template>
 
 <script>
-// Import necessary components and methods
 import CustomInput from '../shared/helpers/GenericInput.vue';
 import CustomForm from '../shared/helpers/GenericForm.vue';
 import { validatePassword, validateUsername } from '../shared/helpers/InputValidation.js';

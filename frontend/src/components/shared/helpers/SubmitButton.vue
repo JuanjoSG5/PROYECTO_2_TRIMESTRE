@@ -8,7 +8,7 @@
   export default {
     methods: {
       handleClick() {
-        this.$emit('submit'); // Emit the submit event
+        this.$emit('submit'); 
         console.log('Button clicked');
       }
     }
@@ -40,6 +40,14 @@
   .submit-button:focus {
     box-shadow: 4px 4px 8px rgba(221, 230, 237, 0.3);
     outline: 2px solid var(--vt-c-black-contrast);
+  }
+
+  @media (max-width: 1024px) {
+    .submit-button {
+      width: 78%;
+      padding: 10px 20px;
+      font-size: 1.5rem;
+    }
   }
   </style>
   

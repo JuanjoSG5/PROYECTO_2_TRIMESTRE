@@ -41,7 +41,21 @@ export default {
             transform: scale(0.8); /* Scale down gradually before hiding */
         }
         .login-page {
-            grid-template-columns: 1fr;
+            display: block;
+        }
+    }
+    @media (max-width: 1000px) {
+        /*No se me ocurre otra manera de hacer que la imagen no se muestre */
+        .login-image{
+            display: none;
+        }
+        
+    }
+
+    @media (max-width: 768px) {
+        
+        .login-page {
+            padding: 2rem 2rem;
         }
     }
 </style>

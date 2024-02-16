@@ -11,6 +11,14 @@
             :errorMessage="errorMessage.name" 
             @input="handleInputChange('name', $event.target.value)"
         />
+        <CustomInput 
+            label="Email" 
+            type="email" 
+            v-model="formData.email" 
+            placeholder="example@gmail.com"
+            :errorMessage="errorMessage.email" 
+            @input="handleInputChange('email', $event.target.value)" 
+        />
 
         <CustomInput 
             label="Password" 
@@ -20,21 +28,13 @@
             @input="handleInputChange('password', $event.target.value)" 
         />
 
-        <CustomInput 
-            label="Email" 
-            type="email" 
-            v-model="formData.email" 
-            placeholder="example@gmail.com"
-            :errorMessage="errorMessage.email" 
-            @input="handleInputChange('email', $event.target.value)" 
-        />
+        
         
         
     </CustomForm>
 </template>
 
 <script>
-// Import necessary components and methods
 import CustomInput from '../shared/helpers/GenericInput.vue';
 import CustomForm from '../shared/helpers/GenericForm.vue';
 import { validateEmail, validatePassword, validateUsername } from '../shared/helpers/InputValidation.js';

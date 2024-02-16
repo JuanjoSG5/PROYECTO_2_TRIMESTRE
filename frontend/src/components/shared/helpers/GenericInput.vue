@@ -91,15 +91,6 @@ export default {
   width: 40vw;
 }
 
-@media (max-width: 1024px) {
-  .label {
-    margin-top: 16px;
-      width: 50vw;
-  }
-}
-
-
-
 
 
 .input {
@@ -116,17 +107,29 @@ export default {
 .input:focus-visible {
   outline: 2px inset var(--vt-c-black-mute);
 }
-@media (max-width: 1024px) {
-  .input {
-    height: 10vw;
-    width: 90vw;
-  }
-}
-
 
 .error-message {
   color: var(--vt-c-red);
   font-size: 12px;
   margin-top: 5px;
 }
+
+@media (max-width: 1024px) {
+  .label{
+    display: block;
+  }
+  .input {
+    height: 10vw;
+    width: 70vw;
+  }
+}
+
+@media (max-width: 1024px) {
+  .label {
+    margin-top: 16px;
+      width: 50vw;
+  }
+}
+
+
 </style>
