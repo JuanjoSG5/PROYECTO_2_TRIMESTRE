@@ -1,7 +1,7 @@
 <script>
 import PrivateLayout from './components/shared/layouts/Private.vue';
 import PublicLayout from './components/shared/layouts/Public.vue';
-import { store } from './context/UserContext.js';
+import { store } from './store/UserStore.js';
 
 export default {
     components: {
