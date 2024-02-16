@@ -273,7 +273,9 @@ export default {
             text-align: left;
 
             & .route {
+                display: inline-block;
                 color: var(--vt-c-black);
+                vertical-align: middle;
             }
 
             & .route:hover {
