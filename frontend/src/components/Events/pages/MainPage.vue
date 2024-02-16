@@ -2,23 +2,38 @@
     <section :class="[isMenuRetracted ? 'main-event-content' : 'main-content']">
         <LateralMenu :isMenuRetracted="isMenuRetracted" @toggle-menu="toggleMenu" />
         <section class="events">
-            <header class="events-header">
-                <button class="routines-button">Routines</button>
-                <Icon v-if="isImportant" @click="toggleImportant" class="important-icon"
-                    icon="fluent:important-12-regular" />
-                <Icon v-else @click="toggleImportant" class="important-icon-filled" icon="fluent:important-12-filled" />
-                <button @click="toggleEditMode" v-if="!isEditMode">Edit</button>
-                <button @click="saveChanges" v-if="isEditMode">Save</button>
-            </header>
-            <section v-if="!isLoading" class="events-content">
-                <h1>{{ currentEvent.name }}</h1>
-                <p>{{ currentEvent.description }}</p>
-                <p v-if="!isEditMode">Time: {{ getFormattedTime(currentEvent.start_date) }}</p>
-                <input v-model="editedEvent.name" v-if="isEditMode">
-                <textarea v-model="editedEvent.description" v-if="isEditMode"></textarea>
-                <input type="datetime-local" v-model="editedEvent.start_date" v-if="isEditMode">
+            <EventHeader/>
+            <section v-if="!isLoading" >
+                <section v-if="!isEditMode" class="event-content">
+                    <h1 class="event-title">{{ currentEvent.name }}</h1>
+                    <p class="event-description">{{ currentEvent.description }}</p>
+                    <div class="event-time-edit">
+                        <p 
+                            
+                            class="event-time"
+                        >Time: <span 
+                            class="actual-time"
+                        > {{ getFormattedTime(currentEvent.start_date) }}
+                        </span></p>
+
+                        <button class="edit-button" @click="toggleEditMode" v-if="!isEditMode"><Icon icon="material-symbols:edit" /></button>
+                    </div>
+                </section>
+                <section class="event-content" v-else>
+                    <input 
+                            class="event-title event-title-local" 
+                            v-model="editedEvent.name" 
+                            
+                        >
+                    <textarea 
+                        class=" event-description event-description-local" 
+                        v-model="editedEvent.description" 
+                    ></textarea>
+                    <input type="datetime-local" v-model="editedEvent.start_date" >
+                    <button class="edit-button" @click="saveChanges" >Save</button>
+                </section>
             </section>
-            <Loader v-else />
+            <Loader class="loader" v-else />
         </section>
     </section>
 </template>
@@ -27,14 +42,14 @@
 import { Icon } from '@iconify/vue'; 
 import Loader from '../../shared/Loader.vue'; 
 import LateralMenu from '../components/LateralMenu.vue';
+import EventHeader from '../components/EventHeader.vue';
 
 export default {
-    components: { LateralMenu, Icon, Loader },
+    components: { LateralMenu, Icon, Loader,EventHeader },
     data() {
         return {
             isLoading: true,
             isMenuRetracted: false,
-            isImportant: false,
             isEditMode: false,
             currentEvent: {},
             events: [],
@@ -51,8 +66,10 @@ export default {
         toggleMenu() {
             this.isMenuRetracted = !this.isMenuRetracted;
         },
-        toggleImportant() {
-            this.isImportant = !this.isImportant;
+        
+        toggleEditMode() {
+            this.isEditMode = !this.isEditMode;
+            this.editedEvent = this.currentEvent
         },
         async getEventFrontApi() {
             const eventsData = await fetch('http://localhost:9000/api/v1/events')
@@ -67,9 +84,6 @@ export default {
             const hours = date.getHours();
             const minutes = date.getMinutes();
             return `${hours}:${minutes < 10 ? '0' + minutes : minutes}`;
-        },
-        toggleEditMode() {
-            this.isEditMode = !this.isEditMode;
         },
         saveChanges() {
             // TODO: Save changes to the backend
@@ -105,41 +119,71 @@ export default {
     width: 100%;
     height: 100%;
 
-    & .events-header {
-        position: absolute;
-        right: 5rem;
+    
 
+    & .event-content{
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        height: 90%;
 
-        & .routines-button {
-            background-color: var(--vt-c-black);
-            color: var(--vt-c-black-contrast);
-            border: none;
-            padding: 1rem;
-            border-radius: 5px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            transition: color 0.5s ease-in-out;
-            cursor: pointer;
+        & .event-title{
+            margin: auto;
+            padding-top: 2rem;
+            font-size: 3rem;
         }
 
-        & .routines-button:hover {
-            color: var(--vt-c-black-mute);
-        }
-
-        & .important-icon,
-        .important-icon-filled {
-            display: inline-block;
-            margin-left: 1rem;
+        & .event-description {
             font-size: 2rem;
-            font-weight: bold;
-
+            padding-left: 3rem;
+        }
+        & .event-time-edit{
+            position:relative
+        }
+        
+        & .event-time{
+            display: inline-block;
+            font-size: 2rem;
+            padding-left: 3rem;
+            & .actual-time{
+                font-weight: 500;
+                color: var(--vt-c-black-mute);
+            }
+        }
+        & .edit-button{
+            position: absolute;
+            top: 2rem; /* Adjust this value as needed */
+            right: 2rem; /* Adjust this value as needed */
             color: var(--vt-c-black-contrast);
-            vertical-align: middle;
-            transition: 5s ease-in-out;
-            /* Increase the duration from 0.5s to 1s */
+            background-color: var(--vt-c-black);
+            border: none;
+            font-size: 2.5rem;
+            width: 5vw;
+            
         }
 
+        & .event-title-local{
+            border: none;
+            border-radius: 0.5rem;
+            padding: auto;
+            margin-top:3rem ;
+            color: var(--vt-c-black-contrast);
+            background-color: var(--vt-c-black);
+            box-shadow: 4px 4px 8px rgba(82, 109, 130, 0.4);
+        }
+
+        & .event-description-local{
+            margin-top:2rem
+        }
     }
-}</style>
+    & .loader{
+        position: absolute;
+        top: 40%;
+        left: 40%;
+        justify-content: center;
+    }
+}
+
+</style>
 
   

@@ -11,7 +11,7 @@
           Search for your events
         </p>
       </button>
-      <button class="create-event-button">
+      <button class="create-event-button" @click="createEvent">
         <p class="create-event-text">
           <Icon class="create-icon" icon="iconamoon:sign-plus-circle-bold" />
           Create a new event
@@ -31,7 +31,7 @@
       </section>
       <section class="user-display">
         <Icon class="user-icon" icon="solar:user-line-duotone" />
-        <h2 class="username">Username</h2>
+        <h2 class="username"> <router-link class="route" to="/user">Username</router-link></h2>
       </section>
     </aside>
   </template>
@@ -47,7 +47,8 @@
     methods: {
       toggleMenu() {
         this.$emit('toggle-menu');
-      }
+      },
+
     }
   };
   </script>
@@ -216,6 +217,15 @@
                 font-size: 1.6rem;
                 display: inline-block;
                 text-align: left;
+
+                & .route{
+                  color: var(--vt-c-black);
+                }
+
+                & .route:hover{
+                  color: var(--vt-c-black-contrast);
+                }
+
             }
             & .user-icon{
                 display: inline-block;
