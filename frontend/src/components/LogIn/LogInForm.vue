@@ -11,6 +11,7 @@
             @input="handleInputChange('Name', $event.target.value)"
         />
 
+
         <CustomInput 
             label="Password" 
             type="password" 
@@ -18,17 +19,17 @@
             :errorMessage="errorMessage.password" 
             @input="handleInputChange('password', $event.target.value)" 
         />
-
-        
         
         
     </CustomForm>
 </template>
 
 <script>
+// Import necessary components and methods
 import CustomInput from '../shared/helpers/GenericInput.vue';
 import CustomForm from '../shared/helpers/GenericForm.vue';
 import { validatePassword, validateUsername } from '../shared/helpers/InputValidation.js';
+
 
 export default {
     components: {
@@ -61,7 +62,6 @@ export default {
     methods: {
         
         handleInputChange(fieldName, value) {
-            console.log(fieldName, value);
             this.formData[fieldName] = value; 
             this.errorMessage[fieldName] = '';
         },
@@ -74,7 +74,6 @@ export default {
 </script>
   
 <style scoped>
-    
     .form-title{
         font-size: 3rem;
         font-weight: bold;
@@ -94,4 +93,3 @@ export default {
         }
     }
 </style>
-  

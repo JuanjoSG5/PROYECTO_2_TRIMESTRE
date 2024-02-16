@@ -1,3 +1,4 @@
+
 # Launching the project
 
 In  order to launch the API of the project, you need to use `docker-compose up -d --build` to launch the docker.
@@ -40,3 +41,4 @@ And change the permissions of the files using this commands:
 ```
 
 After that, we just need to relaunch the apache server and then the API should be functional 
+

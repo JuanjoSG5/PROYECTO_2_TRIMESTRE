@@ -12,7 +12,6 @@ export default {
 
 <style scoped>
 .footer {
-    
     bottom: 0;
     width: 100%;
     background-color: var(--vt-c-black-contrast);
@@ -21,6 +20,7 @@ export default {
     padding: 8px;
     box-sizing: border-box;
 }
+
 
 .text {
     font-weight: bold;

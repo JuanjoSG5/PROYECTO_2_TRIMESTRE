@@ -16,7 +16,6 @@ export function validateUsername(name) {
     return regex.test(name);
 }
 
-
 // In order to confirm the password when logging in
 export function doesPasswordMatch(password, confirmPassword) {
     return password === confirmPassword;

@@ -58,4 +58,5 @@ export default {
             padding: 2rem 2rem;
         }
     }
+
 </style>

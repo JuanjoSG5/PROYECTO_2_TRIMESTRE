@@ -22,6 +22,7 @@
           :errorMessage="userTextErrorMessage"
           @input="clearUserTextErrorMessage"
       />
+
       
       <!-- CustomInput component for describing the inquiry -->
       <CustomInput 
@@ -33,7 +34,6 @@
           :errorMessage="subjectErrorMessage"
           @input="clearSubjectErrorMessage"
       />
-      
       
       <SubmitButton @click="submitForm"/>
       
@@ -65,6 +65,7 @@ export default {
               { label: 'Other', value: 'Other Inquiry' }
           ],
           selectedInquiryErrorMessage: '',
+
           userTextErrorMessage: '',
           subjectErrorMessage: '',
       };
@@ -83,7 +84,6 @@ export default {
           if (this.userText.trim() === '') {
               this.userTextErrorMessage = 'Please enter a valid description';
           }
-
           if(this.subject.trim() === ''){
               this.subjectErrorMessage = 'Please enter a valid subject';
           }
@@ -117,5 +117,4 @@ export default {
         font-size: 2rem;
         margin-bottom: 1rem;
     }
-
 </style>
