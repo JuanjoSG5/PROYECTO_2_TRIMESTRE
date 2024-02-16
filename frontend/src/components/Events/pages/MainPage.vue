@@ -1,6 +1,6 @@
 <template lang="">
     <div>
-        Log in 
+        This is where the main page will be written
     </div>
 </template>
 <script>
