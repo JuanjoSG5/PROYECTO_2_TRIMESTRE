@@ -1,5 +1,5 @@
 <template>
-    <CustomForm :formData="formData" :validationRules="validationRules" >
+    <CustomForm :formData="formData" :validationRules="validationRules" @field-error="handleFieldError">
         <legend class="form-title">Sign Up</legend>
         <p class="signup-suggestion">Already have an account?
             <router-link class="route" to="/login">Log In</router-link>
@@ -80,9 +80,8 @@ export default {
             this.formData[fieldName] = value; 
             this.errorMessage[fieldName] = '';
         },
-
-        getErrorMessage(fieldName) {
-            return this.validationRules[fieldName].errorMessage;
+        handleFieldError({ fieldName, errorMessage }) {
+            this.errorMessage[fieldName] = errorMessage;
         }
     }
 };

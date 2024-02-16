@@ -1,17 +1,16 @@
 <template>
-    <CustomForm :formData="formData" :validationRules="validationRules" >
+    <CustomForm :formData="formData" :validationRules="validationRules" @field-error="handleFieldError">
         <legend class="form-title"> Log In</legend>
         <p class="signup-suggestion">Don’t have an count yet 
             <router-link class="route" to="/register">Sign Up</router-link>
-        </p><CustomInput 
+        </p>
+        <CustomInput 
             label="Name" 
             v-model="formData.name" 
             placeholder="Name"
             :errorMessage="errorMessage.name" 
-            @input="handleInputChange('Name', $event.target.value)"
+            @input="handleInputChange('name', $event.target.value)"
         />
-
-
         <CustomInput 
             label="Password" 
             type="password" 
@@ -19,8 +18,6 @@
             :errorMessage="errorMessage.password" 
             @input="handleInputChange('password', $event.target.value)" 
         />
-        
-        
     </CustomForm>
 </template>
 
@@ -30,7 +27,6 @@ import CustomInput from '../shared/helpers/GenericInput.vue';
 import CustomForm from '../shared/helpers/GenericForm.vue';
 import { validatePassword, validateUsername } from '../shared/helpers/InputValidation.js';
 
-
 export default {
     components: {
         CustomInput,
@@ -38,7 +34,6 @@ export default {
     },
     data() {
         return {
-            
             formData: {
                 name: '',
                 password: '',
@@ -49,25 +44,25 @@ export default {
             },
             validationRules: {
                 name: {
-                    label: 'Name',
-                    validator: (value) => validateUsername(value) 
+                    label: 'name',
+                    validator: (value) => validateUsername(value),
+                    errorMessage: '' // Initialize error message in validation rules
                 },
                 password: {
-                    label: 'Password',
-                    validator: (value) => validatePassword(value)
+                    label: 'password',
+                    validator: (value) => validatePassword(value),
+                    errorMessage: '' // Initialize error message in validation rules
                 },
             }
         };
     },
     methods: {
-        
         handleInputChange(fieldName, value) {
             this.formData[fieldName] = value; 
             this.errorMessage[fieldName] = '';
         },
-
-        getErrorMessage(fieldName) {
-            return this.validationRules[fieldName].errorMessage;
+        handleFieldError({ fieldName, errorMessage }) {
+            this.errorMessage[fieldName] = errorMessage;
         }
     }
 };
@@ -78,7 +73,6 @@ export default {
         font-size: 3rem;
         font-weight: bold;
     }
-    
     .signup-suggestion{
         font-size: 1.5rem;
     }
