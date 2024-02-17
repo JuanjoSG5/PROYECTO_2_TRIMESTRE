@@ -71,7 +71,6 @@ export default {
             if (Array.isArray(currentData.data)) {
                 const userExists = currentData.data.some(user => user.name === this.formData.name);
                 if (userExists) {
-                    this.errorMessage.name = 'Username already exists';
                     return true;
                 }
                 return false;
@@ -110,6 +109,7 @@ export default {
                 console.log("form is valid");
 
                 this.checkIfUserExists() === false ?
+                    // TODO: Implement a log in function here and remove the following line
                     console.log('User does not exist')
                     : this.createUser();
 
