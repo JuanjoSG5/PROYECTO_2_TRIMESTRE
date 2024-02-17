@@ -67,12 +67,13 @@ export default {
         };
     },
     async mounted() {
-        this.toggleLoading()
+        
         await this.getEventFrontApi();
     },
     methods: {
         toggleLoading() {
             this.isLoading = !this.isLoading;
+            console.log("laoding from toggle"+ this.isLoading);
         },
         toggleMenu() {
             this.isMenuRetracted = !this.isMenuRetracted;
@@ -88,11 +89,13 @@ export default {
             this.editedEvent.user_id = 1
         },
         async getEventFrontApi() {
+            this.toggleLoading();
             const eventsData = await fetch('http://localhost:9000/api/v1/events')
                 .then(response => response.json());
                 console.log("fecth Done");
             this.events = eventsData;
-            this.currentEvent = this.events.data[0];
+            console.log("Loading from get from API"+this.isLoading);
+            this.currentEvent = this.events.data[this.events.data.length - 1];
             this.toggleLoading();
         },
         getFormattedTime(dateTimeString) {
