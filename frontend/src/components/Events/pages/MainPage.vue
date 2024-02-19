@@ -104,11 +104,27 @@ export default {
             const minutes = date.getMinutes();
             return `${hours}:${minutes < 10 ? '0' + minutes : minutes}`;
         },
-        saveChanges() {
-            // TODO: Save changes to the backend
-            console.log('Changes saved:', this.editedEvent);
-            this.currentEvent = { ...this.editedEvent };
-            this.toggleEditMode(); 
+        async saveChanges() {
+            const postRequest = {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(this.editedEvent)
+            };
+            console.log("eited evente" + this.currentEvent.id);
+            console.log('Sending post request:', postRequest);
+            await fetch(`http://localhost:9000/api/v1/events/${this.currentEvent.id}`, postRequest)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            this.toggleEditMode();
+            this.getEventFrontApi();  
         },
     },
 };

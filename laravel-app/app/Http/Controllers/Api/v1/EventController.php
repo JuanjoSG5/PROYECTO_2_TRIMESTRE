@@ -45,17 +45,17 @@ class EventController extends Controller
             ->setStatusCode(Response::HTTP_CREATED);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateEventRequest $request, Event $event)
-    {
-        $event->update($request->validated());
+        /**
+         * Update the specified resource in storage.
+         */
+        public function update(UpdateEventRequest $request, Event $event)
+        {
+            $event->update($request->validated());
 
-        return (new EventResource($event))
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
-    }
+            return (new EventResource($event))
+                ->response()
+                ->setStatusCode(Response::HTTP_OK);
+        }
 
     /**
      * Remove the specified resource from storage.
