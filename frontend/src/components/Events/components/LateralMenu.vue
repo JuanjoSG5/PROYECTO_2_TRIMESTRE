@@ -22,10 +22,17 @@
         </button>
         <section class="prioritary-events">
             <h2>
-                <Icon class="down-arrow" icon="lets-icons:arrow-drop-down-big" /> Prioritary
+                <Icon class="down-arrow" icon="lets-icons:arrow-drop-down-big" /> High priority
             </h2>
             <ul class="prioritary-list">
-                <li class="prioritary-event">Example Prioritary event</li>
+                <li 
+                    v-for="event in highPriorityEvents" 
+                    :key="event.id" 
+                    class="event" 
+                    @click="$emit('event', event)">
+                    {{ event.name }}
+                </li>
+
             </ul>
         </section>
         <section class="events">
@@ -61,6 +68,10 @@ export default {
         events: {
             type:Object,
             required:true
+        },
+        highPriorityEvents: {
+            type: Object,
+            required: true
         },
         editedEvent: {
             type: Object,

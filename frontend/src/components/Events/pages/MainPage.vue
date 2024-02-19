@@ -1,7 +1,8 @@
 <template>
     <section :class="[isMenuRetracted ? 'main-event-content' : 'main-content']">
         <LateralMenu 
-            :events="events.data" 
+            :events="events" 
+            :highPriorityEvents="highPriorityEvents"
             :editedEvent="editedEvent" 
             :isMenuRetracted="isMenuRetracted" 
             @toggle-menu="toggleMenu" 
@@ -63,11 +64,11 @@ export default {
             isEditMode: false,
             currentEvent: {},
             events: [],
+            highPriorityEvents: [],
             editedEvent: {} 
         };
     },
-    async mounted() {
-        
+    async mounted() { 
         await this.getEventFrontApi();
     },
     methods: {
@@ -95,12 +96,16 @@ export default {
             this.toggleLoading();
             const eventsData = await fetch('http://localhost:9000/api/v1/events')
                 .then(response => response.json());
-            this.events = eventsData;
+            this.highPriorityEvents = eventsData.data.filter(event => event.priority === 'high');
+            this.events = eventsData.data.filter(event => event.priority !== 'high');
             localStorage.getItem('currentEvent') 
                 ? this.currentEvent = JSON.parse(localStorage.getItem('currentEvent')) 
-                : this.currentEvent = this.events.data[this.events.data.length - 1];
+                : this.currentEvent = this.events[this.events.length - 1];
+
             this.toggleLoading();
         },
+
+
         getFormattedTime(dateTimeString) {
             const date = new Date(dateTimeString);
             const day = date.getDate();
