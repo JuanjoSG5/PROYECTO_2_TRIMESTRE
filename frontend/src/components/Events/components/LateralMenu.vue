@@ -88,7 +88,6 @@ export default {
                 },
                 body: JSON.stringify(newEvent)
             };
-            console.log('Sending post request:', postRequest);
             await fetch('http://localhost:9000/api/v1/events', postRequest)
                 .then(response => response.json())
                 .then(data => {

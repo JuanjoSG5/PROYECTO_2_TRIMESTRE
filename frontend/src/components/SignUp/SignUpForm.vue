@@ -71,9 +71,7 @@ export default {
         };
     },
     methods: {
-        
         handleInputChange(fieldName, value) {
-            console.log(fieldName, value);
             this.formData[fieldName] = value; 
             this.errorMessage[fieldName] = '';
         },

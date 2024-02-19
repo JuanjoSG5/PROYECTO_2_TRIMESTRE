@@ -9,7 +9,6 @@ export default {
   methods: {
     handleClick() {
       this.$emit('submit'); 
-      console.log('Button clicked');
     }
   }
 };

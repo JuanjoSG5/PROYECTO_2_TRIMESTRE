@@ -5,7 +5,7 @@
             :editedEvent="editedEvent" 
             :isMenuRetracted="isMenuRetracted" 
             @toggle-menu="toggleMenu" 
-            @event="currentEvent = $event"
+            @event="setCurrentEvent($event)"
             @update="getEventFrontApi"
         />
         <section class="events">
@@ -71,9 +71,12 @@ export default {
         await this.getEventFrontApi();
     },
     methods: {
+        setCurrentEvent(event) {
+            this.currentEvent = event;
+            localStorage.setItem('currentEvent', JSON.stringify(event));
+        },
         toggleLoading() {
             this.isLoading = !this.isLoading;
-            console.log("laoding from toggle"+ this.isLoading);
         },
         toggleMenu() {
             this.isMenuRetracted = !this.isMenuRetracted;
@@ -92,18 +95,21 @@ export default {
             this.toggleLoading();
             const eventsData = await fetch('http://localhost:9000/api/v1/events')
                 .then(response => response.json());
-                console.log("fecth Done");
             this.events = eventsData;
-            console.log("Loading from get from API"+this.isLoading);
-            this.currentEvent = this.events.data[this.events.data.length - 1];
+            localStorage.getItem('currentEvent') 
+                ? this.currentEvent = JSON.parse(localStorage.getItem('currentEvent')) 
+                : this.currentEvent = this.events.data[this.events.data.length - 1];
             this.toggleLoading();
         },
         getFormattedTime(dateTimeString) {
             const date = new Date(dateTimeString);
+            const day = date.getDate();
+            const month = date.getMonth() + 1; 
             const hours = date.getHours();
             const minutes = date.getMinutes();
-            return `${hours}:${minutes < 10 ? '0' + minutes : minutes}`;
+            return `${day}/${month}/${date.getFullYear()} ${hours}:${minutes < 10 ? '0' + minutes : minutes}`;
         },
+
         async saveChanges() {
             const postRequest = {
                 method: 'PUT',
@@ -113,8 +119,6 @@ export default {
                 },
                 body: JSON.stringify(this.editedEvent)
             };
-            console.log("eited evente" + this.currentEvent.id);
-            console.log('Sending post request:', postRequest);
             await fetch(`http://localhost:9000/api/v1/events/${this.currentEvent.id}`, postRequest)
                 .then(response => response.json())
                 .then(data => {

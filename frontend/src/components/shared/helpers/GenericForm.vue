@@ -35,7 +35,6 @@ export default {
         // Validate the entire form
         validateForm() {
             let correctForm = true;
-            console.log('formData:', this.formData);
             for (const fieldName in this.formData) {
 
                 if (!this.validateField(fieldName)) {
@@ -47,10 +46,8 @@ export default {
         // Validate a single form field
         validateField(fieldName) {
             const rule = this.validationRules[fieldName];
-            console.log('rule:', rule);
             const value = this.formData[fieldName];
             if (!rule.validator(value)) {
-                console.log('Invalid field:', fieldName);
                 rule.errorMessage = `Please enter a valid ${rule.label}.`;
 
                 return false;
