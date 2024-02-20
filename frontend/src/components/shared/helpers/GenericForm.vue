@@ -92,10 +92,10 @@ export default {
             await fetch('http://localhost:9000/api/v1/users', postRequest)
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Success:', data);
+                    this.$router.push('/home')
                 })
                 .catch((error) => {
-                    console.error('Error:', error);
+                    this.formData[this.formData.length - 1] = { errorMessage: 'Error:', error };
                 });
             this.logIn = true;
             this.formSent = true;

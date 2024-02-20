@@ -130,6 +130,7 @@ export default {
     &.retracted {
         width: 30%;
         height: 100%;
+        
         transform: translateX(-100%);
     }
 

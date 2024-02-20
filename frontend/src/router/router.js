@@ -1,8 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import { store } from '@/store/UserStore.js';
 
-console.log(store);
-
 const routes = [
     { path: '/', component: () => import('@/components/landing/pages/LandingPage.vue'), meta: { showFooter: true }},
     { path: '/contact', component: () => import('@/components/Contact/pages/ContactPage.vue'), meta: { showFooter: true }},

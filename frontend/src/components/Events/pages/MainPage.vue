@@ -96,12 +96,15 @@ export default {
             this.toggleLoading();
             const eventsData = await fetch('http://localhost:9000/api/v1/events')
                 .then(response => response.json());
-            this.highPriorityEvents = eventsData.data.filter(event => event.priority === 'high');
-            this.events = eventsData.data.filter(event => event.priority !== 'high');
+            this.highPriorityEvents = eventsData.data.filter(
+                event => event.priority === 'high'
+            );
+            this.events = eventsData.data.filter(
+                event => event.priority !== 'high'
+            );
             localStorage.getItem('currentEvent') 
                 ? this.currentEvent = JSON.parse(localStorage.getItem('currentEvent')) 
                 : this.currentEvent = this.events[this.events.length - 1];
-
             this.toggleLoading();
         },
 
