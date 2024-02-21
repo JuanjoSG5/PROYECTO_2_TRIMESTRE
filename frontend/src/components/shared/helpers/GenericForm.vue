@@ -56,26 +56,26 @@ export default {
             return true;
         },
         async checkIfUserExists() {
-            console.log('Checking if user exists');
-            const currentData = await fetch('http://localhost:9000/api/v1/users')
+            console.log('Checking if user exists', this.formData.email);
+            const postRequest = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({"email": this.formData.email})
+            };
+            console.log(JSON.stringify(this.formData.email));
+            const currentData = await fetch('http://localhost:9000/api/checkUserExists',postRequest)
                 .then(response => response.json())
                 .catch(error => {
                     console.error('Error fetching user data:', error);
                     return [];
                 });
 
-            console.log('currentData:', currentData);
+            console.log('currentData:', currentData, currentData.exists);
 
-            if (Array.isArray(currentData.data)) {
-                const userExists = currentData.data.some(user => user.name === this.formData.name);
-                if (userExists) {
-                    return true;
-                }
-                return false;
-            } else {
-                console.error('Unexpected response format: currentData is not an array');
-                return false;
-            }
+            return currentData.exists
         },
 
         handleSubmit() {
