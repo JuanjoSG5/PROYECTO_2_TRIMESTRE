@@ -1,26 +1,28 @@
-
 <template>
-    
     <nav class="navbar">
-            <router-link class="route" to="/">Home</router-link>
-            <router-link class="route" to="/contact">Contact</router-link>
-            <router-link class="route" to="/home">Events</router-link>
-            <router-link v-if="!isLoggedIn" class="route" to="/login">Login</router-link>
-            <router-link v-if="!isLoggedIn" class="route" to="/register">Register</router-link>
-            <router-link v-else class="route" to="/user">User</router-link>
+        <router-link class="route" to="/">Home</router-link>
+        <router-link class="route" to="/contact">Contact</router-link>
+        <router-link class="route" to="/home">Events</router-link>
+        <router-link v-if="!isLoggedIn" class="route" to="/login">Login</router-link>
+        <router-link v-if="!isLoggedIn" class="route" to="/register">Register</router-link>
+        <router-link v-else class="route" to="/user">User</router-link>
     </nav>
 </template>
-  
+
 <script>
-import {store} from '../../store/UserStore.js';
+import { useAuthStore } from '../../store/UserStore.js';
+
 export default {
-    computed: {
-        isLoggedIn() {
-            return store.isLoggedIn;
-        },
-    },
+    setup() {
+        const store = useAuthStore();
+
+        return {
+            isLoggedIn: store.username === null
+        };
+    }
 };
 </script>
+
   
 <style scoped>
 

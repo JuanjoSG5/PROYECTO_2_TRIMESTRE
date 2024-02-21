@@ -9,7 +9,7 @@
 
 <script>
 import SubmitButton from './SubmitButton.vue';
-import { store } from '../../../store/UserStore.js'
+import { useAuthStore } from '../../../store/UserStore.js'
 
 export default {
     components: {
@@ -29,6 +29,7 @@ export default {
     data() {
         return {
             formSent: false,
+            authStore: useAuthStore()
         };
     },
     methods: {
@@ -77,52 +78,34 @@ export default {
             }
         },
 
-        async createUser() {
-            console.log(JSON.stringify(this.formData));
-
-            const postRequest = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(this.formData)
-            };
-            console.log('Sending post request:', postRequest);
-            await fetch('http://localhost:9000/api/v1/users', postRequest)
-                .then(response => response.json())
-                .then(data => {
-                    this.$router.push('/home')
-                })
-                .catch((error) => {
-                    this.formData[this.formData.length - 1] = { errorMessage: 'Error:', error };
-                });
-            this.logIn = true;
-            this.formSent = true;
-        },
-
         handleSubmit() {
             if (this.validateForm()) {
                 console.log("form is valid");
 
-                this.checkIfUserExists() === false ?
-                    // TODO: Implement a log in function here and remove the following line
-                    console.log('User does not exist')
-                    : this.createUser();
-
-            }else{
+                this.checkIfUserExists().then(userExists => {
+                    if (!userExists) {
+                        // TODO: Implement a log in function here and remove the following line
+                        this.authStore.register(this.formData,this.formSent);
+                    } else {
+                        this.authStore.logIn(this.formData);
+                    }
+                });
+            } else {
                 for (const fieldName in this.formData) {
                     this.$emit('field-error', {
                         fieldName: fieldName,
                         errorMessage: this.validationRules[fieldName].errorMessage
                     });
                 }
-
             }
+        }
 
+    },
+    computed:{
+        logOut(){
+            return this.authStore.logOut()
         }
     }
-
 };
 </script>
 
