@@ -2,11 +2,8 @@ import { defineStore } from 'pinia'
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
-        id: "",
-        username: "",
-        email: "",
-        password: "",
-        token: null
+        
+        user: {}
     }),
     getters: {
         isLoggedIn() {
@@ -35,47 +32,48 @@ export const useAuthStore = defineStore('auth', {
                     formData[formData.length - 1] = { errorMessage: 'Error:', error };
                 });
         },
-    },
-    async register(formData,formSent) {
-        console.log(JSON.stringify(formData));
 
-        const postRequest = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        };
-        console.log('Sending post request:', postRequest);
-        await fetch('http://localhost:9000/api/register', postRequest)
-            .then(response => response.json())
-            .then(data => {
-                this.$router.push('/home')
-            })
-            .catch((error) => {
-                formData[formData.length - 1] = { errorMessage: 'Error:', error };
-            });
-            formSent = true;
-    },
-    logout() {
-        this.user = {
-            id: "",
-            username: "",
-            email: "",
-            token: null
-        }
+        async register(formData, formSent) {
+            console.log(JSON.stringify(formData));
+
+            const postRequest = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            };
+            console.log('Sending post request:', postRequest);
+            await fetch('http://localhost:9000/api/register', postRequest)
+                .then(response => response.json())
+                .then(data => {
+                    this.user = data;
+                    console.log('User:', this.user);
+                })
+                .catch((error) => {
+                    formData[formData.length - 1] = { errorMessage: 'Error:', error };
+                });
+        },
+        logout() {
+            this.user = {
+                id: "",
+                username: "",
+                email: "",
+                token: null
+            }
+        },
     },
 
 
     persist: {
-    enabled: true,
-    strategies: [{
-        key: 'my-user-store',
-        storage: localStorage,
+        enabled: true,
+        strategies: [{
+            key: 'my-user-store',
+            storage: localStorage,
 
-    }]
-    // If you want to use a custom storage provider
-    // storage: myStorageProvider,
-}
+        }]
+        // If you want to use a custom storage provider
+        // storage: myStorageProvider,
+    }
 })

@@ -54,6 +54,7 @@ import Loader from '../../shared/Loader.vue';
 import LateralMenu from '../components/LateralMenu.vue';
 import EventHeader from '../components/EventHeader.vue';
 import {getTime} from '../helpers/Time'
+import { useAuthStore } from '../../../store/UserStore';
 
 export default {
     components: { LateralMenu, Icon, Loader,EventHeader },
@@ -65,7 +66,8 @@ export default {
             currentEvent: {},
             events: [],
             highPriorityEvents: [],
-            editedEvent: {} 
+            editedEvent: {},
+            authStore: useAuthStore()
         };
     },
     async mounted() { 
@@ -94,7 +96,16 @@ export default {
         },
         async getEventFrontApi() {
             this.toggleLoading();
-            const eventsData = await fetch('http://localhost:9000/api/v1/events')
+            console.log('Bearer', this.authStore.user.token);
+            const getRequest = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${this.authStore.user.token}`
+                }
+            }
+            const eventsData = await fetch('http://localhost:9000/api/v1/events',getRequest)
                 .then(response => response.json());
             this.highPriorityEvents = eventsData.data.filter(
                 event => event.priority === 'high'

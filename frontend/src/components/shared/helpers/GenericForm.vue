@@ -84,8 +84,11 @@ export default {
 
                 this.checkIfUserExists().then(userExists => {
                     if (!userExists) {
-                        // TODO: Implement a log in function here and remove the following line
+                        // FIXME: There seems to be bug here where sometimes the it calls the login function when it should call the register
+                        
                         this.authStore.register(this.formData,this.formSent);
+                        this.$router.push('/home')
+                        this.formSent = true;
                     } else {
                         this.authStore.logIn(this.formData);
                     }
