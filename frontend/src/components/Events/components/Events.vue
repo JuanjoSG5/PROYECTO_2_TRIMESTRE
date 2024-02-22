@@ -3,7 +3,7 @@
         <section>
             <h1 class="event-title">{{ currentEvent.name }}</h1>
             <p class="event-description">{{ currentEvent.description }}</p>
-            <div class="event-time-edit">
+            <div class="event-time-edit" v-if="Object.keys(currentEvent).length > 0">
                 <p class="event-time">Time:
                     <span class="actual-time"> {{ getFormattedTime(currentEvent.start_date) }}</span>
                 </p>
@@ -11,6 +11,7 @@
                     <Icon icon="material-symbols:edit" />
                 </button>
             </div>
+
         </section>
     </section>
     <section class="event-content" v-else>
@@ -72,7 +73,12 @@ export default {
             this.toggleEditMode();
             this.$emit('put'); // Emit the "put" event using "$emit"
         }
-    }
+    },
+    watch: {
+        currentEvent(newVal, oldVal) {
+            console.log('currentEvent updated:', newVal);
+        }
+    },
 }
 </script>
 <style scoped>
@@ -127,26 +133,31 @@ export default {
         width: 5vw;
 
     }
-    & .event-title-local{
+
+    & .event-title-local {
         border: none;
         border-radius: 0.5rem;
         padding: 0;
-        margin-top:6rem ;
+        margin-top: 6rem;
         text-align: center;
         color: var(--vt-c-black-contrast);
         background-color: var(--vt-c-black-soft);
         box-shadow: 4px 4px 8px rgba(82, 109, 130, 0.4);
+
         &:hover {
             outline: 2px solid var(--vt-c-black-contrast);
         }
+
         &:focus {
-            outline: 2px solid /* Your desired outline color */;
-        }       
+            outline: 2px solid
+                /* Your desired outline color */
+            ;
+        }
     }
 
-    & .event-description-local{
+    & .event-description-local {
         margin: auto;
-        margin-top:2rem;
+        margin-top: 2rem;
         padding: 0;
         border: none;
         border-radius: .5rem;
@@ -154,19 +165,23 @@ export default {
         color: var(--vt-c-black-contrast);
         box-shadow: 4px 4px 8px rgba(82, 109, 130, 0.4);
         width: 80%;
-        
+
         &:hover {
             outline: 2px solid var(--vt-c-black-contrast);
         }
+
         &:focus {
-            outline: 2px solid /* Your desired outline color */;
-        }       
+            outline: 2px solid
+                /* Your desired outline color */
+            ;
+        }
     }
-    & .event-time-edit-local{
-        
-        
-        & .event-time-local{
-            margin-top:2rem;
+
+    & .event-time-edit-local {
+
+
+        & .event-time-local {
+            margin-top: 2rem;
             margin-left: 4rem;
             padding: 0;
             border: none;
@@ -176,19 +191,21 @@ export default {
             text-align: center;
             box-shadow: 4px 4px 8px rgba(82, 109, 130, 0.4);
             width: 33%;
+
             &:hover {
                 outline: 2px solid var(--vt-c-black-contrast);
             }
-            &:focus {
-                outline: 2px solid /* Your desired outline color */;
-                }       
-            }
 
-            & .edit-button{
-                padding:0;
-                margin-right: 3rem;
+            &:focus {
+                outline: 2px solid
+                    /* Your desired outline color */
+                ;
             }
         }
-    }
 
-</style>
+        & .edit-button {
+            padding: 0;
+            margin-right: 3rem;
+        }
+    }
+}</style>
