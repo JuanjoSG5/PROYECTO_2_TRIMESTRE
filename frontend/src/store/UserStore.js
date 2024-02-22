@@ -26,14 +26,15 @@ export const useAuthStore = defineStore('auth', {
             await fetch('http://localhost:9000/api/login', postRequest)
                 .then(response => response.json())
                 .then(data => {
-                    this.$router.push('/home')
+                    this.user = data;
+                    console.log('User:', this.user);
                 })
                 .catch((error) => {
-                    formData[formData.length - 1] = { errorMessage: 'Error:', error };
+                    return false
                 });
         },
 
-        async register(formData, formSent) {
+        async register(formData) {
             console.log(JSON.stringify(formData));
 
             const postRequest = {

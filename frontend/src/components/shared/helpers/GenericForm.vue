@@ -78,19 +78,21 @@ export default {
             return currentData.exists
         },
 
-        handleSubmit() {
+        async handleSubmit() {
             if (this.validateForm()) {
                 console.log("form is valid");
 
-                this.checkIfUserExists().then(userExists => {
+                await this.checkIfUserExists().then(userExists => {
                     if (!userExists) {
                         // FIXME: There seems to be bug here where sometimes the it calls the login function when it should call the register
                         
-                        this.authStore.register(this.formData,this.formSent);
-                        this.$router.push('/home')
-                        this.formSent = true;
+                        this.authStore.register(this.formData) === false ?
+                            this.validationRules[this.validationRules.length -1].errorMessage = "An error occurred during register process" 
+                            : "";
+                        
                     } else {
                         this.authStore.logIn(this.formData);
+                        this.$router.push("/home")
                     }
                 });
             } else {

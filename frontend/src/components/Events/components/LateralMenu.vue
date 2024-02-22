@@ -60,9 +60,19 @@
 <script>
 import { Icon } from '@iconify/vue';
 import {getTime} from '../helpers/Time.js'
+import { useAuthStore } from '../../../store/UserStore';
 
 export default {
     components: { Icon },
+    emits: [
+        'event',
+         'update'
+    ], 
+    data(){
+        return {
+            authStore:useAuthStore()
+        }
+    },
     props: {
         isMenuRetracted: Boolean,
         events: {
@@ -95,7 +105,9 @@ export default {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${this.authStore.user.token}`
+                
                 },
                 body: JSON.stringify(newEvent)
             };

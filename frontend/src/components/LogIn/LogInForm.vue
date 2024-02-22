@@ -5,11 +5,11 @@
             <router-link class="route" to="/register">Sign Up</router-link>
         </p>
         <CustomInput 
-            label="Name" 
-            v-model="formData.name" 
-            placeholder="Name"
-            :errorMessage="errorMessage.name" 
-            @input="handleInputChange('name', $event.target.value)"
+            label="Email" 
+            v-model="formData.email" 
+            placeholder="example@gmail.com"
+            :errorMessage="errorMessage.email" 
+            @input="handleInputChange('email', $event.target.value)"
         />
         <CustomInput 
             label="Password" 
@@ -25,7 +25,7 @@
 // Import necessary components and methods
 import CustomInput from '../shared/helpers/GenericInput.vue';
 import CustomForm from '../shared/helpers/GenericForm.vue';
-import { validatePassword, validateUsername } from '../shared/helpers/InputValidation.js';
+import { validatePassword, validateEmail } from '../shared/helpers/InputValidation.js';
 
 export default {
     components: {
@@ -35,17 +35,17 @@ export default {
     data() {
         return {
             formData: {
-                name: '',
+                email: '',
                 password: '',
             },
             errorMessage: {
-                name: '',
+                email: '',
                 password: '',
             },
             validationRules: {
-                name: {
-                    label: 'name',
-                    validator: (value) => validateUsername(value),
+                email: {
+                    label: 'email',
+                    validator: (value) => validateEmail(value),
                     errorMessage: '' // Initialize error message in validation rules
                 },
                 password: {
