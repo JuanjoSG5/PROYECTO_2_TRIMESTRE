@@ -27,9 +27,14 @@
 <script>
 import { Icon } from '@iconify/vue';
 import { getTime } from '../helpers/Time';
-
+import { useAuthStore } from '../../../store/UserStore';
 export default {
     components: { Icon },
+    data(){
+        return {
+            authStore : useAuthStore()
+        }
+    },
     props: {
         currentEvent: {
             type: Object,
@@ -58,7 +63,8 @@ export default {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${this.authStore.store.token}`
                 },
                 body: JSON.stringify(this.editedEvent)
             };
@@ -70,15 +76,9 @@ export default {
                 .catch((error) => {
                     console.error('Error:', error);
                 });
-            this.toggleEditMode();
             this.$emit('put'); // Emit the "put" event using "$emit"
         }
-    },
-    watch: {
-        currentEvent(newVal, oldVal) {
-            console.log('currentEvent updated:', newVal);
-        }
-    },
+    }
 }
 </script>
 <style scoped>

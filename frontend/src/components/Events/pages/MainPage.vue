@@ -112,6 +112,7 @@ export default {
         },
 
         handleSaveChanges(){
+            this.toggleEditMode()
             this.getEventFrontApi();
         }
         
