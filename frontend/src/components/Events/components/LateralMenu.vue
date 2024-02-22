@@ -106,7 +106,7 @@ export default {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
-                    'Authorization': `Bearer ${this.authStore.store.user.token}`
+                    'Authorization': `Bearer ${this.authStore.store.token}`
                 
                 },
                 body: JSON.stringify(newEvent)

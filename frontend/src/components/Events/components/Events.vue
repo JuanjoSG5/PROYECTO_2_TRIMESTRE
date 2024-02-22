@@ -33,7 +33,7 @@ export default {
     props: {
         currentEvent: {
             type: Object,
-            required: true
+            default: undefined 
         },
         editedEvent: {
             type: Object,
