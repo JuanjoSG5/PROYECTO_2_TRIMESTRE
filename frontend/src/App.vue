@@ -2,7 +2,7 @@
 import PrivateLayout from './components/shared/layouts/Private.vue';
 import PublicLayout from './components/shared/layouts/Public.vue';
 import { useAuthStore } from './store/UserStore.js';
-
+ // TODO: Use padding instead of margi, in most cases, where you have a background color you can use margin 
 export default {
     data() {
         return {

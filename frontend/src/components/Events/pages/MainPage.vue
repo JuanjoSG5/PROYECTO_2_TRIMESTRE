@@ -120,18 +120,15 @@ export default {
 };
 </script>
 <style scoped>
+/* TODO: Fix the grid display so that it shows properly the size of the */
 .main-content {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    align-items: center;
-    justify-items: center;
+    display: flex;
     height: 100%;
 
 }
 
 .main-event-content {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
     height: 100%;
 }
 

@@ -135,7 +135,7 @@ export default {
     align-items: center;
     background-color: var(--vt-c-black-contrast);
     color: var(--vt-c-black);
-    width: 100%;
+    width: 25%;
     height: 100%;
     transition: transform 0.5s ease-in;
 

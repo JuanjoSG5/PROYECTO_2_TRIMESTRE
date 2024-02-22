@@ -1,4 +1,5 @@
 <template>
+
     <main class="main">
       <Navbar />
         <router-view />
@@ -7,6 +8,7 @@
   </template>
   
   <script>
+  // TODO: Refactor the html structure since the main is the main cntent of the app 
   import Navbar from '../Navbar.vue';
   import Footer from '../Footer.vue';
   

@@ -7,11 +7,25 @@
                 <p class="event-time">Time:
                     <span class="actual-time"> {{ getFormattedTime(currentEvent.start_date) }}</span>
                 </p>
+                <label>
+                    <select 
+                        class=""
+                        v-model="currentEvent.priority"
+                        @change="$emit('put')"
+                    >
+                        <option
+                            v-for="priority in priorities"
+                            :value="priority.value"
+                        >
+                            {{ priority.label }}
+                        </option>
+                    </select>
+                </label>
                 <button class="edit-button" @click="$emit('edit')" v-if="!isEditMode">
                     <Icon icon="material-symbols:edit" />
                 </button>
             </div>
-
+            
         </section>
     </section>
     <section class="event-content" v-else>
@@ -25,6 +39,9 @@
 </template>
 
 <script>
+
+// FIXME: There is a bug here wehre the current event isn't cleared so when editing 
+ 
 import { Icon } from '@iconify/vue';
 import { getTime } from '../helpers/Time';
 import { useAuthStore } from '../../../store/UserStore';
@@ -32,7 +49,12 @@ export default {
     components: { Icon },
     data(){
         return {
-            authStore : useAuthStore()
+            authStore : useAuthStore(),
+            priorities: [
+                {label: 'High', value: 'High'},
+                {label: 'Medium', value: 'Medium'},
+                {label: 'Low', value: 'Low'}
+            ]
         }
     },
     props: {
@@ -56,6 +78,7 @@ export default {
 
     methods: {
         getFormattedTime(time) {
+            console.log(this.currentEvent);
             return getTime(time);
         },
         async saveChanges() {
@@ -89,31 +112,30 @@ export default {
     height: 90%;
 
     & .event-title {
-        margin: auto;
-        padding-top: 5rem;
+       
         font-size: 3rem;
     }
 
     & .event-description {
         font-size: 2rem;
-        padding-left: 7rem;
+        margin: 0;
         margin-top: 1.3rem;
         margin-bottom: 1.3rem;
+        width: 80%;
         min-height: 20vh;
         max-height: 50vh;
         resize: none;
-        overflow: hidden;
+        overflow: auto;
     }
 
     & .event-time-edit {
-        position: relative
+        position: relative;
     }
 
     & .event-time {
         display: inline-block;
         font-size: 2rem;
-        margin-top: .5rem;
-        padding-left: 7rem;
+        margin: 0;
 
         & .actual-time {
             font-weight: 500;
@@ -139,7 +161,6 @@ export default {
         border-radius: 0.5rem;
         padding: 0;
         margin-top: 6rem;
-        text-align: center;
         color: var(--vt-c-black-contrast);
         background-color: var(--vt-c-black-soft);
         box-shadow: 4px 4px 8px rgba(82, 109, 130, 0.4);
@@ -156,7 +177,6 @@ export default {
     }
 
     & .event-description-local {
-        margin: auto;
         margin-top: 2rem;
         padding: 0;
         border: none;
@@ -182,7 +202,6 @@ export default {
 
         & .event-time-local {
             margin-top: 2rem;
-            margin-left: 4rem;
             padding: 0;
             border: none;
             border-radius: .5rem;
