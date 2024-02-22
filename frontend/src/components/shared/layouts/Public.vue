@@ -1,9 +1,9 @@
 <template lang="">
-  <main class="main">
     <Navbar />
-        <router-view />
+        <main class="main">
+            <router-view />
+        </main>
     <Footer v-if="showFooter" />
-  </main>
 </template>
 
 <script>
@@ -11,22 +11,22 @@ import Navbar from '../Navbar.vue';
 import Footer from '../Footer.vue';
 
 export default {
-  components: {
-    Navbar,
-    Footer,
-  },
-  computed: {
-    showFooter() {
-      return this.$route.meta.showFooter;
+    components: {
+        Navbar,
+        Footer,
     },
-  },
+    computed: {
+        showFooter() {
+            return this.$route.meta.showFooter;
+        },
+    },
 
 }
 </script>
 
 <style scoped>
 .main {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 </style>
