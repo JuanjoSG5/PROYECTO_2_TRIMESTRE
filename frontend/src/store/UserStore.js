@@ -2,8 +2,7 @@ import { defineStore } from 'pinia'
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
-        
-        user: {}
+        store: {}
     }),
     getters: {
         isLoggedIn() {
@@ -26,8 +25,8 @@ export const useAuthStore = defineStore('auth', {
             await fetch('http://localhost:9000/api/login', postRequest)
                 .then(response => response.json())
                 .then(data => {
-                    this.user = data;
-                    console.log('User:', this.user);
+                    this.store = data;
+                    console.log('User:', this.store);
                 })
                 .catch((error) => {
                     return false
@@ -49,15 +48,15 @@ export const useAuthStore = defineStore('auth', {
             await fetch('http://localhost:9000/api/register', postRequest)
                 .then(response => response.json())
                 .then(data => {
-                    this.user = data;
-                    console.log('User:', this.user);
+                    this.store = data;
+                    console.log('User:', this.store);
                 })
                 .catch((error) => {
                     formData[formData.length - 1] = { errorMessage: 'Error:', error };
                 });
         },
         logout() {
-            this.user = {
+            this.store.user = {
                 id: "",
                 username: "",
                 email: "",

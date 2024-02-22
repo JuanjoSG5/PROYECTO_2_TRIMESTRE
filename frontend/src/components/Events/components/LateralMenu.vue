@@ -99,14 +99,14 @@ export default {
                 start_date: getTime(),
                 end_date:null,
                 priority: "high", 
-                user_id: 1
+                user_id: this.authStore.store.user.id
             };
             const postRequest = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
-                    'Authorization': `Bearer ${this.authStore.user.token}`
+                    'Authorization': `Bearer ${this.authStore.store.user.token}`
                 
                 },
                 body: JSON.stringify(newEvent)

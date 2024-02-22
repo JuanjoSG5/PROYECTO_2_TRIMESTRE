@@ -19,10 +19,11 @@ class AuthController extends Controller{
         $user = User::create([
             'name' => $fields['name'],
             'email' => $fields['email'],
-            'password' => bcrypt($fields['password'])
+            'password' => bcrypt($fields['password']),
         ]);
 
-        $token = $user->createToken('token', ['expires_in' => 60])->plainTextToken;
+        $token =  $user->createToken('token', ['expires_in' => 60])->plainTextToken;
+        
 
         $response = [
             'user' => $user,

@@ -68,13 +68,13 @@ export default {
         },
         async getEventFrontApi() {
             this.toggleLoading();
-            console.log('Bearer', this.authStore.user.token);
+            console.log('Bearer', this.authStore.store.token);
             const getRequest = {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
-                    'Authorization': `Bearer ${this.authStore.user.token}`
+                    'Authorization': `Bearer ${this.authStore.store.token}`
                 }
             }
 
