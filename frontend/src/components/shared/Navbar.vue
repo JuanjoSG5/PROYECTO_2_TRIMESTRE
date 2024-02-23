@@ -1,6 +1,5 @@
 <template>
     <nav >
-        <!-- TODO: Implement a list structure here to contain the links-->
         <ul class="navbar">
             <router-link class="route" to="/">Home</router-link>
             <router-link class="route" to="/contact">Contact</router-link>

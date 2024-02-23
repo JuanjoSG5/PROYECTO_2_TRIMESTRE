@@ -1,13 +1,13 @@
 <template>
-    <Navbar />
-    <main class="main">
-        <router-view />
-    </main>
-    <Footer v-if="showFooter" />
+    <div class="wrapper">
+        <Navbar />
+        <main class="main">
+            <router-view />
+        </main>
+        <Footer v-if="showFooter" />
+    </div>
 </template>
-  
 <script>
-// TODO: Refactor the html structure since the main is the main cntent of the app 
 import Navbar from '../Navbar.vue';
 import Footer from '../Footer.vue';
 
@@ -22,11 +22,19 @@ export default {
         },
     },
 }
+// document.setStyle
 </script>
   
 <style scoped>
+
+.wrapper{
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    min-height:100vh;
+}
 .main {
     position: relative;
+    flex: 1 0 auto;
     width: 100%;
     height: 100%;
 }

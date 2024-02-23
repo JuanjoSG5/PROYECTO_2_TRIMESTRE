@@ -41,7 +41,7 @@ export default {
 
 .top-section {
   display: grid;
-  margin: 2rem 5rem;
+  padding: 2rem ;
   grid-template-columns: 1.3fr 1fr;
   grid-gap: 0.4fr;
 }

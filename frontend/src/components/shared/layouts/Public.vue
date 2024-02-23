@@ -1,9 +1,11 @@
 <template lang="">
-    <Navbar />
-        <main class="main">
-            <router-view />
-        </main>
-    <Footer v-if="showFooter" />
+    <div class="wrapper">
+        <Navbar />
+            <main class="main">
+                <router-view />
+            </main>
+        <Footer v-if="showFooter" />
+    </div>
 </template>
 
 <script>
@@ -25,7 +27,14 @@ export default {
 </script>
 
 <style scoped>
+.wrapper{
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height:100vh;
+    width: 100%;
+}
 .main {
+    
     width: 100%;
     height: 100%;
 }
