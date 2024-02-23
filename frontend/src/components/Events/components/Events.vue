@@ -7,15 +7,15 @@
                 <p class="event-time">Time:
                     <span class="actual-time"> {{ getFormattedTime(currentEvent.start_date) }}</span>
                 </p>
-                <label>
+                <label class="select-label">
                     <select 
-                        class=""
-                        v-model="currentEvent.priority"
-                        @change="$emit('put')"
+                        class="priority-select"
+                        @change="console.log(currentEvent.priority)"
                     >
                         <option
                             v-for="priority in priorities"
                             :value="priority.value"
+                            :key="priority.value"
                         >
                             {{ priority.label }}
                         </option>
@@ -60,7 +60,6 @@ export default {
     props: {
         currentEvent: {
             type: Object,
-            default: undefined 
         },
         editedEvent: {
             type: Object,
@@ -75,10 +74,12 @@ export default {
         'put',
         'edit'
     ],
+    mounted(){
+        console.log(this.currentEvent)
+    },
 
     methods: {
         getFormattedTime(time) {
-            console.log(this.currentEvent);
             return getTime(time);
         },
         async saveChanges() {
@@ -140,12 +141,36 @@ export default {
         & .actual-time {
             font-weight: 500;
             color: var(--vt-c-black-mute);
+
+           
+        }
+    }
+    & .select-label{
+        padding:2rem;
+        font-size: 2rem;
+        
+        & .priority-select {
+            font-size: 2rem;
+            background-color: var(--vt-c-black-soft);
+            border: none;
+            border-radius: 1rem;
+
+            & .priority-option{
+                border: 2px solid var(--vt-c-black-contrast);
+                background-color: var(--vt-c-black-mute);
+
+                &:hover{
+                    background-color: var(--vt-c-black-contrast)
+                }
+            }
+
+            
         }
     }
 
     & .edit-button {
         position: absolute;
-        top: 2rem;
+        top: .5rem;
         right: 2rem;
         /* Adjust this value as needed */
         color: var(--vt-c-black-contrast);

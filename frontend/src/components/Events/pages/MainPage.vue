@@ -11,15 +11,15 @@
         />
         <section class="events">
             <EventHeader/>
-            <section v-if="!isLoading" >
-                <Events 
-                    :currentEvent="currentEvent" 
-                    :editedEvent="editedEvent"
-                    :isEditMode="isEditMode" 
-                    @edit="toggleEditMode"
-                    @put="handleSaveChanges"
-                />
-            </section>
+                <section v-if="!isLoading" >
+                    <Events 
+                        :currentEvent="currentEvent" 
+                        :editedEvent="editedEvent"
+                        :isEditMode="isEditMode" 
+                        @edit="toggleEditMode"
+                        @put="handleSaveChanges"
+                    />
+                </section>
             <Loader class="loader" v-else />
         </section>
     </section>
