@@ -11,19 +11,13 @@
                     <select 
                         class="priority-select"
                         :class="priorityClass(currentEvent.priority)"
-                        @change="console.log(currentEvent.priority)"
+                        :value="currentEvent.priority"
+                        disabled
                     >
-                    <option
-                        v-for="priority in priorities"
-                        :value="priority.value"
-                        :key="priority.value"
-                        :class="priorityClass(priority.label)"
-                    >
-                        {{ priority.label }}
-                    </option>
+                        <option> {{ currentEvent.priority }}</option>
+                     
                     </select>
                 </label>
-
                 <button class="edit-button" @click="$emit('edit')" v-if="!isEditMode">
                     <Icon icon="material-symbols:edit" />
                 </button>
@@ -36,6 +30,22 @@
         <textarea class=" event-description event-description-local" v-model="editedEvent.description"></textarea>
         <div class="event-time-edit event-time-edit-local">
             <input class="event-time event-time-local" type="datetime" v-model="editedEvent.start_date">
+            <label class="select-label">
+                <select 
+                    class="priority-select"
+                    v-model="editedEvent.priority"
+                    :class="priorityClass(editedEvent.priority)"
+                >
+                    <option
+                        v-for="priority in priorities"
+                        :value="priority.value"
+                        :key="priority.value"
+                        :class="priorityClass(priority.label)"
+                    >
+                        {{ priority.label }}
+                    </option>
+                </select>
+            </label>
             <button class="edit-button" @click="saveChanges">Save</button>
         </div>
     </section>
