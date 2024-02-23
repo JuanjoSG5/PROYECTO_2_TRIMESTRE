@@ -30,7 +30,7 @@
                     :key="event.id" 
                     class="event" 
                     @click="$emit('event', event)">
-                    {{ event.name }}
+                    {{ event.name }} - <span class="high-priority">{{ capitalize(event.priority) }}</span>
                 </li>
 
             </ul>
@@ -46,7 +46,7 @@
                     class="event"
                     @click="$emit('event', event)"
                 >
-                    {{ event.name }}
+                    {{ event.name }} - <span :class="getPriorityClass(event.priority)">{{ capitalize(event.priority) }}</span>
                 </li>
             </ul>
         </section>
@@ -92,6 +92,9 @@ export default {
         toggleMenu() {
             this.$emit('toggle-menu');
         },
+        capitalize(priority) {
+            return priority.charAt(0).toUpperCase() + priority.slice(1);
+        },
         async createEvent() {
             const newEvent = {
                 name: "Title",
@@ -121,7 +124,18 @@ export default {
                 });
             this.$emit('update', newEvent);
         },
-
+        getPriorityClass(priority) {
+            switch (priority) {
+                case 'high':
+                    return 'high-priority';
+                case 'medium':
+                    return 'medium-priority';
+                case 'low':
+                    return 'low-priority';
+                default:
+                    return ''; // Handle other cases if needed
+            }
+        }
     }
 };
 </script>
@@ -326,6 +340,19 @@ export default {
     }
 }
 
+.high-priority {
+    color: #800020; 
+    font-weight: bold;
+}
+.medium-priority {
+    font-weight: bold;
+    color: navy;
+}
+
+.low-priority {
+    color: var(--vt-c-black-soft);
+    font-weight: bold;
+}
 
 
 

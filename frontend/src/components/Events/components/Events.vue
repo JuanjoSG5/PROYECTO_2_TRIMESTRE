@@ -10,17 +10,20 @@
                 <label class="select-label">
                     <select 
                         class="priority-select"
+                        :class="priorityClass(currentEvent.priority)"
                         @change="console.log(currentEvent.priority)"
                     >
-                        <option
-                            v-for="priority in priorities"
-                            :value="priority.value"
-                            :key="priority.value"
-                        >
-                            {{ priority.label }}
-                        </option>
+                    <option
+                        v-for="priority in priorities"
+                        :value="priority.value"
+                        :key="priority.value"
+                        :class="priorityClass(priority.label)"
+                    >
+                        {{ priority.label }}
+                    </option>
                     </select>
                 </label>
+
                 <button class="edit-button" @click="$emit('edit')" v-if="!isEditMode">
                     <Icon icon="material-symbols:edit" />
                 </button>
@@ -101,7 +104,15 @@ export default {
                     console.error('Error:', error);
                 });
             this.$emit('put'); // Emit the "put" event using "$emit"
-        }
+        },
+        priorityClass(label) {
+            switch(label) {
+                case 'High': return 'high-priority';
+                case 'Medium': return 'medium-priority';
+                case 'Low': return 'low-priority';
+                default: return '';
+            }
+        },
     }
 }
 </script>
@@ -146,19 +157,20 @@ export default {
         }
     }
     & .select-label{
-        padding:2rem;
+        padding:3rem;
         font-size: 2rem;
         
         & .priority-select {
             font-size: 2rem;
-            background-color: var(--vt-c-black-soft);
+            background-color: var(--vt-c-black-mute);
+            text-align: center;
             border: none;
             border-radius: 1rem;
-
+            
             & .priority-option{
                 border: 2px solid var(--vt-c-black-contrast);
-                background-color: var(--vt-c-black-mute);
-
+                background-color: var(--vt-c-black-contrast);
+                text-align: center;
                 &:hover{
                     background-color: var(--vt-c-black-contrast)
                 }
@@ -252,4 +264,22 @@ export default {
             margin-right: 3rem;
         }
     }
-}</style>
+
+}
+.high-priority {
+    color: #800020; 
+    font-weight: bold;
+}
+.medium-priority {
+    font-weight: bold;
+    color: navy;
+}
+
+.low-priority {
+    color: var(--vt-c-black-soft);
+    font-weight: bold;
+}
+
+
+
+</style>

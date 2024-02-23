@@ -140,7 +140,7 @@ export default {
     color: var(--vt-c-black-contrast);
     width: 100%;
     height: 100%;
-
+    padding-left: 2rem;
     
 
    
