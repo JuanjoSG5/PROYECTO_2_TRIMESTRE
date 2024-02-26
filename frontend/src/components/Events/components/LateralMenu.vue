@@ -133,7 +133,7 @@ export default {
                 case 'low':
                     return 'low-priority';
                 default:
-                    return ''; // Handle other cases if needed
+                    return ''; 
             }
         }
     }
@@ -150,7 +150,7 @@ export default {
     background-color: var(--vt-c-black-contrast);
     color: var(--vt-c-black);
     width: 25%;
-    height: 100%;
+    height: 110vh;
     transition: transform 0.5s ease-in;
 
     &.retracted {
@@ -262,7 +262,7 @@ export default {
         &:hover .prioritary-list,
         &:hover .events-list {
             opacity: 1;
-            max-height: 20vh;
+            max-height: 30vh;
         }
 
         & h2 {

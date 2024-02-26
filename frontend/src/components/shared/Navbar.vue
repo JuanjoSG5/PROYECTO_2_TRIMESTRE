@@ -1,20 +1,23 @@
 <template>
     <nav >
         <ul class="navbar">
-            <router-link class="route" to="/">Home</router-link>
+            <router-link class="route icon" to="/"><Icon height="2.5rem" class="icon" icon="noto:hourglass-done" /></router-link>
             <router-link class="route" to="/contact">Contact</router-link>
-            <router-link class="route" to="/home">Events</router-link>
             <router-link v-if="!isLoggedIn" class="route" to="/login">Login</router-link>
-            <router-link v-if="!isLoggedIn" class="route" to="/register">Register</router-link>
+            <router-link v-if="!isLoggedIn" class="route register" to="/register">Register</router-link>
             <router-link v-else class="route" to="/user">User</router-link>
         </ul>
     </nav>
 </template>
 
 <script>
+import { Icon } from '@iconify/vue';
 import { useAuthStore } from '../../store/UserStore.js';
 
 export default {
+    components:{
+        Icon
+    },
     setup() {
         const store = useAuthStore();
 
@@ -31,10 +34,11 @@ export default {
 .navbar {
     display: flex;
     padding-top: 1rem;
-    width: 100%;
-    justify-content: space-around;
+    width: 90%;
+    justify-content: space-between;
     align-items: center;
     color: white;
+    padding-right: 3rem;
 }
 
 @media (max-width: 768px) {
@@ -54,9 +58,19 @@ export default {
     color: white;
     padding: 5px 10px;
     border-radius: 5px;
-
-    
 }
+.icon{
+    width:2.5rem;
+    margin-right: 48rem;
+}
+
+.register{
+    background-color: var(--vt-c-black-contrast);
+    color: var(--vt-c-black);
+    font-weight: 500;
+}
+
+
 .route:hover {
     background-color: var(--vt-c-black-contrast);
     color: var(--vt-c-black);
@@ -65,6 +79,11 @@ export default {
 .route:focus,
 .route:focus-visible {
     outline: 2px solid var(--vt-c-black-contrast);
+}
+.register:hover{
+    background-color: var(--vt-c-black-soft);
+    color: var(--vt-c-black-contrast);
+    font-weight: bold;
 }
 </style>
   

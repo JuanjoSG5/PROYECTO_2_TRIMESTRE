@@ -132,9 +132,10 @@ export default {
     flex-direction: column;
     position: relative;
     height: 90%;
+    padding-left: 3rem;
 
     & .event-title {
-       
+       padding-left: 5rem;
         font-size: 3rem;
     }
 
