@@ -1,8 +1,8 @@
-<template lang="">
-    <button type="button" class="button loginButton">
+<template>
+    <button type="button" class="button loginButton" @click="goToLogin">
         Log In 
     </button>
-    <button type="button" class="button signupButton">
+    <button type="button" class="button signupButton" @click="goToSignup">
         Sign Up
     </button>
 </template>
@@ -14,6 +14,14 @@ export default {
             return store.isLoggedIn;
         },
     },
+    methods: {
+        goToLogin() {
+            this.$router.push('/login');
+        },
+        goToSignup() {
+            this.$router.push('/signup');
+        }
+    }
 }
 </script>
 
