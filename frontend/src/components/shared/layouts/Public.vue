@@ -1,6 +1,6 @@
 <template lang="">
     <div class="wrapper">
-        <Navbar />
+        <Navbar v-if="showHeader"/>
             <main class="main">
                 <router-view />
             </main>
@@ -20,6 +20,9 @@ export default {
     computed: {
         showFooter() {
             return this.$route.meta.showFooter;
+        },
+        showHeader() {
+            return this.$route.meta.showHeader;
         },
     },
 
