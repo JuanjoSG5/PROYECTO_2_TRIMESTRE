@@ -77,12 +77,15 @@ export default {
         font-size: 1.5rem;
     }
     .route{
+        
+        background-color: var(--vt-c-black);
+        color: var(--vt-c-black-contrast);
         text-decoration: none;
         font-weight: bold;
         border-radius: .5rem;
         transition: background-color 0.8s, color 0.8s;
         &:hover{
-            background-color: var(--vt-c-black-mute);
+            background-color: var(--vt-c-black-contrast);
             color: var(--vt-c-black);
         }
     }

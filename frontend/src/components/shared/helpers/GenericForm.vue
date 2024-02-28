@@ -3,6 +3,7 @@
         <!-- Slot for custom form content -->
         <slot :validateForm="validateForm" :handleSubmit="handleSubmit"></slot>
         <!-- SubmitButton component triggers handleSubmit method -->
+        <!-- FIXME: Change the responsive of the submit button-->
         <SubmitButton @submit="handleSubmit" />
     </form>
 </template>

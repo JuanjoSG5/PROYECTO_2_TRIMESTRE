@@ -173,7 +173,8 @@ export default {
         
         & .priority-select {
             font-size: 2rem;
-            background-color: var(--vt-c-black-mute);
+            background-color: var(--vt-c-black-contrast);
+            color: var(--vt-c-black);
             text-align: center;
             border: none;
             border-radius: 1rem;

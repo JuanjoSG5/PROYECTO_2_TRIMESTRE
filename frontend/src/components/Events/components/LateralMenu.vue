@@ -170,7 +170,7 @@ export default {
 
     & .hidden-menu-arrow {
         position: absolute;
-        color: white;
+        color: var(--vt-c-black-contrast);
         vertical-align: middle;
         font-size: 2rem;
         top: 1rem;
@@ -197,14 +197,21 @@ export default {
     & .search-button {
         border: none;
         background-color: var(--vt-c-black-contrast);
+        color: yellow;
         transition: background-color 0.8s, color 0.8s;
         width: 100%;
 
         & .search-button-text {
+            color: var(--vt-c-black);
             font-size: 1.2rem;
             padding: 0.3rem;
             border-radius: 5px;
             margin-top: 1rem;
+            transition: color 0.8s;
+
+            &:hover {
+                color: var(--vt-c-black-contrast);
+            }
 
             & .search-icon {
                 display: inline-block;
@@ -226,22 +233,30 @@ export default {
     }
 
     & .search-button:hover {
-        background-color: rgba(39, 55, 77, 0.886);
-        color: rgba(221, 230, 237, 0.813);
+        background-color: var(--vt-c-black);
+        color: var(--vt-c-black-contrast);
         cursor: pointer;
     }
 
     & .create-event-button {
         border: none;
         background-color: var(--vt-c-black-contrast);
+        
+        color: var(--vt-c-black);
         transition: background-color 0.8s, color 0.8s;
         width: 100%;
 
         & .create-event-text {
+            color: var(--vt-c-black);
             font-size: 1.2rem;
             padding: 0.3rem;
             border-radius: 5px;
             margin-top: 1rem;
+
+            &:hover {
+                color: var(--vt-c-black-contrast);
+            }
+
 
             & .create-icon {
                 display: inline-block;
@@ -253,8 +268,8 @@ export default {
     }
 
     & .create-event-button:hover {
-        background-color: rgba(39, 55, 77, 0.886);
-        color: rgba(221, 230, 237, 0.813);
+        background-color: var(--vt-c-black);
+        color: var(--vt-c-black-contrast);
         cursor: pointer;
     }
 
@@ -275,7 +290,6 @@ export default {
 
             &:hover .down-arrow {
                 transform: rotate(360deg);
-                /* Adjust the degree as needed */
             }
         }
 
@@ -304,8 +318,8 @@ export default {
 
             & .prioritary-event:hover,
             .event:hover {
-                background-color: rgba(39, 55, 77, 0.886);
-                color: rgba(221, 230, 237, 0.813);
+                background-color: var(--vt-c-black);
+                color: var(--vt-c-black-contrast);
                 cursor: pointer;
             }
         }
