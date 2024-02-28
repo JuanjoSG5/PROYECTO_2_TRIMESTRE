@@ -50,9 +50,9 @@
                 </li>
             </ul>
         </section>
-        <section class="user-display">
+        <section class="user-display" @click="navigateToUser">
             <Icon class="user-icon" icon="solar:user-line-duotone" />
-            <h2 class="username"> <router-link class="route" to="/user">Username</router-link></h2>
+            <h2 class="username">Username</h2>
         </section>
     </aside>
 </template>
@@ -94,6 +94,9 @@ export default {
         },
         capitalize(priority) {
             return priority.charAt(0).toUpperCase() + priority.slice(1);
+        },
+        navigateToUser() {
+            this.$router.push('/user');
         },
         async createEvent() {
             const newEvent = {
@@ -361,4 +364,15 @@ export default {
     vertical-align: middle;
     transform: rotate(270deg);
     transition: transform 0.8s ease;
-}</style>
+}
+.user-display{
+    cursor: pointer;
+    border-radius: 1rem;
+    transition: background-color 0.6s, color 0.6s;
+    &:hover{
+        background-color: var(--vt-c-black-soft);
+        color: var(--vt-c-black-contrast);
+    }
+}
+
+</style>
