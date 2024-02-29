@@ -19,6 +19,7 @@
             </p>
             <SearchModal 
                 v-if="showSearchModal" 
+                :events="events"
                 :showSearchModal="showSearchModal"
                 @close="showSearchModal = false"
             />

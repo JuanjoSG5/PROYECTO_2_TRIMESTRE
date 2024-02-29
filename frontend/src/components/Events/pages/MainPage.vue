@@ -67,9 +67,15 @@ export default {
             this.isEditMode = !this.isEditMode;
             this.editedEvent = { ...this.currentEvent };
         },
+        validateToken(token) {
+            if (!token) {
+                this.$router.push('/');
+            }
+        },
         async getEventFrontApi() {
             this.toggleLoading();
             console.log('Bearer', this.authStore.store.token);
+            this.validateToken(this.authStore.store.token);
             const getRequest = {
                 method: 'GET',
                 headers: {
@@ -98,7 +104,7 @@ export default {
                 }
 
             } catch (error) {
-                console.error('Error fetching events:', error);
+                this.$router.push();
             }
 
             this.toggleLoading();

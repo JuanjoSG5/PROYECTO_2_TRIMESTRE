@@ -64,9 +64,9 @@ export default {
         return {
             authStore : useAuthStore(),
             priorities: [
-                {label: 'High', value: 'High'},
-                {label: 'Medium', value: 'Medium'},
-                {label: 'Low', value: 'Low'}
+                {label: 'High', value: 'high'},
+                {label: 'Medium', value: 'medium'},
+                {label: 'Low', value: 'low'}
             ]
         }
     },

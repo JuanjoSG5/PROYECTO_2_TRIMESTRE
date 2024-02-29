@@ -8,7 +8,12 @@
                     placeholder="Search for your events"
                     @input="handleSearchInput()"
                 />
-                <button> It works</button>
+                <hr>
+                <section class="results">
+                    <section v-for="event in events" :key="event.id">
+                        <p>{{ event.name }} - {{ event.priority}}</p>
+                    </section>
+                </section>
             </section>
         </section>
     </Teleport>
@@ -28,6 +33,10 @@ export default {
         CustomInput
     },
     props: {
+        events:{
+            type: Array,
+            required: true
+        },
         showSearchModal: {
             type: Boolean,
             required: true
@@ -61,5 +70,9 @@ export default {
         background-color: var(--vt-c-black-contrast);
         border-radius: 1rem;
         box-shadow: 0px 10px 5px 2 px rgba(0, 0, 0, 0.1);
+    }
+
+    .results{
+        color: var(--vt-c-black);
     }
 </style>
