@@ -9,12 +9,12 @@
                         class="search-input"
                         v-model="search"
                         placeholder="Search for your events"
-                        @input="handleSearchInput()"
+                        @input="handleSearchInput"
                     />
                 </section>
                 <hr>
                 <section class="results">
-                    <section v-for="event in localEvents" :key="event.id">
+                    <section v-for="event in filteringEvents" :key="event.id">
                         <p class="event">
                             <span class="event-name-time">{{ event.name }} -
                                 <span 
@@ -42,6 +42,7 @@ export default {
     data(){
         return {
             localEvents: [],
+            filteringEvents: [],
             modal: null,
             search: ''
         }
@@ -61,8 +62,14 @@ export default {
         }
     },
     methods: {
-        handleSearchInput(){
-            console.log('searching for', this.search);
+        handleSearchInput(event){
+            // This function is supposed to filter the events based on the search input names 
+            // and display the results in the modal
+            const value = event.target.value;
+            this.search = value;
+            this.filteringEvents = this.localEvents.filter(event => {
+                return event.name.toLowerCase().includes(this.search.toLowerCase());
+            });
         },
         capitalize(priority) {
             return priority.charAt(0).toUpperCase() + priority.slice(1);
@@ -101,6 +108,7 @@ export default {
                 end_date: getFormattedTime(event.end_date)
             };
         });
+        this.filteringEvents = this.localEvents;
         console.log(this.localEvents);
         onClickOutside(this.$refs.modal, () => (this.$emit('close')));
     }
@@ -161,6 +169,7 @@ export default {
         justify-content: space-between;
         margin: 0;
         padding:.5rem;
+        transition: 1s;
     }
 
     .event-name-time {
