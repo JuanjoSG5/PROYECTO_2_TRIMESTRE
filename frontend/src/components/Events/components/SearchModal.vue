@@ -2,6 +2,8 @@
     <Teleport to="#modal">
         <section v-if="showSearchModal" class="modal-bg">
             <section class="modal" ref="modal">
+                <Icon class="search-icon" icon="ph:magnifying-glass-bold" />
+                
                 <CustomInput
                     label="Search"
                     v-model="search"
@@ -10,8 +12,13 @@
                 />
                 <hr>
                 <section class="results">
-                    <section v-for="event in events" :key="event.id">
-                        <p>{{ event.name }} - <span :class="getPriorityClass(event.priority)">{{ capitalize(event.priority) }}</span></p>
+                    <section v-for="event in localEvents" :key="event.id">
+                        <p>
+                            {{ event.name }} - 
+                            <span :class="getPriorityClass(event.priority)">{{ capitalize(event.priority) }}</span>
+                            {{ event.end_date == '01/01/1970 01:00' ? '' :  event.end_date}}
+                        </p>
+                        
                     </section>
                 </section>
             </section>
@@ -19,19 +26,23 @@
     </Teleport>
 </template>
 <script>
+
+import { Icon } from '@iconify/vue';
 import CustomInput from '@/components/shared/helpers/GenericInput.vue';
 import { onClickOutside } from '@vueuse/core';
-
+import { getFormattedTime } from '../helpers/Time.js';
 export default {
     data(){
         return {
+            localEvents: [],
             modal: null,
             search: ''
         }
     },
     components: {
-        CustomInput
+        CustomInput,Icon
     },
+    emits: ['close'],
     props: {
         events:{
             type: Array,
@@ -63,9 +74,30 @@ export default {
             }
         }
     },
+    watch: {
+        events: {
+            immediate: true,
+            handler(newEvents) {
+                this.localEvents = newEvents.map(event => {
+                    return {
+                        ...event,
+                        start_date: getFormattedTime(event.start_date)
+                    };
+                });
+            }
+        }
+    },
     mounted() {
+        this.localEvents = this.events.map(event => {
+            return {
+                ...event,
+                end_date: getFormattedTime(event.end_date)
+            };
+        });
+        console.log(this.localEvents);
         onClickOutside(this.$refs.modal, () => (this.$emit('close')));
     }
+
 }
 </script>
 <style scoped>
