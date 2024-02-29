@@ -196,6 +196,14 @@ export default {
 
 }
 
+.event-title{
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
 .event{
     background-color: var(--vt-c-black-contrast);
     color: var(--vt-c-black);

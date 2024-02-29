@@ -157,9 +157,7 @@ input:checked+label svg.moon {
     fill: #fff;
 }
 
-.dark-button{
-    margin-right: 12rem;
-}
+
 
 @media (max-width: 768px) {
     label {
