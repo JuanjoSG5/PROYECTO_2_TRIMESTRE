@@ -15,13 +15,13 @@
                 <section v-if="!isLoading" >
                     <Events 
                         :currentEvent="currentEvent" 
-                        :editedEvent="editedEvent"
+                        :editedEvent="loadereditedEvent"
                         :isEditMode="isEditMode" 
                         @edit="toggleEditMode"
                         @put="handleSaveChanges"
                     />
                 </section>
-            <Loader class="loader" v-else />
+            <Loader class="" v-else />
         </section>
     </section>
 </template>
@@ -161,6 +161,10 @@ export default {
         display: flex;
         flex-direction: column;
         height: 100%;
+    }
+
+    .events{
+        display:none;
     }
 }
 

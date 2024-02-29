@@ -87,9 +87,6 @@ export default {
         'put',
         'edit'
     ],
-    mounted(){
-        console.log(this.currentEvent)
-    },
 
     methods: {
         getFormattedTime(time) {
@@ -305,6 +302,7 @@ export default {
         }
     }
 }
+
 
 
 

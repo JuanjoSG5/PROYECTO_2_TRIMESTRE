@@ -63,7 +63,7 @@
         </section>
         <section class="user-display" @click="navigateToUser">
             <Icon class="user-icon" icon="solar:user-line-duotone" />
-            <h2 class="username">Username</h2>
+            <h2 class="username">Profile</h2>
         </section>
     </aside>
     
@@ -425,6 +425,7 @@ export default {
 @media (max-width: 768px) {
     .lateral-menu {
         width: 100vw;
+        height: 100vh;
         top: 0;
         left: 0;
         transition: transform 0.5s ease-in;

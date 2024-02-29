@@ -5,7 +5,7 @@
             <router-link class="route" to="/contact">Contact</router-link>
             <router-link v-if="!isLoggedIn" class="route" to="/login">Login</router-link>
             <router-link v-if="!isLoggedIn" class="route register" to="/register">Register</router-link>
-            <DarkModeButton @darkModeChanged="changeColor"/>    
+            <DarkModeButton  @darkModeChanged="changeColor"/>    
         </ul>
     </header>
 </template>
@@ -99,6 +99,8 @@ export default {
     font-weight: bold;
 }
 
+
+
 @media (max-width: 1440px) {
     .icon{
         margin-right: 16rem;
@@ -110,10 +112,9 @@ export default {
         width: 100%;    
         padding: 0;
         justify-content: space-around; 
-        margin-right:2rem;    
     }
     .route {
-        margin-right: 2rem;
+        margin-right: 0rem;
     }
     .icon{
         margin-right: 12rem;

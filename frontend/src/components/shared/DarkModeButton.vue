@@ -1,6 +1,6 @@
 <template>
     <input type="checkbox" id="darkmode-toggle" v-model="darkMode" @change="emitChangeEvent" />
-    <label for="darkmode-toggle">
+    <label class="dark-button" for="darkmode-toggle">
         <svg version="1.1" class="sun" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
             y="0px" viewBox="0 0 496 496" style="enable-background:new 0 0 496 496;" xml:space="preserve">
 
@@ -157,6 +157,9 @@ input:checked+label svg.moon {
     fill: #fff;
 }
 
+.dark-button{
+    margin-right: 12rem;
+}
 
 @media (max-width: 768px) {
     label {

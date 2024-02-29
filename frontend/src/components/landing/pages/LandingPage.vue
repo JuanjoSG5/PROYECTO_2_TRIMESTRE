@@ -94,4 +94,16 @@ export default {
   font-size: 2rem;
   font-weight: bold;
 }
+
+@media (max-width: 1024px ){
+  .top-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .top-section-image{
+    padding-top: 2rem;
+  }
+}
 </style>
