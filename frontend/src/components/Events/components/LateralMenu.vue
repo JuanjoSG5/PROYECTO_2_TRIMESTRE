@@ -143,7 +143,8 @@ export default {
             this.$emit('update', newEvent);
         },
         getPriorityClass(priority) {
-            switch (priority) {
+            const lowerPriority = priority.toLowerCase();
+            switch (lowerPriority) {
                 case 'high':
                     return 'high-priority';
                 case 'medium':

@@ -64,9 +64,9 @@ export default {
         return {
             authStore : useAuthStore(),
             priorities: [
-                {label: 'High', value: 'high'},
-                {label: 'Medium', value: 'medium'},
-                {label: 'Low', value: 'low'}
+                {label: 'High', value: 'High'},
+                {label: 'Medium', value: 'Medium'},
+                {label: 'Low', value: 'Low'}
             ]
         }
     },
@@ -117,9 +117,9 @@ export default {
         },
         priorityClass(label) {
             switch(label) {
-                case 'High': return 'high-priority';
-                case 'Medium': return 'medium-priority';
-                case 'Low': return 'low-priority';
+                case 'High' || 'high': return 'high-priority';
+                case 'Medium' || 'medium': return 'medium-priority';
+                case 'Low' || 'low': return 'low-priority';
                 default: return '';
             }
         },

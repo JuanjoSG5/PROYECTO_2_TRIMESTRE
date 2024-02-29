@@ -11,7 +11,7 @@
                 <hr>
                 <section class="results">
                     <section v-for="event in events" :key="event.id">
-                        <p>{{ event.name }} - {{ event.priority}}</p>
+                        <p>{{ event.name }} - <span :class="getPriorityClass(event.priority)">{{ capitalize(event.priority) }}</span></p>
                     </section>
                 </section>
             </section>
@@ -45,6 +45,22 @@ export default {
     methods: {
         handleSearchInput(){
             console.log('searching for', this.search);
+        },
+        capitalize(priority) {
+            return priority.charAt(0).toUpperCase() + priority.slice(1);
+        },
+        getPriorityClass(priority) {
+            const lowerPriority = priority.toLowerCase();
+            switch (lowerPriority) {
+                case 'high':
+                    return 'high-priority';
+                case 'medium':
+                    return 'medium-priority';
+                case 'low':
+                    return 'low-priority';
+                default:
+                    return ''; 
+            }
         }
     },
     mounted() {
@@ -68,6 +84,7 @@ export default {
     .modal{
         position: relative;
         background-color: var(--vt-c-black-contrast);
+        width: 50vw;
         border-radius: 1rem;
         box-shadow: 0px 10px 5px 2 px rgba(0, 0, 0, 0.1);
     }
@@ -75,4 +92,17 @@ export default {
     .results{
         color: var(--vt-c-black);
     }
+    .high-priority {
+    color: #800020; 
+    font-weight: bold;
+}
+.medium-priority {
+    font-weight: bold;
+    color: navy;
+}
+
+.low-priority {
+    color: var(--vt-c-black-soft);
+    font-weight: bold;
+}
 </style>
