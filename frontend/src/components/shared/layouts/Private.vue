@@ -4,7 +4,7 @@
         <main class="main">
             <router-view />
         </main>
-        <Footer v-if="showFooter" />
+        <Footer class="footer" v-if="showFooter" />
     </div>
 </template>
 <script>
@@ -40,5 +40,11 @@ export default {
     flex: 1 0 auto;
     width: 100%;
     height: 100%;
+}
+@media (max-width: 1024px){
+    .footer {
+        position: relative;
+        bottom: 0;
+    }
 }
 </style>

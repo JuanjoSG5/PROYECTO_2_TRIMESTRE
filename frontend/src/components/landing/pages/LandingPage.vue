@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style scoped>
-/* TODO: check the responsiveness of the button of log in and Sign up  */
+/*   check the responsiveness of the button of log in and Sign up  */
 .landing {
   padding: 0;
 }

@@ -4,7 +4,10 @@
             <main class="main">
                 <router-view />
             </main>
-        <Footer v-if="showFooter" />
+            <div class="container">
+                <Footer class="footer" v-if="showFooter" />
+            </div>
+        
     </div>
 </template>
 
@@ -40,5 +43,21 @@ export default {
     
     width: 100%;
     height: 100%;
+}
+
+
+@media (max-width: 1024px){
+    
+    .container {
+        position: relative;
+        bottom: 0;
+        
+    }
+    .footer {
+        position: absolute;
+        top: 43rem ;
+        height: 5rem;
+        background-color: var(--vt-c-black-contrast);
+    }
 }
 </style>

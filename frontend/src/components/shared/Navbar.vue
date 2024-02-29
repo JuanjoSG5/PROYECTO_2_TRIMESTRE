@@ -5,7 +5,6 @@
             <router-link class="route" to="/contact">Contact</router-link>
             <router-link v-if="!isLoggedIn" class="route" to="/login">Login</router-link>
             <router-link v-if="!isLoggedIn" class="route register" to="/register">Register</router-link>
-            <router-link v-else class="route" to="/user">User</router-link>
             <DarkModeButton @darkModeChanged="changeColor"/>    
         </ul>
     </nav>

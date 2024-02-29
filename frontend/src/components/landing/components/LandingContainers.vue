@@ -1,29 +1,31 @@
 <template lang="">
-    <section class="top-container">
-        <section class="top-container-content">
-            <h2 class="top-header">Optimize your time management </h2>
-            <p class="top-description">
-                Simplify your day and sync your events with the apps you use most—all from one place.
-                Discover how TimeSync can enhance your productivity and make your workflow more efficient.
-            </p>
+    <section class="containers">
+        <section class="top-container">
+            <section class="top-container-content">
+                <h2 class="top-header">Optimize your time management </h2>
+                <p class="top-description">
+                    Simplify your day and sync your events with the apps you use most—all from one place.
+                    Discover how TimeSync can enhance your productivity and make your workflow more efficient.
+                </p>
+            </section>
+            <section class="top-container-image">
+                <img class="top-image" src="https://dummyimage.com/361x284/000000/fff" alt="landing-image">   
+            </section>
         </section>
-        <section class="top-container-image">
-            <img class="top-image" src="https://dummyimage.com/361x284/000000/fff" alt="landing-image">   
-        </section>
-    </section>
 
-    <section class="bottom-container">
-        <section class="bottom-container-image">
-            <img class="bottom-image" src="https://dummyimage.com/361x284/000000/fff" alt="landing-image">   
+        <section class="bottom-container">
+            <section class="bottom-container-image">
+                <img class="bottom-image" src="https://dummyimage.com/361x284/000000/fff" alt="landing-image">   
+            </section>
+            <section class="bottom-container-content">
+                <h2 class="bottom-header">Customize your events on the go!</h2>
+                <p class="bottom-description">
+                    Customize your working style with TimeSync. 
+                    TimeSync offers you the flexibility to manage your events the way you prefer.
+                </p>
+            </section>
+            
         </section>
-        <section class="bottom-container-content">
-            <h2 class="bottom-header">Customize your events on the go!</h2>
-            <p class="bottom-description">
-                Customize your working style with TimeSync. 
-                TimeSync offers you the flexibility to manage your events the way you prefer.
-            </p>
-        </section>
-        
     </section>
 </template>
 <script>
@@ -32,6 +34,13 @@ export default {
 }
 </script>
 <style scoped>
+
+.containers{
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+}
     .top-container{
         display:grid;
         grid-template-columns: 1fr 1fr;
@@ -119,7 +128,13 @@ export default {
         top: 10.2%;
         left: 10%;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 1440px) {
+        .top-container, .bottom-container {
+            margin: 10px;
+            width: 95vw;
+        }
+    }
+    @media (max-width: 1024px) {
         .top-container {
             grid-template-columns: 1fr;
             border-radius: 0rem 5rem 5rem  0rem;
@@ -128,29 +143,28 @@ export default {
             justify-content: right;
             height: auto;
             position: relative;
-            left: -1rem;
+            left: -10rem;
         }
 
         .top-container-image {
             position: absolute;
             top: 100%;
-            right: -75%;
-            width:100%;
+            right: -20vw;
+            width: 85vw;
             margin-top: 3rem;
-           
-            height: 40vh;
             display: block;
 
             & .top-image {
+                height: auto;
                 top: 6.25%;
                 left: 10%;
             }
         }
 
         .top-container-content{
-           
+           position: relative;
+           width: 80vw;
             height: 40vh;
-            left: 0;
         }
 
         .top-image, .bottom-image {
@@ -167,27 +181,25 @@ export default {
         }
 
         .bottom-container{
-            display:flex;
-            flex-direction: column;
-            border-radius: 5rem 0rem 0rem 5rem;
+            grid-template-columns: 1fr;
+            border-radius: 5rem 0rem 0rem  5rem;
             margin-left:0;
             margin-bottom: 5rem;
+            width: 105vw;
             justify-content: right;
-            height: 15rem;
-            width: 30rem;
+            height: auto;
             position: relative;
-            top: 17rem;
-            left: 25rem;
+            top:21rem;
+            right: -10rem;
         }
         .bottom-container-content{
-            justify-self: flex-start;
+            position: relative;
             height: 40vh;
             width: 50vw;
-            font-size: 1.5rem;
-            text-align:start;
+            right: 20rem;
 
             & .bottom-header {
-                font-size: 3vw;
+                font-size: 3.5vw;
             }
             & .bottom-description {
                 font-size: 2.5vw;
@@ -196,16 +208,16 @@ export default {
         .bottom-container-image{
             position: absolute;
             top: 100%;
-            right: 95%;
-            width:100%;
+            right: 50%;
+            width:80vw;
             margin-top: 3rem;
            
-            height: 40vh;
             display: block;
 
             & .bottom-image {
+                height: auto;
                 top: 6.25%;
-                left: 35.5%;
+                left: 40.5%;
             }
         }
     }

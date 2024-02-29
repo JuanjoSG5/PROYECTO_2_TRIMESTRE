@@ -9,7 +9,7 @@ const routes = [
     { path: '/login', component: () => import('@/components/Login/pages/LoginPage.vue'), meta: { showFooter: true, showHeader: true } },
     { path: '/register', component: () => import('@/components/Signup/pages/SignUpPage.vue'), meta: { showFooter: true, showHeader: true } },
     {
-        path: '/user', component: () => import('@/components/User/pages/ProfilePage.vue'), meta: { showFooter: false,showHeader: false},
+        path: '/user', component: () => import('@/components/User/pages/ProfilePage.vue'), meta: { showFooter: false,showHeader: true},
         beforeEnter: (to, from, next) => {
             const store = useAuthStore()
             if (store.token !== "") {
