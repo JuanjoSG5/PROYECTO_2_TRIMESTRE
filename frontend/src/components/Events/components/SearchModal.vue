@@ -8,6 +8,7 @@
                     <CustomInput
                         class="search-input"
                         v-model="search"
+                        aria-label="search"
                         placeholder="Search for your events"
                         @input="handleSearchInput"
                     />

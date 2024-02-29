@@ -53,6 +53,7 @@ export default {
 <style scoped>
 /* 
     TODO: Make this page responsive
+    TODO: change from nav to header 
 */
 .navbar{
     background-color: var(--vt-c-black-contrast);
@@ -112,7 +113,7 @@ export default {
     .navbar-list {
         width: 100%;    
         padding: 0;
-        justify-content: space-around; /* Change this line */
+        justify-content: space-around; 
         margin-right:2rem;    
     }
     .route {

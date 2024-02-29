@@ -137,6 +137,8 @@ export default {
     & .event-title {
        padding-left: 5rem;
         font-size: 3rem;
+        margin-top:5rem;
+        margin-bottom: 4rem;
     }
 
     & .event-description {
@@ -168,7 +170,7 @@ export default {
         }
     }
     & .select-label{
-        padding:3rem;
+        padding:0rem 3rem;
         font-size: 2rem;
         
         & .priority-select {
@@ -201,6 +203,7 @@ export default {
         background-color: var(--vt-c-black);
         border: none;
         font-size: 2.5rem;
+        height: 5vh;
         width: 5vw;
 
     }

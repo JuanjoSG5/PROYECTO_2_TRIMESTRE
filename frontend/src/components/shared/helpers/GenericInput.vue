@@ -30,6 +30,7 @@
           v-else 
           class="input"
           :type="type" 
+          :aria-label="input"
           :placeholder="placeholder"
       />
       
@@ -42,8 +43,7 @@ export default {
   props: {
       
       label: {
-          type: String,
-          required: true
+          type: String
       },
       // Type of input field: 'text' by default
       type: {

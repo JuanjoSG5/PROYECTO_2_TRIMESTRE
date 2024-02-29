@@ -1,5 +1,6 @@
 <template>
     <aside :class="{ 'lateral-menu': true, 'retracted': isMenuRetracted }">
+        <section id="modal"></section>
         <h2 class="menu-title" @click="toggleMenu">
             Events of username
             <Icon class="menu-arrow" icon="solar:double-alt-arrow-right-line-duotone" />
@@ -65,7 +66,7 @@
             <h2 class="username">Username</h2>
         </section>
     </aside>
-    <section id="modal"></section>
+    
 </template>
   
 <script>
@@ -169,7 +170,7 @@ export default {
     background-color: var(--vt-c-black-contrast);
     color: var(--vt-c-black);
     width: 25%;
-    height: 110vh;
+    height: 100vh;
     transition: transform 0.5s ease-in;
 
     &.retracted {

@@ -36,13 +36,16 @@ export default {
 .wrapper{
     display: grid;
     grid-template-rows: auto 1fr auto;
+    box-sizing: border-box;
     min-height:100vh;
     width: 100%;
 }
-.main {
-    
+.main {  
     width: 100%;
     height: 100%;
+}
+.container{
+    display:none;
 }
 
 

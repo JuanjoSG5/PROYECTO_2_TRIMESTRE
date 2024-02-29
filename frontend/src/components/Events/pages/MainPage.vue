@@ -131,7 +131,6 @@ export default {
 .main-content {
     display: flex;
     height: 100%;
-
 }
 
 .main-event-content {
@@ -149,9 +148,6 @@ export default {
     height: 100%;
     padding-left: 2rem;
     
-
-   
-        
     & .loader{
         position: absolute;
         top: 40%;
