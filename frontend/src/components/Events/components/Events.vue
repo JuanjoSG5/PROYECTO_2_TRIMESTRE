@@ -295,6 +295,17 @@ export default {
     font-weight: bold;
 }
 
+@media (max-width: 1024px) {
+    .event-content {
+        padding: 0;
+        width: 100%;
+
+        & .event-title{
+            padding: 0;
+        }
+    }
+}
+
 
 
 </style>

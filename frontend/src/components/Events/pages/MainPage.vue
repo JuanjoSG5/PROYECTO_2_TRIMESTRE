@@ -127,9 +127,9 @@ export default {
 };
 </script>
 <style scoped>
-/* TODO: Fix the grid display so that it shows properly the size of the */
 .main-content {
     display: flex;
+    flex-direction: row;
     height: 100%;
 }
 
@@ -153,6 +153,14 @@ export default {
         top: 40%;
         left: 40%;
         justify-content: center;
+    }
+}
+
+@media (max-width:768px){
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
     }
 }
 

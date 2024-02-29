@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar">
+    <header class="navbar">
         <ul class="navbar-list">
             <router-link class="route icon" to="/"><Icon height="2.5rem"  icon="noto:hourglass-done" /></router-link>
             <router-link class="route" to="/contact">Contact</router-link>
@@ -7,7 +7,7 @@
             <router-link v-if="!isLoggedIn" class="route register" to="/register">Register</router-link>
             <DarkModeButton @darkModeChanged="changeColor"/>    
         </ul>
-    </nav>
+    </header>
 </template>
 
 <script>
@@ -51,10 +51,6 @@ export default {
 
   
 <style scoped>
-/* 
-    TODO: Make this page responsive
-    TODO: change from nav to header 
-*/
 .navbar{
     background-color: var(--vt-c-black-contrast);
 }

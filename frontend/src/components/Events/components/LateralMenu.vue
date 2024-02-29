@@ -174,9 +174,8 @@ export default {
     transition: transform 0.5s ease-in;
 
     &.retracted {
-        width: 30%;
+        width: 20%;
         height: 100%;
-        
         transform: translateX(-100%);
     }
 
@@ -406,4 +405,35 @@ export default {
     }
 }
 
+@media (max-width: 1024px) {
+    .lateral-menu {
+        width: 50%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        transition: transform 0.5s ease-in;
+
+        &.retracted {
+            width: 20%;
+            height: 100%;
+            transform: translateX(-100%);
+        }
+    }
+    
+}
+
+@media (max-width: 768px) {
+    .lateral-menu {
+        width: 100vw;
+        top: 0;
+        left: 0;
+        transition: transform 0.5s ease-in;
+
+        &.retracted {
+            width: 10%;
+            height: 100%;
+            transform: translateX(-100%);
+        }
+    }
+}
 </style>
