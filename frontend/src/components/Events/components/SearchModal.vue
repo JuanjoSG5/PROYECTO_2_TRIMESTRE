@@ -2,35 +2,42 @@
     <Teleport to="#modal">
         <section v-if="showSearchModal" class="modal-bg">
             <section class="modal" ref="modal">
-                <Icon class="search-icon" icon="ph:magnifying-glass-bold" />
-                
-                <CustomInput
-                    label="Search"
-                    v-model="search"
-                    placeholder="Search for your events"
-                    @input="handleSearchInput()"
-                />
+                <section class="modal-searchbar">
+                    <Icon height="2rem"class="search-icon" icon="ph:magnifying-glass-bold" />
+                    
+                    <CustomInput
+                        class="search-input"
+                        v-model="search"
+                        placeholder="Search for your events"
+                        @input="handleSearchInput()"
+                    />
+                </section>
                 <hr>
                 <section class="results">
                     <section v-for="event in localEvents" :key="event.id">
-                        <p>
-                            {{ event.name }} - 
-                            <span :class="getPriorityClass(event.priority)">{{ capitalize(event.priority) }}</span>
-                            {{ event.end_date == '01/01/1970 01:00' ? '' :  event.end_date}}
+                        <p class="event">
+                            <span class="event-name-time">{{ event.name }} -
+                                <span 
+                                    :class="getPriorityClass(event.priority)"
+                                >
+                                {{ capitalize(event.priority) }}
+                                </span>
+                            </span>  
+                            <span class="time">{{ event.end_date == '01/01/1970 01:00' ? '' :  event.end_date}}</span>
                         </p>
-                        
                     </section>
                 </section>
             </section>
         </section>
     </Teleport>
 </template>
-<script>
 
+<script>
 import { Icon } from '@iconify/vue';
 import CustomInput from '@/components/shared/helpers/GenericInput.vue';
 import { onClickOutside } from '@vueuse/core';
 import { getFormattedTime } from '../helpers/Time.js';
+
 export default {
     data(){
         return {
@@ -97,9 +104,9 @@ export default {
         console.log(this.localEvents);
         onClickOutside(this.$refs.modal, () => (this.$emit('close')));
     }
-
 }
 </script>
+
 <style scoped>
     .modal-bg{
         position: fixed;
@@ -121,20 +128,62 @@ export default {
         box-shadow: 0px 10px 5px 2 px rgba(0, 0, 0, 0.1);
     }
 
+    .modal-searchbar{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 4rem;
+        
+    }
+    .search-icon{
+        color: var(--vt-c-black);
+        padding: 0.5rem;
+    }
+    .search-input{
+        padding-top:2rem;
+    }
     .results{
+        font-size: 1rem;
+        margin: 0;
+        margin-top: 1.3rem;
+        margin-bottom: 1.3rem;
+        width: 100%;
+        min-height: 20vh;
+        max-height: 50vh;
+        resize: none;
+        overflow: auto;
         color: var(--vt-c-black);
     }
-    .high-priority {
-    color: #800020; 
-    font-weight: bold;
-}
-.medium-priority {
-    font-weight: bold;
-    color: navy;
-}
+  
+    .event {
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+        padding:.5rem;
+    }
 
-.low-priority {
-    color: var(--vt-c-black-soft);
-    font-weight: bold;
-}
+    .event-name-time {
+        padding-left:2rem;
+    }
+
+    .time{
+        padding-right: 2rem;
+        justify-self: flex-end;
+    }
+    
+    .high-priority {
+        color: #800020; 
+        font-weight: bold;
+    }
+
+    .medium-priority {
+        font-weight: bold;
+        color: navy;
+    }
+
+    .low-priority {
+        color: var(--vt-c-black-soft);
+        font-weight: bold;
+    }
 </style>
