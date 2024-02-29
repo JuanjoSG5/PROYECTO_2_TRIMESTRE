@@ -9,10 +9,19 @@
             </span>
         </h2>
         <button class="search-button">
-            <p class="search-button-text">
+            <p 
+                class="search-button-text"
+                
+                @click="showSearchModal = true"
+            >
                 <Icon class="search-icon" icon="ph:magnifying-glass-bold" />
                 Search for your events
             </p>
+            <SearchModal 
+                v-if="showSearchModal" 
+                :showSearchModal="showSearchModal"
+                @close="showSearchModal = false"
+            />
         </button>
         <button class="create-event-button" @click="createEvent">
             <p class="create-event-text">
@@ -55,18 +64,22 @@
             <h2 class="username">Username</h2>
         </section>
     </aside>
+    <section id="modal"></section>
 </template>
   
 <script>
 import { Icon } from '@iconify/vue';
 import {getTime} from '../helpers/Time.js'
 import { useAuthStore } from '../../../store/UserStore';
+import SearchModal from '../components/SearchModal.vue';
+
 
 export default {
-    components: { Icon },
+    components: { Icon,SearchModal },
     emits: [
         'event',
-         'update'
+         'update',
+        'toggle-menu'
     ], 
     data(){
         return {
@@ -75,6 +88,7 @@ export default {
     },
     props: {
         isMenuRetracted: Boolean,
+        showSearchModal: Boolean,
         events: {
             type:Object,
             required:true

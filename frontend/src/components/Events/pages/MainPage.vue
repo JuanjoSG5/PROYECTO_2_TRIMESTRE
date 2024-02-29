@@ -1,5 +1,6 @@
 <template>
     <section :class="[isMenuRetracted ? 'main-event-content' : 'main-content']">
+        
         <LateralMenu 
             :events="events" 
             :highPriorityEvents="highPriorityEvents"
@@ -61,8 +62,8 @@ export default {
         },
         toggleMenu() {
             this.isMenuRetracted = !this.isMenuRetracted;
-        },toggleEditMode() {
-            // TODO: In future chnages make it able to actually change the priority and assign it to the current user
+        },
+        toggleEditMode() {
             this.isEditMode = !this.isEditMode;
             this.editedEvent = { ...this.currentEvent };
         },

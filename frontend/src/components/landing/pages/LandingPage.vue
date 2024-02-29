@@ -42,13 +42,13 @@ export default {
 
 .top-section {
   display: grid;
-  padding: 2rem ;
+  padding: 2rem 4rem ;
   grid-template-columns: 1.3fr 1fr;
   grid-gap: 0.4fr;
 }
 
 .top-section-content {
-  margin-right: 10vw;
+  margin-right: 7vw;
 }
 
 .top-section-image {

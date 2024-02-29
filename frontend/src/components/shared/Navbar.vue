@@ -52,32 +52,20 @@ export default {
 
   
 <style scoped>
-/* TODO: Make this page responsive*/
+/* 
+    TODO: Make this page responsive
+*/
 .navbar{
     background-color: var(--vt-c-black-contrast);
 }
 
 .navbar-list {
     display: flex;
-    padding-top: 1rem;
     width: 90%;
-    justify-content: space-between;
-    
+    justify-content: space-around;
     align-items: center;
     color: white;
     padding-right: 3rem;
-}
-
-@media (max-width: 768px) {
-    .navbar-list {
-        width: 100%;    
-        padding: 0;
-        margin: 0;
-        justify-content:safe;
-    }
-    .route {
-        margin-top: 1rem;
-    }
 }
 
 .route {
@@ -88,10 +76,9 @@ export default {
     border-radius: 5px;
 }
 .icon{
-    
     background-color: var(--vt-c-black-contrast);
     width:2.5rem;
-    margin-right: 48rem;
+    margin-right: 32rem;
 }
 
 .register{
@@ -108,12 +95,50 @@ export default {
 }
 .route:focus,
 .route:focus-visible {
-    outline: 2px solid var(--vt-c-black-contrast);
+    outline: 2px solid var(--vt-c-black);
 }
 .register:hover{
     background-color: var(--vt-c-black);
     color: var(--vt-c-black-contrast);
     font-weight: bold;
 }
+
+@media (max-width: 1440px) {
+    .icon{
+        margin-right: 16rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .navbar-list {
+        width: 100%;    
+        padding: 0;
+        justify-content: space-around; /* Change this line */
+        margin-right:2rem;    
+    }
+    .route {
+        margin-right: 2rem;
+    }
+    .icon{
+        margin-right: 12rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-list {
+        width: 100%;    
+        padding: 0;
+        margin: 0;
+        justify-content: space-around; /* Change this line */
+    }
+    .route {
+        
+        margin-top: 1rem;
+    }
+    .icon{
+        margin-right: 4rem;
+    }
+}
+
 </style>
   

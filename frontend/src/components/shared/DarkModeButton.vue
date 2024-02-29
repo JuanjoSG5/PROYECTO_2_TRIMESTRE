@@ -55,23 +55,33 @@
 </template>
 
 <script>
+import { ref, onMounted } from 'vue';
+
 export default {
-    data() {
+    setup() {
+        const darkMode = ref(false);
+
+        onMounted(() => {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                darkMode.value = true;
+            }
+        });        
+
         return {
-            darkMode: false
-        }
+            darkMode
+        };
     },
     methods: {
         emitChangeEvent() {
-            this.$emit('darkModeChanged', this.darkMode);
+            this.$emit('darkModeChanged');
         }
-    }
+    },
+    emits: ['darkModeChanged']
 }
-
 </script>
 
 <style scoped>
-
+/** TODO: implement responsive to the button  */
 
 label {
     width: 8rem;
@@ -101,7 +111,7 @@ label:after {
 input {
     width: 0;
     height: 0;
-    visibility: hidden;
+    display: none;
 }
 
 input:checked+label {
@@ -145,6 +155,59 @@ input:checked+label svg.sun {
 
 input:checked+label svg.moon {
     fill: #fff;
+}
+
+
+@media (max-width: 768px) {
+    label {
+        width: 6rem;
+        height: 2.5rem;
+    }
+
+    label:after {
+        width: 2.5rem;
+        height: 2rem;
+    }
+
+    label svg {
+        width: 2.5rem;
+    }
+
+    label svg.sun {
+        left: .1rem;
+        height: 1.5rem;
+    }
+
+    label svg.moon {
+        left: 3.5rem;
+        height: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    label {
+        width: 4rem;
+        height: 2rem;
+    }
+
+    label:after {
+        width: 2rem;
+        height: 1.5rem;
+    }
+
+    label svg {
+        width: 2rem;
+    }
+
+    label svg.sun {
+        left: .1rem;
+        height: 1rem;
+    }
+
+    label svg.moon {
+        left: 2.5rem;
+        height: 1rem;
+    }
 }
 
 </style>
