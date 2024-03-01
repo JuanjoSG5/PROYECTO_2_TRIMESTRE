@@ -1,6 +1,5 @@
 <template>
     <section :class="[isMenuRetracted ? 'main-event-content' : 'main-content']">
-        
         <LateralMenu 
             :events="events" 
             :highPriorityEvents="highPriorityEvents"
@@ -10,21 +9,23 @@
             @event="setCurrentEvent($event)"
             @update="getEventFrontApi"
         />
-        <section class="events">
+        <section class="events" :class="{ 'hidden': !isMenuRetracted }">
+
             <EventHeader/>
-                <section v-if="!isLoading" >
-                    <Events 
-                        :currentEvent="currentEvent" 
-                        :editedEvent="loadereditedEvent"
-                        :isEditMode="isEditMode" 
-                        @edit="toggleEditMode"
-                        @put="handleSaveChanges"
-                    />
-                </section>
+            <section v-if="!isLoading" >
+                <Events 
+                    :currentEvent="currentEvent" 
+                    :editedEvent="loadereditedEvent"
+                    :isEditMode="isEditMode" 
+                    @edit="toggleEditMode"
+                    @put="handleSaveChanges"
+                />
+            </section>
             <Loader class="" v-else />
         </section>
     </section>
 </template>
+
 
 <script>
 import { Icon } from '@iconify/vue'; 
@@ -162,9 +163,8 @@ export default {
         flex-direction: column;
         height: 100%;
     }
-
-    .events{
-        display:none;
+    .hidden {
+        display: none;
     }
 }
 
