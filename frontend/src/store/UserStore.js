@@ -27,6 +27,7 @@ export const useAuthStore = defineStore('auth', {
                 .then(data => {
                     this.store = data;
                     console.log('User:', this.store);
+                    this.$router.push("/home")
                 })
                 .catch((error) => {
                     return false

@@ -87,7 +87,7 @@ export default {
                         
                     } else {
                         this.authStore.logIn(this.formData);
-                        this.$router.push("/home")
+                        
                     }
                 });
             } else {
