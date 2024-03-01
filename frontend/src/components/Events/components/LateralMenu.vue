@@ -408,7 +408,7 @@ export default {
 @media (max-width: 1440px) {
     .lateral-menu {
         width: 30%;
-        height: 100%;
+        height: 100vh;
         top: 0;
         left: 0;
         transition: transform 0.5s ease-in;
@@ -425,7 +425,7 @@ export default {
 @media (max-width: 1024px) {
     .lateral-menu {
         width: 35%;
-        height: 100%;
+        height: auto;
         top: 0;
         left: 0;
         transition: transform 0.5s ease-in;

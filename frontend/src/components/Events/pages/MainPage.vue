@@ -21,7 +21,7 @@
                     @put="handleSaveChanges"
                 />
             </section>
-            <Loader class="" v-else />
+            <Loader class="loader" v-else />
         </section>
     </section>
 </template>
@@ -142,7 +142,6 @@ export default {
 .events {
     display: flex;
     flex-direction: column;
-    position: relative;
     background-color: var(--vt-c-black);
     color: var(--vt-c-black-contrast);
     width: 100%;
@@ -151,8 +150,8 @@ export default {
     
     & .loader{
         position: absolute;
-        top: 40%;
-        left: 40%;
+        top: 50%;
+        left: 50%;
         justify-content: center;
     }
 }

@@ -130,7 +130,7 @@ export default {
     }
     @media (max-width: 1440px) {
         .top-container, .bottom-container {
-            margin: 10px;
+            margin: 2rem;
             width: 95vw;
         }
     }

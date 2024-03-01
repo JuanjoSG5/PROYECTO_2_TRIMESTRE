@@ -61,4 +61,16 @@ export default {
     background-color: rgba(157, 178, 191, 0.306);
     color: rgba(221, 230, 237, 0.765);
 }
+
+@media (max-width: 1024px) {
+    .button {
+        width: 80vw;
+    }
+}
+
+@media (max-width: 768px){
+    .button {
+        width: 80vw;
+    }
+}
 </style>
