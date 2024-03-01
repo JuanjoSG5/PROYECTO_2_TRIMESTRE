@@ -32,6 +32,7 @@ import { Icon } from '@iconify/vue';
 import Loader from '../../shared/Loader.vue'; 
 import LateralMenu from '../components/LateralMenu.vue';
 import EventHeader from '../components/EventHeader.vue';
+
 import {getTime} from '../helpers/Time'
 import { useAuthStore } from '../../../store/UserStore';
 import Events from '../components/Events.vue';
@@ -87,7 +88,8 @@ export default {
             }
 
             try {
-                const response = await fetch('http://localhost:9000/api/v1/events', getRequest);
+                console.log('API URL:', `${import.meta.env.VITE_DATABASE_URL}`);
+                const response = await fetch(`http://localhost:9000/api/v1/events`, getRequest);
                 const eventsData = await response.json();
 
                 if (eventsData && eventsData.data && eventsData.data.length > 0) {

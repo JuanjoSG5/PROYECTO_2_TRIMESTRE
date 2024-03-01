@@ -43,6 +43,7 @@
 </template>
 
 <script>
+
 import { useAuthStore } from '../../../store/UserStore.js';
 import Loader from '../../shared/Loader.vue';
 
@@ -109,9 +110,8 @@ export default {
             };
 
             try {
-                const response = await fetch('http://localhost:9000/api/v1/events', getRequest);
+                const response = await fetch(`http://localhost:9000/api/v1/events`, getRequest);
                 const eventsData = await response.json();
-
                 if (eventsData && eventsData.data && eventsData.data.length > 0) {
                     this.highPriorityEvents = eventsData.data.filter(
                         event => event.priority === 'high' && event.user_id === userId
