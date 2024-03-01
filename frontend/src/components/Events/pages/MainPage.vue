@@ -157,11 +157,24 @@ export default {
     }
 }
 
+@media (max-width:1024px) {
+    .main-content {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+    }
+    
+}
+
 @media (max-width:768px){
+    
     .main-content {
         display: flex;
         flex-direction: column;
         height: 100%;
+    }
+    .retrated{
+        width: 3%;
     }
     .hidden {
         display: none;

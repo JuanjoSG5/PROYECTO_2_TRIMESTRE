@@ -4,9 +4,7 @@
             <main class="main">
                 <router-view />
             </main>
-            <div class="container">
                 <Footer class="footer" v-if="showFooter" />
-            </div>
         
     </div>
 </template>
@@ -35,7 +33,7 @@ export default {
 <style scoped>
 .wrapper{
     display: grid;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto  ;
     box-sizing: border-box;
     min-height:100vh;
     width: 100%;

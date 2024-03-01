@@ -48,4 +48,15 @@
 
     }
 
+@media (max-width: 1024px) {
+    .events-header {
+        right: 13rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .events-header {
+        right: 13rem;
+    }
+}
 </style>

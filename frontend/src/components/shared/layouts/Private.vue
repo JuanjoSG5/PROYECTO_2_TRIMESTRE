@@ -25,14 +25,13 @@ export default {
         },
     },
 }
-// document.setStyle
 </script>
   
 <style scoped>
 
 .wrapper{
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto ;
     min-height:100vh;
 }
 .main {

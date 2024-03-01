@@ -292,17 +292,41 @@ export default {
     font-weight: bold;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1440px) {
     .event-content {
         padding: 0;
         width: 100%;
 
         & .event-title{
             padding: 0;
+            width: 80%;
         }
     }
 }
 
+@media (max-width: 1024px) {
+    .event-content {
+        padding: 0;
+        width: 65vw;
+
+        & .event-title{
+            padding: 0;
+        width: 80%;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .event-content {
+        padding: 0;
+        width: 100%;
+
+        & .event-title{
+            padding: 0;
+            width: 80%;
+        }
+    }
+}
 
 
 
