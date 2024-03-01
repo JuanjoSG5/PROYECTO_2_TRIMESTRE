@@ -133,7 +133,7 @@ export default {
         margin-top: 1rem;
     }
     .icon{
-        margin-right: 4rem;
+        margin-right: 0rem;
     }
 }
 

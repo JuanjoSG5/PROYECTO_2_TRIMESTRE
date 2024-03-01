@@ -67,7 +67,7 @@ export default {
 @media (max-width: 1024px) {
     .container {
         position: relative;
-        bottom: 0;
+        top: 43rem;
     }
     .footer {
         position: relative;
@@ -75,4 +75,5 @@ export default {
         background-color: var(--vt-c-black-contrast);
     }
 }
+
 </style>

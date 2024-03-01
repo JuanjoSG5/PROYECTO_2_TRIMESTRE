@@ -161,13 +161,10 @@ input:checked+label svg.moon {
 
 @media (max-width: 768px) {
     label {
-        width: 6rem;
-        height: 2.5rem;
+        margin-right: 2rem;
     }
 
     label:after {
-        width: 2.5rem;
-        height: 2rem;
     }
 
     label svg {
@@ -175,13 +172,11 @@ input:checked+label svg.moon {
     }
 
     label svg.sun {
-        left: .1rem;
-        height: 1.5rem;
+        left: .5rem;
     }
 
     label svg.moon {
-        left: 3.5rem;
-        height: 1.5rem;
+        left: 4.5rem;
     }
 }
 

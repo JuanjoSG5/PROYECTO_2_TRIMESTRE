@@ -149,22 +149,24 @@ export default {
         .top-container-image {
             position: absolute;
             top: 100%;
-            right: -20vw;
-            width: 85vw;
+            right: -48vw;
+            width: 90vw;
+            height: 35vh;
             margin-top: 3rem;
             display: block;
 
             & .top-image {
                 height: auto;
-                top: 6.25%;
+                top: 10.25%;
                 left: 10%;
             }
         }
 
         .top-container-content{
-           position: relative;
-           width: 80vw;
+            position: relative;
+            width: 80vw;
             height: 40vh;
+            left: 2rem;
         }
 
         .top-image, .bottom-image {
@@ -222,11 +224,16 @@ export default {
         }
     }
 
-    /* For mobile phones */
+    
     @media (max-width: 480px) {
         .top-container, .bottom-container {
             margin: 10px;
-            width: 90vw;
+            width: 100vw;
+        }
+
+        .top-container-content{
+            height: auto;
+            left: 20rem;
         }
 
         .top-header, .bottom-header {
@@ -235,6 +242,13 @@ export default {
 
         .top-description, .bottom-description {
             font-size: 4vw;
+        }
+
+        .bottom-container-content{
+            right: 2rem ;
+        }
+        .footer{
+            bottom: 20rem;
         }
     }
 
