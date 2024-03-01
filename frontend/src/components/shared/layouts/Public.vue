@@ -4,7 +4,8 @@
         <main class="main">
             <router-view />
         </main>
-        <div class="container">
+        <Footer class="footer" v-if="!this.$route.path.endsWith('/')" />
+            <div class="container" v-else>
         <Footer class="footer" v-if="showFooter" />
     </div>
     </div>
@@ -54,6 +55,14 @@ export default {
     height: 100%;
 }
 
+.footer{
+    position: relative;
+    bottom: 0;
+    height: 5rem;
+    background-color: var(--vt-c-black-contrast);
+
+}
+
 
 @media (max-width: 1024px) {
     .container {
@@ -61,8 +70,7 @@ export default {
         bottom: 0;
     }
     .footer {
-        position: absolute;
-        top: 43rem;
+        position: relative;
         height: 5rem;
         background-color: var(--vt-c-black-contrast);
     }

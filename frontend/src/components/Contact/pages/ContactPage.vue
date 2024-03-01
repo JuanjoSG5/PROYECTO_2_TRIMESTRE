@@ -31,10 +31,28 @@ export default {
       transition: opacity 0.3s ease-in-out;
       border-radius: 12px;
     }
-    @media (max-width: 1024) {
-    .contact-image {
-        opacity: 0;
+    @media (max-width: 1024px) {
+      
+      .contact-page {
+            display: block;
+        }
+        .contact-image {
+            display: none;
+            transform: scale(0.8); /* Scale down gradually before hiding */
+        }
     }
-}
+
+    @media (max-width: 768px) {
+      
+      .contact-page {
+            display: block;
+        } 
+        
+        .contact-page {
+            padding: 2rem 2rem;
+        }
+    }
+
+
 
 </style>

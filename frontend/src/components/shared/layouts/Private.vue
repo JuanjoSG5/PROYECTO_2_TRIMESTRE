@@ -1,12 +1,16 @@
 <template>
-    <div class="wrapper">
+    <div :class="wrapperClass">
         <Navbar v-if="showHeader"/>
         <main class="main">
             <router-view />
         </main>
+        <Footer class="footer" v-if="!this.$route.path.endsWith('/')" />
+            <div class="container" v-else>
         <Footer class="footer" v-if="showFooter" />
     </div>
+    </div>
 </template>
+
 <script>
 import Navbar from '../Navbar.vue';
 import Footer from '../Footer.vue';
@@ -28,22 +32,40 @@ export default {
 </script>
   
 <style scoped>
-
-.wrapper{
-    display: grid;
-    grid-template-columns: auto ;
-    min-height:100vh;
+.wrapper {
+    box-sizing: border-box;
+    min-height: 100vh;
+    width: 100%;
 }
-.main {
-    position: relative;
-    flex: 1 0 auto;
+
+.wrapper-with-grid {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+.main {  
     width: 100%;
     height: 100%;
 }
-@media (max-width: 1024px){
-    .footer {
+
+.footer{
+    position: relative;
+    bottom: 0;
+    height: 5rem;
+    background-color: var(--vt-c-black-contrast);
+
+}
+
+
+@media (max-width: 1024px) {
+    .container {
         position: relative;
         bottom: 0;
+    }
+    .footer {
+        position: relative;
+        height: 5rem;
+        background-color: var(--vt-c-black-contrast);
     }
 }
 </style>
