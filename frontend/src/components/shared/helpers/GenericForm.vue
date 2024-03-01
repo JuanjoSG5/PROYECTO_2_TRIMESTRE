@@ -77,8 +77,6 @@ export default {
 
         async handleSubmit() {
             if (this.validateForm()) {
-                console.log("form is valid");
-
                 await this.checkIfUserExists().then(userExists => {
                     if (!userExists) {
                         this.authStore.register(this.formData).then(this.$router.push("/home"))

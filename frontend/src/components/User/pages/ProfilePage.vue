@@ -63,7 +63,6 @@ export default {
             this.isLoading = !this.isLoading;
         },
         async getUserData() {
-            console.log('Fetching user data...'); // Log before making the API call
             this.toggleLoader();
             const currentUser = JSON.parse(localStorage.getItem('my-user-store'));
 
@@ -78,13 +77,10 @@ export default {
 
             try {
                 const response = await fetch(`${import.meta.env.VITE_DATABASE_URL}/users/${currentUser.store.user.id}`, request);
-                console.log('Response:', response);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const userData = await response.json();
-                console.log('User data:', userData);
-                console.log('User data:', userData.data);
                 this.user = { ...userData.data };
             } catch (error) {
                 console.error('Error fetching user data:', error);
@@ -110,7 +106,7 @@ export default {
             };
 
             try {
-                const response = await fetch(`${import.meta.env.VITE_DATABASE_URL}/v1/events`, getRequest);
+                const response = await fetch(`${import.meta.env.VITE_DATABASE_URL}v1/events`, getRequest);
                 const eventsData = await response.json();
                 if (eventsData && eventsData.data && eventsData.data.length > 0) {
                     this.highPriorityEvents = eventsData.data.filter(

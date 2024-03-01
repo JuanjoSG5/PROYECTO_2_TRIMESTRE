@@ -11,7 +11,6 @@ export const useAuthStore = defineStore('auth', {
     },
     actions: {
         async logIn(formData) {
-            console.log('Logging in');
             const postRequest = {
                 method: 'POST',
                 headers: {
@@ -21,7 +20,6 @@ export const useAuthStore = defineStore('auth', {
                 body: JSON.stringify(formData)
             };
 
-            console.log('Sending post request:', postRequest);
             await fetch(`${import.meta.env.VITE_DATABASE_URL}login`, postRequest)
                 .then(response => response.json())
                 .then(data => {
@@ -35,8 +33,6 @@ export const useAuthStore = defineStore('auth', {
         },
 
         async register(formData) {
-            console.log(JSON.stringify(formData));
-
             const postRequest = {
                 method: 'POST',
                 headers: {
@@ -45,7 +41,6 @@ export const useAuthStore = defineStore('auth', {
                 },
                 body: JSON.stringify(formData)
             };
-            console.log('Sending post request:', postRequest);
             await fetch(`${import.meta.env.VITE_DATABASE_URL}register`, postRequest)
                 .then(response => response.json())
                 .then(data => {

@@ -66,7 +66,6 @@ export default {
             this.isMenuRetracted = !this.isMenuRetracted;
         },
         toggleEditMode() {
-            console.log('toggleEditMode');
             this.isEditMode = !this.isEditMode;
             this.editedEvent = { ...this.currentEvent };
         },
@@ -76,43 +75,43 @@ export default {
             }
         },
         async getEventFrontApi() {
-            this.toggleLoading();
-            console.log('Bearer', this.authStore.store.token);
-            this.validateToken(this.authStore.store.token);
-            const getRequest = {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'Authorization': `Bearer ${this.authStore.store.token}`
-                }
-            }
+    this.toggleLoading();
+    this.validateToken(this.authStore.store.token);
+    const getRequest = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${this.authStore.store.token}`
+        }
+    }
 
-            try {
-             const response = await fetch(`${import.meta.env.VITE_DATABASE_URL}v1/events`, getRequest);
+    try {
+        const userId = JSON.parse(localStorage.getItem('my-user-store')).store.user.id;
+        const response = await fetch(`${import.meta.env.VITE_DATABASE_URL}v1/events`, getRequest);
+        const eventsData = await response.json();
+        console.log('eventsData', eventsData);
+        if (eventsData && eventsData.data && eventsData.data.length > 0) {
+            this.highPriorityEvents = eventsData.data.filter(
+                event => event.priority === 'high' && event.user_id === userId
+            );
+            this.events = eventsData.data.filter(
+                event => event.priority !== 'high' && event.user_id === userId
+            );
+            this.currentEvent = localStorage.getItem('currentEvent') ?
+                JSON.parse(localStorage.getItem('currentEvent')) :
+                this.events[this.events.length - 1];
+        } else {
+            console.log('No data received from the API');
+        }
+    } catch (error) {
+        console.error(error);
+        this.$router.push('/error');
+    }
 
-                const eventsData = await response.json();
+    this.toggleLoading();
+},
 
-                if (eventsData && eventsData.data && eventsData.data.length > 0) {
-                    this.highPriorityEvents = eventsData.data.filter(
-                        event => event.priority === 'high'
-                    );
-                    this.events = eventsData.data.filter(
-                        event => event.priority !== 'high'
-                    );
-                    this.currentEvent = localStorage.getItem('currentEvent') ?
-                        JSON.parse(localStorage.getItem('currentEvent')) :
-                        this.events[this.events.length - 1];
-                } else {
-                    console.log('No data received from the API');
-                }
-
-            } catch (error) {
-                this.$router.push();
-            }
-
-            this.toggleLoading();
-        },
         getFormattedTime(dateTimeString) {
             const date = new Date(dateTimeString);
             const day = date.getDate();
