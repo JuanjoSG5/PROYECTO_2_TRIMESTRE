@@ -4,7 +4,7 @@
         <main class="main">
             <router-view />
         </main>
-        <Footer class="footer" v-if="!this.$route.path.endsWith('/')" />
+        <Footer class="footer" v-if="!this.$route.path.endsWith('/') && showFooter" />
             <div class="container" v-else>
         <Footer class="footer" v-if="showFooter" />
     </div>
