@@ -1,3 +1,5 @@
+
+
 # Launching the project
 
 In  order to launch the API of the project, you need to use `docker-compose up -d --build` to launch the docker.
@@ -57,3 +59,6 @@ npm run preview
 ```
 
 After that you should be able to access the app from the link provided in the terminal
+
+# Figma 
+[Enlace](https://www.figma.com/file/Ce7D027DBdFLyUeEgJEJ83/Proyecto-4?type=design&node-id=0-1&mode=design&t=pmWCsRjZPXAckR3X-0)

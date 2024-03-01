@@ -53,8 +53,6 @@
 
 <script>
 
-// FIXME: There is a bug here wehre the current event isn't cleared so when editing 
-
 import { Icon } from '@iconify/vue';
 import { getTime } from '../helpers/Time';
 import { useAuthStore } from '../../../store/UserStore';

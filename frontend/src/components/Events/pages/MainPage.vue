@@ -15,7 +15,7 @@
             <section v-if="!isLoading" >
                 <Events 
                     :currentEvent="currentEvent" 
-                    :editedEvent="loadereditedEvent"
+                    :editedEvent="editedEvent"
                     :isEditMode="isEditMode" 
                     @edit="toggleEditMode"
                     @put="handleSaveChanges"
@@ -66,6 +66,7 @@ export default {
             this.isMenuRetracted = !this.isMenuRetracted;
         },
         toggleEditMode() {
+            console.log('toggleEditMode');
             this.isEditMode = !this.isEditMode;
             this.editedEvent = { ...this.currentEvent };
         },
