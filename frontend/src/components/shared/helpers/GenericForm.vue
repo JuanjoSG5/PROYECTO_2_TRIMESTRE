@@ -81,12 +81,11 @@ export default {
 
                 await this.checkIfUserExists().then(userExists => {
                     if (!userExists) {
-                        this.authStore.register(this.formData) === false ?
-                            this.validationRules[this.validationRules.length -1].errorMessage = "An error occurred during register process" 
-                            : "";
+                        this.authStore.register(this.formData).then(this.$router.push("/home"))
                         
                     } else {
-                        this.authStore.logIn(this.formData);
+                        this.authStore.logIn(this.formData)
+                            .then(this.$router.push("/home"))
                         
                     }
                 });
