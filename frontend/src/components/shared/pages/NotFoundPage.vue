@@ -1,54 +1,58 @@
 <template>
-    <div id="clock">
-      {{ formattedTime }}
+  <div class="error-404">
+    <h1>404</h1>
+    <p>Oops! Page not found</p>
+    <div class="animation-container">
+      <div class="circle"></div>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        currentTime: new Date(),
-        timeMultiplier: 1
-      };
-    },
-    computed: {
-      formattedTime() {
-        let currentTime = new Date(this.currentTime.getTime()); // Clone the current time to avoid mutation
-        const hours = this.padZero(currentTime.getHours());
-        const minutes = this.padZero(currentTime.getMinutes());
-        let seconds = Math.round(currentTime.getSeconds() * this.timeMultiplier);
-        
-        if (seconds >= 60) {
-          currentTime.setMinutes(currentTime.getMinutes() + Math.floor(seconds / 60)); // Add minutes
-          seconds %= 60; // Reset seconds
-        }
-        
-        seconds = this.padZero(seconds); // Pad seconds
-        return `${hours}:${minutes}:${seconds}`;
-      }
-    },
-    methods: {
-      padZero(num) {
-        return num < 10 ? '0' + num : num;
-      },
-      updateClock() {
-        this.currentTime = new Date();
-        this.timeMultiplier *= 1.1; // Increase the time multiplier
-      }
-    },
-    mounted() {
-      setInterval(this.updateClock, 1000);
+  </div>
+</template>
+
+<script>
+  // You can add any script logic here if needed
+</script>
+
+<style scoped>
+  .error-404 {
+    text-align: center;
+    padding: 50px;
+  }
+
+  .error-404 h1 {
+    font-size: 5em;
+    margin: 0;
+    color: #ff5e7d;
+  }
+
+  .error-404 p {
+    font-size: 1.5em;
+    margin: 20px 0;
+  }
+
+  .animation-container {
+    position: relative;
+    height: 100px;
+    width: 100px;
+    margin: auto;
+    perspective: 1000px;
+  }
+
+  .circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ff5e7d;
+    position: absolute;
+    top: 0;
+    animation: spin 2s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotateY(0deg);
+    }
+    to {
+      transform: rotateY(360deg);
     }
   }
-  </script>
-  
-  <style scoped>
-  #clock {
-    font-family: Arial, sans-serif;
-    font-size: 48px;
-    text-align: center;
-    margin-top: 100px;
-  }
-  </style>
-  
+</style>

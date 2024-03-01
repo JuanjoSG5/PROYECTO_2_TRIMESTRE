@@ -54,7 +54,7 @@
 <script>
 
 // FIXME: There is a bug here wehre the current event isn't cleared so when editing 
- 
+
 import { Icon } from '@iconify/vue';
 import { getTime } from '../helpers/Time';
 import { useAuthStore } from '../../../store/UserStore';
@@ -102,7 +102,7 @@ export default {
                 },
                 body: JSON.stringify(this.editedEvent)
             };
-            await fetch(`http://localhost:9000/api/v1/events/${this.currentEvent.id}`, postRequest)
+            await fetch(`${import.meta.env.VITE_DATABASE_URL}/events/${this.currentEvent.id}`, postRequest)
                 .then(response => response.json())
                 .then(data => {
                     console.log('Success:', data);
