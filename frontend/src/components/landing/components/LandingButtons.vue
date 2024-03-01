@@ -1,8 +1,8 @@
-<template lang="">
-    <button type="button" class="button loginButton">
+<template>
+    <button type="button" class="button loginButton" @click="goToLogin">
         Log In 
     </button>
-    <button type="button" class="button signupButton">
+    <button type="button" class="button signupButton" @click="goToSignup">
         Sign Up
     </button>
 </template>
@@ -14,6 +14,14 @@ export default {
             return store.isLoggedIn;
         },
     },
+    methods: {
+        goToLogin() {
+            this.$router.push('/login');
+        },
+        goToSignup() {
+            this.$router.push('/register');
+        }
+    }
 }
 </script>
 
@@ -52,5 +60,17 @@ export default {
 .signupButton:hover {
     background-color: rgba(157, 178, 191, 0.306);
     color: rgba(221, 230, 237, 0.765);
+}
+
+@media (max-width: 1024px) {
+    .button {
+        width: 80vw;
+    }
+}
+
+@media (max-width: 768px){
+    .button {
+        width: 80vw;
+    }
 }
 </style>

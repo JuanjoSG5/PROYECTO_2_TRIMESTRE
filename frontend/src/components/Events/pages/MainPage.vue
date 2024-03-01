@@ -1,61 +1,44 @@
 <template>
     <section :class="[isMenuRetracted ? 'main-event-content' : 'main-content']">
         <LateralMenu 
-            :events="events.data" 
+            :events="events" 
+            :highPriorityEvents="highPriorityEvents"
             :editedEvent="editedEvent" 
             :isMenuRetracted="isMenuRetracted" 
             @toggle-menu="toggleMenu" 
-            @event="currentEvent = $event"
+            @event="setCurrentEvent($event)"
             @update="getEventFrontApi"
         />
-        <section class="events">
+        <section class="events" :class="{ 'hidden': !isMenuRetracted }">
+
             <EventHeader/>
             <section v-if="!isLoading" >
-                <section v-if="!isEditMode" class="event-content">
-                    <h1 class="event-title">{{ currentEvent.name }}</h1>
-                    <p class="event-description">{{ currentEvent.description }}</p>
-                    <div class="event-time-edit">
-                        <p 
-                            
-                            class="event-time"
-                        >Time: <span 
-                            class="actual-time"
-                        > {{ getFormattedTime(currentEvent.start_date) }}
-                        </span></p>
-
-                        <button class="edit-button" @click="toggleEditMode" v-if="!isEditMode"><Icon icon="material-symbols:edit" /></button>
-                    </div>
-                </section>
-                <section class="event-content" v-else>
-                    <input 
-                            class="event-title event-title-local" 
-                            v-model="editedEvent.name" 
-                            
-                        >
-                    <textarea 
-                        class=" event-description event-description-local" 
-                        v-model="editedEvent.description" 
-                    ></textarea>
-                    <div class="event-time-edit event-time-edit-local">
-                        <input class="event-time event-time-local" type="datetime" v-model="editedEvent.start_date" >
-                        <button class="edit-button" @click="saveChanges" >Save</button>
-                    </div>
-                </section>
+                <Events 
+                    :currentEvent="currentEvent" 
+                    :editedEvent="editedEvent"
+                    :isEditMode="isEditMode" 
+                    @edit="toggleEditMode"
+                    @put="handleSaveChanges"
+                />
             </section>
             <Loader class="loader" v-else />
         </section>
     </section>
 </template>
 
+
 <script>
 import { Icon } from '@iconify/vue'; 
 import Loader from '../../shared/Loader.vue'; 
 import LateralMenu from '../components/LateralMenu.vue';
 import EventHeader from '../components/EventHeader.vue';
+
 import {getTime} from '../helpers/Time'
+import { useAuthStore } from '../../../store/UserStore';
+import Events from '../components/Events.vue';
 
 export default {
-    components: { LateralMenu, Icon, Loader,EventHeader },
+    components: { LateralMenu, Icon, Loader,EventHeader,Events },
     data() {
         return {
             isLoading: false,
@@ -63,196 +46,140 @@ export default {
             isEditMode: false,
             currentEvent: {},
             events: [],
-            editedEvent: {} 
+            highPriorityEvents: [],
+            editedEvent: {},
+            authStore: useAuthStore()
         };
     },
-    async mounted() {
-        this.toggleLoading()
+    async mounted() { 
         await this.getEventFrontApi();
     },
     methods: {
+        setCurrentEvent(event) {
+            this.currentEvent = event;
+            localStorage.setItem('currentEvent', JSON.stringify(event));
+        },
         toggleLoading() {
             this.isLoading = !this.isLoading;
         },
         toggleMenu() {
             this.isMenuRetracted = !this.isMenuRetracted;
         },
-        
         toggleEditMode() {
-            // TODO: In future chnages make it able to actually change the priority and assign it to the current user
+            console.log('toggleEditMode');
             this.isEditMode = !this.isEditMode;
-            this.editedEvent.name = this.currentEvent.name
-            this.editedEvent.description = this.currentEvent.description
-            this.editedEvent.start_date = getTime()
-            this.editedEvent.priority = 'medium'
-            this.editedEvent.user_id = 1
+            this.editedEvent = { ...this.currentEvent };
+        },
+        validateToken(token) {
+            if (!token) {
+                this.$router.push('/');
+            }
         },
         async getEventFrontApi() {
-            const eventsData = await fetch('http://localhost:9000/api/v1/events')
-                .then(response => response.json());
-                console.log("fecth Done");
-            this.events = eventsData;
-            this.currentEvent = this.events.data[0];
+            this.toggleLoading();
+            console.log('Bearer', this.authStore.store.token);
+            this.validateToken(this.authStore.store.token);
+            const getRequest = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${this.authStore.store.token}`
+                }
+            }
+
+            try {
+             const response = await fetch(`http://localhost:9000/api/v1/events`, getRequest);
+
+                const eventsData = await response.json();
+
+                if (eventsData && eventsData.data && eventsData.data.length > 0) {
+                    this.highPriorityEvents = eventsData.data.filter(
+                        event => event.priority === 'high'
+                    );
+                    this.events = eventsData.data.filter(
+                        event => event.priority !== 'high'
+                    );
+                    this.currentEvent = localStorage.getItem('currentEvent') ?
+                        JSON.parse(localStorage.getItem('currentEvent')) :
+                        this.events[this.events.length - 1];
+                } else {
+                    console.log('No data received from the API');
+                }
+
+            } catch (error) {
+                this.$router.push();
+            }
+
             this.toggleLoading();
         },
         getFormattedTime(dateTimeString) {
             const date = new Date(dateTimeString);
+            const day = date.getDate();
+            const month = date.getMonth() + 1; 
             const hours = date.getHours();
             const minutes = date.getMinutes();
-            return `${hours}:${minutes < 10 ? '0' + minutes : minutes}`;
+            return `${day}/${month}/${date.getFullYear()} ${hours}:${minutes < 10 ? '0' + minutes : minutes}`;
         },
-        saveChanges() {
-            // TODO: Save changes to the backend
-            console.log('Changes saved:', this.editedEvent);
-            this.currentEvent = { ...this.editedEvent };
-            this.toggleEditMode(); 
-        },
+
+        handleSaveChanges(){
+            this.toggleEditMode()
+            this.getEventFrontApi();
+        }
+        
     },
 };
 </script>
 <style scoped>
 .main-content {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    align-items: center;
-    justify-items: center;
+    display: flex;
+    flex-direction: row;
     height: 100%;
-
 }
 
 .main-event-content {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
     height: 100%;
 }
 
 .events {
     display: flex;
     flex-direction: column;
-    position: relative;
     background-color: var(--vt-c-black);
     color: var(--vt-c-black-contrast);
     width: 100%;
     height: 100%;
-
+    padding-left: 2rem;
     
-
-    & .event-content{
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        height: 90%;
-
-        & .event-title{
-            margin: auto;
-            padding-top: 5rem;
-            font-size: 3rem;
-        }
-
-        & .event-description {
-            font-size: 2rem;
-            padding-left: 7rem;
-            margin-top: 1.3rem;
-            margin-bottom: 1.3rem;
-            min-height: 20vh;
-            max-height: 50vh;
-            resize: none;
-            overflow: hidden;
-        }
-        & .event-time-edit{
-            position:relative
-        }
-        
-        & .event-time{
-            display: inline-block;
-            font-size: 2rem;
-            margin-top: .5rem;
-            padding-left: 7rem;
-            & .actual-time{
-                font-weight: 500;
-                color: var(--vt-c-black-mute);
-            }
-        }
-        & .edit-button{
-            position: absolute;
-            top: 2rem; /* Adjust this value as needed */
-            right: 2rem; /* Adjust this value as needed */
-            color: var(--vt-c-black-contrast);
-            background-color: var(--vt-c-black);
-            border: none;
-            font-size: 2.5rem;
-            width: 5vw;
-            
-        }
-
-        & .event-title-local{
-            border: none;
-            border-radius: 0.5rem;
-            padding: 0;
-            margin-top:6rem ;
-            text-align: center;
-            color: var(--vt-c-black-contrast);
-            background-color: var(--vt-c-black-soft);
-            box-shadow: 4px 4px 8px rgba(82, 109, 130, 0.4);
-            &:hover {
-                outline: 2px solid var(--vt-c-black-contrast);
-            }
-            &:focus {
-                outline: 2px solid /* Your desired outline color */;
-            }       
-        }
-
-        & .event-description-local{
-            margin: auto;
-            margin-top:2rem;
-            padding: 0;
-            border: none;
-            border-radius: .5rem;
-            background-color: var(--vt-c-black-soft);
-            color: var(--vt-c-black-contrast);
-            box-shadow: 4px 4px 8px rgba(82, 109, 130, 0.4);
-            width: 80%;
-            
-            &:hover {
-                outline: 2px solid var(--vt-c-black-contrast);
-            }
-            &:focus {
-                outline: 2px solid /* Your desired outline color */;
-            }       
-        }
-        & .event-time-edit-local{
-            
-            
-            & .event-time-local{
-                margin-top:2rem;
-                margin-left: 4rem;
-                padding: 0;
-                border: none;
-                border-radius: .5rem;
-                background-color: var(--vt-c-black-soft);
-                color: var(--vt-c-black-contrast);
-                text-align: center;
-                box-shadow: 4px 4px 8px rgba(82, 109, 130, 0.4);
-                width: 33%;
-                &:hover {
-                    outline: 2px solid var(--vt-c-black-contrast);
-                }
-                &:focus {
-                    outline: 2px solid /* Your desired outline color */;
-                }       
-            }
-
-            & .edit-button{
-                padding:0;
-                margin-right: 3rem;
-            }
-        }
-    }
     & .loader{
         position: absolute;
-        top: 40%;
-        left: 40%;
+        top: 50%;
+        left: 50%;
         justify-content: center;
+    }
+}
+
+@media (max-width:1024px) {
+    .main-content {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+    }
+    
+}
+
+@media (max-width:768px){
+    
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    .retrated{
+        width: 3%;
+    }
+    .hidden {
+        display: none;
     }
 }
 

@@ -1,5 +1,5 @@
 <template>
-    <CustomForm :formData="formData" :validationRules="validationRules" >
+    <CustomForm :formData="formData" :validationRules="validationRules" @field-error="handleFieldError">
         <legend class="form-title">Sign Up</legend>
         <p class="signup-suggestion">Already have an account?
             <router-link class="route" to="/login">Log In</router-link>
@@ -27,9 +27,6 @@
             :errorMessage="errorMessage.password" 
             @input="handleInputChange('password', $event.target.value)" 
         />
-
-        
-        
         
     </CustomForm>
 </template>
@@ -74,15 +71,12 @@ export default {
         };
     },
     methods: {
-        
         handleInputChange(fieldName, value) {
-            console.log(fieldName, value);
             this.formData[fieldName] = value; 
             this.errorMessage[fieldName] = '';
         },
-
-        getErrorMessage(fieldName) {
-            return this.validationRules[fieldName].errorMessage;
+        handleFieldError({ fieldName, errorMessage }) {
+            this.errorMessage[fieldName] = errorMessage;
         }
     }
 };
@@ -99,12 +93,15 @@ export default {
         font-size: 1.5rem;
     }
     .route{
+        
+        background-color: var(--vt-c-black);
+        color: var(--vt-c-black-contrast);
         text-decoration: none;
         font-weight: bold;
         border-radius: .5rem;
         transition: background-color 0.8s, color 0.8s;
         &:hover{
-            background-color: var(--vt-c-black-mute);
+            background-color: var(--vt-c-black-contrast);
             color: var(--vt-c-black);
         }
     }

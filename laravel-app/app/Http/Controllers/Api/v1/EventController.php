@@ -10,6 +10,7 @@ use App\Http\Resources\EventResource;
 use App\Http\Resources\EventCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class EventController extends Controller
 {
@@ -39,23 +40,27 @@ class EventController extends Controller
     public function store(StoreEventRequest $request)
     {
         $event = Event::create($request->validated());
-
+        Log::info("Request");
+        Log::info($request);
+        Log::info("Event");
+        Log::info($event);
+        
         return (new EventResource($event))
             ->response()
             ->setStatusCode(Response::HTTP_CREATED);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateEventRequest $request, Event $event)
-    {
-        $event->update($request->validated());
+        /**
+         * Update the specified resource in storage.
+         */
+        public function update(UpdateEventRequest $request, Event $event)
+        {
+            $event->update($request->validated());
 
-        return (new EventResource($event))
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
-    }
+            return (new EventResource($event))
+                ->response()
+                ->setStatusCode(Response::HTTP_OK);
+        }
 
     /**
      * Remove the specified resource from storage.
@@ -66,3 +71,4 @@ class EventController extends Controller
         return response(null, Response::HTTP_NO_CONTENT);
     }
 }
+

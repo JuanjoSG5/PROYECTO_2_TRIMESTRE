@@ -11,7 +11,7 @@ export default {
   box-sizing: border-box;
   display: inline-block;
   width: 5vw;
-  height: 12.5vh;
+  height: 12.7vh;
   border-top: 5px solid #654321;
   border-bottom: 5px solid #654321;
   position: relative;

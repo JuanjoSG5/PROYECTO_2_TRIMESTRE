@@ -12,6 +12,8 @@ use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
+
+    
     /**
      * Display a listing of the resource.
      */

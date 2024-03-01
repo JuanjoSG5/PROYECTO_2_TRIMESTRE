@@ -1,17 +1,16 @@
 <template>
-    <CustomForm :formData="formData" :validationRules="validationRules" >
+    <CustomForm :formData="formData" :validationRules="validationRules" @field-error="handleFieldError">
         <legend class="form-title"> Log In</legend>
         <p class="signup-suggestion">Don’t have an count yet 
             <router-link class="route" to="/register">Sign Up</router-link>
-        </p><CustomInput 
-            label="Name" 
-            v-model="formData.name" 
-            placeholder="Name"
-            :errorMessage="errorMessage.name" 
-            @input="handleInputChange('Name', $event.target.value)"
+        </p>
+        <CustomInput 
+            label="Email" 
+            v-model="formData.email" 
+            placeholder="example@gmail.com"
+            :errorMessage="errorMessage.email" 
+            @input="handleInputChange('email', $event.target.value)"
         />
-
-
         <CustomInput 
             label="Password" 
             type="password" 
@@ -19,8 +18,6 @@
             :errorMessage="errorMessage.password" 
             @input="handleInputChange('password', $event.target.value)" 
         />
-        
-        
     </CustomForm>
 </template>
 
@@ -28,8 +25,7 @@
 // Import necessary components and methods
 import CustomInput from '../shared/helpers/GenericInput.vue';
 import CustomForm from '../shared/helpers/GenericForm.vue';
-import { validatePassword, validateUsername } from '../shared/helpers/InputValidation.js';
-
+import { validatePassword, validateEmail } from '../shared/helpers/InputValidation.js';
 
 export default {
     components: {
@@ -38,36 +34,35 @@ export default {
     },
     data() {
         return {
-            
             formData: {
-                name: '',
+                email: '',
                 password: '',
             },
             errorMessage: {
-                name: '',
+                email: '',
                 password: '',
             },
             validationRules: {
-                name: {
-                    label: 'Name',
-                    validator: (value) => validateUsername(value) 
+                email: {
+                    label: 'email',
+                    validator: (value) => validateEmail(value),
+                    errorMessage: '' // Initialize error message in validation rules
                 },
                 password: {
-                    label: 'Password',
-                    validator: (value) => validatePassword(value)
+                    label: 'password',
+                    validator: (value) => validatePassword(value),
+                    errorMessage: '' // Initialize error message in validation rules
                 },
             }
         };
     },
     methods: {
-        
         handleInputChange(fieldName, value) {
             this.formData[fieldName] = value; 
             this.errorMessage[fieldName] = '';
         },
-
-        getErrorMessage(fieldName) {
-            return this.validationRules[fieldName].errorMessage;
+        handleFieldError({ fieldName, errorMessage }) {
+            this.errorMessage[fieldName] = errorMessage;
         }
     }
 };
@@ -78,17 +73,19 @@ export default {
         font-size: 3rem;
         font-weight: bold;
     }
-    
     .signup-suggestion{
         font-size: 1.5rem;
     }
     .route{
+        
+        background-color: var(--vt-c-black);
+        color: var(--vt-c-black-contrast);
         text-decoration: none;
         font-weight: bold;
         border-radius: .5rem;
         transition: background-color 0.8s, color 0.8s;
         &:hover{
-            background-color: var(--vt-c-black-mute);
+            background-color: var(--vt-c-black-contrast);
             color: var(--vt-c-black);
         }
     }

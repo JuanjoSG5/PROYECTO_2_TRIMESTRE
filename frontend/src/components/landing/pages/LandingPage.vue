@@ -35,19 +35,20 @@ export default {
 </script>
 
 <style scoped>
+/*   check the responsiveness of the button of log in and Sign up  */
 .landing {
   padding: 0;
 }
 
 .top-section {
   display: grid;
-  margin: 2rem 5rem;
+  padding: 2rem 4rem ;
   grid-template-columns: 1.3fr 1fr;
   grid-gap: 0.4fr;
 }
 
 .top-section-content {
-  margin-right: 10vw;
+  margin-right: 7vw;
 }
 
 .top-section-image {
@@ -92,5 +93,17 @@ export default {
   line-height: 10vh;
   font-size: 2rem;
   font-weight: bold;
+}
+
+@media (max-width: 1024px ){
+  .top-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .top-section-image{
+    padding-top: 2rem;
+  }
 }
 </style>

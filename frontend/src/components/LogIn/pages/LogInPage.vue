@@ -37,19 +37,13 @@ export default {
 
     @media (max-width: 1024px) {
         .login-image {
+            display: none;
             opacity: 0;
             transform: scale(0.8); /* Scale down gradually before hiding */
         }
         .login-page {
             display: block;
         }
-    }
-    @media (max-width: 1012px) {
-        /*No se me ocurre otra manera de hacer que la imagen no se muestre */
-        .login-image{
-            display: none;
-        }
-        
     }
 
     @media (max-width: 768px) {

@@ -30,6 +30,7 @@
           v-else 
           class="input"
           :type="type" 
+          :aria-label="input"
           :placeholder="placeholder"
       />
       
@@ -42,8 +43,7 @@ export default {
   props: {
       
       label: {
-          type: String,
-          required: true
+          type: String
       },
       // Type of input field: 'text' by default
       type: {
@@ -109,8 +109,11 @@ export default {
 }
 
 .error-message {
-  color: var(--vt-c-red);
-  font-size: 12px;
+  font-size: 1.5rem;
+  text-align: center;
+  color: var(--vt-c-black);
+  background-color: var(--vt-c-black-contrast);
+  border-radius: 1rem;
   margin-top: 5px;
 }
 

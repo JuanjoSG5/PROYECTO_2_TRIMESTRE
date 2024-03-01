@@ -1,16 +1,21 @@
 <script>
 import PrivateLayout from './components/shared/layouts/Private.vue';
 import PublicLayout from './components/shared/layouts/Public.vue';
-import { store } from './store/UserStore.js';
+import { useAuthStore } from './store/UserStore.js';
 
 export default {
+    data() {
+        return {
+            store: useAuthStore()
+        };
+    },
     components: {
         PrivateLayout,
         PublicLayout
     }, 
     computed: {
         isLoggedIn() {
-            return store.isLoggedIn;
+            return this.store.username === null;
         },
     },
 }

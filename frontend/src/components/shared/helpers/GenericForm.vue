@@ -3,28 +3,18 @@
         <!-- Slot for custom form content -->
         <slot :validateForm="validateForm" :handleSubmit="handleSubmit"></slot>
         <!-- SubmitButton component triggers handleSubmit method -->
-        <SubmitButton @click.prevent="handleSubmit" />
+        <!-- FIXME: Change the responsive of the submit button-->
+        <SubmitButton @submit="handleSubmit" />
     </form>
 </template>
-  
+
 <script>
 import SubmitButton from './SubmitButton.vue';
-import { store } from '../../../store/UserStore.js'
+import { useAuthStore } from '../../../store/UserStore.js'
 
 export default {
     components: {
         SubmitButton
-    },
-    computed: {
-        // Computed property to check login status
-        logIn: {
-            get() {
-                return store.isLoggedIn;
-            },
-            set(value) {
-                store.isLoggedIn = value;
-            }
-        },
     },
     props: {
         // Validation rules object required for form validation
@@ -40,13 +30,13 @@ export default {
     data() {
         return {
             formSent: false,
+            authStore: useAuthStore()
         };
     },
     methods: {
         // Validate the entire form
         validateForm() {
             let correctForm = true;
-
             for (const fieldName in this.formData) {
 
                 if (!this.validateField(fieldName)) {
@@ -58,112 +48,69 @@ export default {
         // Validate a single form field
         validateField(fieldName) {
             const rule = this.validationRules[fieldName];
-
             const value = this.formData[fieldName];
             if (!rule.validator(value)) {
                 rule.errorMessage = `Please enter a valid ${rule.label}.`;
-               
+
                 return false;
             }
             return true;
         },
-        handleSubmit() {
-            if (this.validateForm()) {
-                console.log("form is valid");
-                
-                this.checkIfUserExists() === false 
-                    ? console.log('User does not exist')
-                    :  this.createUser();
-                    
-            } 
-            
-        },
         async checkIfUserExists() {
-            console.log('Checking if user exists');
-            const currentData = await fetch('http://localhost:9000/api/v1/users')
-                .then(response => response.json())
-                .catch(error => {
-                    console.error('Error fetching user data:', error);
-                    return []; 
-                });
-
-            console.log('currentData:', currentData);
-
-            if (Array.isArray(currentData.data)) {
-                const userExists = currentData.data.some(user => user.name === this.formData.name);
-                if (userExists) {
-                    this.errorMessage.name = 'Username already exists';
-                    return true;
-                }
-                return false;
-            } else {
-                console.error('Unexpected response format: currentData is not an array');
-                return false;
-            }
-        },async checkIfUserExists() {
-            console.log('Checking if user exists');
-            const currentData = await fetch('http://localhost:9000/api/v1/users')
-                .then(response => response.json())
-                .catch(error => {
-                    console.error('Error fetching user data:', error);
-                    return []; 
-                });
-
-            console.log('currentData:', currentData);
-
-            if (Array.isArray(currentData.data)) {
-                const userExists = currentData.data.some(user => user.name === this.formData.name);
-                if (userExists) {
-                    this.errorMessage.name = 'Name already exists';
-                    return true;
-                }
-                return false;
-            } else {
-                console.error('Unexpected response format: currentData is not an array');
-                return false;
-            }
-        },
-
-        async createUser() {
-            console.log(JSON.stringify(this.formData));
-
+            console.log('Checking if user exists', this.formData.email);
             const postRequest = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify(this.formData)
+                body: JSON.stringify({"email": this.formData.email})
             };
-            console.log('Sending post request:', postRequest);
-            await fetch('http://localhost:9000/api/v1/users', postRequest)
+            console.log(JSON.stringify(this.formData.email));
+            const currentData = await fetch('http://localhost:9000/api/checkUserExists',postRequest)
                 .then(response => response.json())
-                .then(data => {
-                    console.log('Success:', data);
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
+                .catch(error => {
+                    console.error('Error fetching user data:', error);
+                    return [];
                 });
-                this.logIn = true; 
-                this.formSent = true;
+
+            console.log('currentData:', currentData, currentData.exists);
+
+            return currentData.exists
         },
 
-        handleSubmit() {
+        async handleSubmit() {
             if (this.validateForm()) {
                 console.log("form is valid");
-                
-                this.checkIfUserExists() === false 
-                    ? console.log('User does not exist')
-                    :  this.createUser();
-                    
-            } 
-            
-        }
-        
-    }
-    
 
+                await this.checkIfUserExists().then(userExists => {
+                    if (!userExists) {
+                        this.authStore.register(this.formData) === false ?
+                            this.validationRules[this.validationRules.length -1].errorMessage = "An error occurred during register process" 
+                            : "";
+                        
+                    } else {
+                        this.authStore.logIn(this.formData);
+                        this.$router.push("/home")
+                    }
+                });
+            } else {
+                for (const fieldName in this.formData) {
+                    this.$emit('field-error', {
+                        fieldName: fieldName,
+                        errorMessage: this.validationRules[fieldName].errorMessage
+                    });
+                }
+            }
+        }
+
+    },
+    computed:{
+        logOut(){
+            return this.authStore.logOut()
+        }
+    }
 };
 </script>
-  
+
 <style scoped></style>
