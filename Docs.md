@@ -71,6 +71,7 @@ Aqui esta el enlace a Netlify
 
 Enlace al [video](https://drive.google.com/file/d/1rLIfENcekfJWhruZmL3X3KzbUWlJBE2M/view?usp=sharing)
 
+
 # Conclusiones: Comparación del resultado con la idea inicial y mejoras futuras.
 La aplicacion esta bastante incompleta comparado con mi idea inical, pero he consolidado la manera de gestionar los eventos y estados que vimos en React asi como los estados globales, ya que antes no entendia muy bien como usarlos pero con este proyecto he cementado esos conocimientos
 

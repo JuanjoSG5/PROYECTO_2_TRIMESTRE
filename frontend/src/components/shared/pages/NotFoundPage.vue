@@ -9,7 +9,6 @@
 </template>
 
 <script>
-  // You can add any script logic here if needed
 </script>
 
 <style scoped>
@@ -42,6 +41,7 @@
     height: 100px;
     border-radius: 50%;
     background-color: var(--vt-c-black-contrast);
+
     position: absolute;
     top: 0;
     animation: spin 2s linear infinite;

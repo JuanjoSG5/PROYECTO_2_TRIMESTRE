@@ -88,8 +88,8 @@ export default {
             }
 
             try {
-                console.log('API URL:', `${import.meta.env.VITE_DATABASE_URL}`);
-                const response = await fetch(`http://localhost:9000/api/v1/events`, getRequest);
+             const response = await fetch(`http://localhost:9000/api/v1/events`, getRequest);
+
                 const eventsData = await response.json();
 
                 if (eventsData && eventsData.data && eventsData.data.length > 0) {

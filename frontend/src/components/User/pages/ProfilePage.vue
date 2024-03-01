@@ -77,7 +77,7 @@ export default {
             };
 
             try {
-                const response = await fetch(`http://localhost:9000/api/v1/users/${currentUser.store.user.id}`, request);
+                const response = await fetch(`${import.meta.env.VITE_DATABASE_URL}/users/${currentUser.store.user.id}`, request);
                 console.log('Response:', response);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
