@@ -68,4 +68,18 @@ export default {
         background-color: var(--vt-c-black-contrast);
     }
 }
+
+@media (max-width: 768px) {
+    .container {
+        position: relative;
+        top: 48rem;
+    }
+    .footer {
+        position: relative;
+        height: 5rem;
+        background-color: var(--vt-c-black-contrast);
+    }
+}
+
+
 </style>

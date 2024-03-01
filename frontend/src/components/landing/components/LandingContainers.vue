@@ -151,7 +151,7 @@ export default {
             top: 100%;
             right: -48vw;
             width: 90vw;
-            height: 35vh;
+            height: 55vh;
             margin-top: 3rem;
             display: block;
 
@@ -212,6 +212,7 @@ export default {
             top: 100%;
             right: 50%;
             width:80vw;
+            height: 55vh;
             margin-top: 3rem;
            
             display: block;
@@ -224,6 +225,50 @@ export default {
         }
     }
 
+    @media (max-width: 768px) {
+        .top-container, .bottom-container {
+            margin: 1rem;
+            width: 100vw;
+        }
+
+        .bottom-container{
+            margin-top: 15vh;
+        }
+
+        .top-container-content{
+            height: auto;
+            left: 1rem;
+           
+        }
+        .bottom-container-content{
+            &  .bottom-description {
+            font-size: 4vw;
+        }
+        }
+        .top-header, .bottom-header {
+            font-size: 5vw;
+        }
+
+        .top-container-image{
+            height: 40vh;
+
+            
+        }
+        
+        .bottom-container-image{
+            height: 40vh;
+            & .bottom-image{
+                left: 15%;
+            }
+        }
+        
+        .bottom-container-content{
+            font-size: 2rem;
+            right: 10rem ;
+        }
+
+    }
+
     
     @media (max-width: 480px) {
         .top-container, .bottom-container {
@@ -233,7 +278,7 @@ export default {
 
         .top-container-content{
             height: auto;
-            left: 20rem;
+            left: 0rem;
         }
 
         .top-header, .bottom-header {
