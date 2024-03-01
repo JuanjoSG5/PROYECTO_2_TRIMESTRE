@@ -57,7 +57,6 @@ export default {
             return true;
         },
         async checkIfUserExists() {
-            console.log('Checking if user exists', this.formData.email);
             const postRequest = {
                 method: 'POST',
                 headers: {
@@ -66,15 +65,12 @@ export default {
                 },
                 body: JSON.stringify({"email": this.formData.email})
             };
-            console.log(JSON.stringify(this.formData.email));
-            const currentData = await fetch('http://localhost:9000/api/checkUserExists',postRequest)
+            const currentData = await fetch(`${import.meta.env.VITE_DATABASE_URL}checkUserExists`,postRequest)
                 .then(response => response.json())
                 .catch(error => {
                     console.error('Error fetching user data:', error);
                     return [];
                 });
-
-            console.log('currentData:', currentData, currentData.exists);
 
             return currentData.exists
         },

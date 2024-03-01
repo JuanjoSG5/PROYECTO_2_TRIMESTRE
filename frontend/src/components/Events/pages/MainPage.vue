@@ -89,7 +89,7 @@ export default {
             }
 
             try {
-             const response = await fetch(`http://localhost:9000/api/v1/events`, getRequest);
+             const response = await fetch(`${import.meta.env.VITE_DATABASE_URL}v1/events`, getRequest);
 
                 const eventsData = await response.json();
 

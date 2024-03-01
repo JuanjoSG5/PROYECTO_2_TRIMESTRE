@@ -22,7 +22,7 @@ export const useAuthStore = defineStore('auth', {
             };
 
             console.log('Sending post request:', postRequest);
-            await fetch('http://localhost:9000/api/login', postRequest)
+            await fetch(`${import.meta.env.VITE_DATABASE_URL}login`, postRequest)
                 .then(response => response.json())
                 .then(data => {
                     this.store = data;
@@ -45,7 +45,7 @@ export const useAuthStore = defineStore('auth', {
                 body: JSON.stringify(formData)
             };
             console.log('Sending post request:', postRequest);
-            await fetch('http://localhost:9000/api/register', postRequest)
+            await fetch(`${import.meta.env.VITE_DATABASE_URL}register`, postRequest)
                 .then(response => response.json())
                 .then(data => {
                     this.store = data;
