@@ -57,7 +57,6 @@ export default {
             return true;
         },
         async checkIfUserExists() {
-            console.log('Checking if user exists', this.formData.email);
             const postRequest = {
                 method: 'POST',
                 headers: {
@@ -66,32 +65,26 @@ export default {
                 },
                 body: JSON.stringify({"email": this.formData.email})
             };
-            console.log(JSON.stringify(this.formData.email));
-            const currentData = await fetch('http://localhost:9000/api/checkUserExists',postRequest)
+            const currentData = await fetch(`${import.meta.env.VITE_DATABASE_URL}checkUserExists`,postRequest)
                 .then(response => response.json())
                 .catch(error => {
                     console.error('Error fetching user data:', error);
                     return [];
                 });
 
-            console.log('currentData:', currentData, currentData.exists);
-
             return currentData.exists
         },
 
         async handleSubmit() {
             if (this.validateForm()) {
-                console.log("form is valid");
-
                 await this.checkIfUserExists().then(userExists => {
                     if (!userExists) {
-                        this.authStore.register(this.formData) === false ?
-                            this.validationRules[this.validationRules.length -1].errorMessage = "An error occurred during register process" 
-                            : "";
+                        this.authStore.register(this.formData).then(this.$router.push("/home"))
                         
                     } else {
-                        this.authStore.logIn(this.formData);
-                        this.$router.push("/home")
+                        this.authStore.logIn(this.formData)
+                            .then(this.$router.push("/home"))
+                        
                     }
                 });
             } else {

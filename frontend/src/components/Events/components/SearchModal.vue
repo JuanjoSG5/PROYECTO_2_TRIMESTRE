@@ -110,7 +110,6 @@ export default {
             };
         });
         this.filteringEvents = this.localEvents;
-        console.log(this.localEvents);
         onClickOutside(this.$refs.modal, () => (this.$emit('close')));
     }
 }
